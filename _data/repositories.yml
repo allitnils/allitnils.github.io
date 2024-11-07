@@ -1,14 +1,14 @@
 github_users:
   - torvalds
-  - alshedivat
+  - allitnils
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
+  - academic/awesome-datascience
+  - freeCodeCamp/freeCodeCamp 
+  - latex3/latex3
   - FortAwesome/Font-Awesome
   - mathjax/MathJax
   - jpswalsh/academicons
+  - The-Art-of-Hacking/h4cker
