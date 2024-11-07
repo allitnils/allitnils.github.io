@@ -263,10 +263,9 @@ plugins:
   - jekyll/scholar
   - jekyll-sitemap
   - jekyll-tabs
-  - jekyll-toc
   - jekyll-twitter-plugin
   - jemoji
-
+#   - jekyll-toc
 # Sitemap settings
 defaults:
   - scope:
