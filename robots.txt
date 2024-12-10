@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://allitnils.github.io/sitemap.xml
+Sitemap: https://ivanocampo.com/sitemap.xml
