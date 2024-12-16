@@ -20,15 +20,11 @@ social: true # includes social icons at the bottom of the page
 I'm **Ivan Ocampo**, a technology professional specialising in architecture, infrastructure, business improvement and design. In my current role as a solutions architect, I design and optimise systems that support growing, scalable and efficient business operations. This work leverages my extensive technical knowledge in programming, cloud platforms, and data analysis to create robust solutions tailored to organisational needs. I apply **TOGAF** principles to structure thisframework, ensuring a comprehensive and methodical approach.
 
 #### 🔭 Current Projects
-- **StudyPoweR:** A Research Sample Size & Power Guide |
+- [**StudyPoweR:**](https://sampwr.shinyapps.io/sampwr/) A Research Sample Size & Power Guide |
 A Shiny R app that guides researchers in calculating sample sizes and statistical power for various study designs. Users can select from common designs (e.g., two-sample t-test, ANOVA, regression) to tailor calculations for their specific studies.
 
 - **SentimentScope:** Real-Time Text Analysis |
 A Shiny app that captures, analyses, and visualises text data from sources like social media and news. It enables users to track sentiment trends, spot emerging topics, and analyze shifts in tone related to specific events or keywords.
-
-- **OptiStat:** Sample Size & Power Calculator |
-A comprehensive tool for calculating sample sizes and statistical power across different study designs. Researchers can visualise power curves and explore various study types to optimise resources and planning.
-
 
 #### 🌱 I’m Currently Learning 
 - **Advanced Python:** Exploring deeper functionalities and optimisation techniques.
