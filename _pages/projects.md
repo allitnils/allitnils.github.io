@@ -1,12 +1,12 @@
 ---
 layout: page
-permalink: /projects/
 title: projects
-description: A growing collection of random projects.
+permalink: /projects/
+description: A growing collection of projects.
 nav: true
-nav_order: 4
-display_categories: [work, fun, academia]
-horizontal: true
+nav_order: 3
+display_categories: [work, fun]
+horizontal: false
 ---
 
 <!-- pages/projects.md -->
@@ -22,7 +22,7 @@ horizontal: true
   <!-- Generate cards for each project -->
   {% if page.horizontal %}
   <div class="container">
-    <div class="row row-cols-1 row-cols-md-1">
+    <div class="row row-cols-1 row-cols-md-2">
     {% for project in sorted_projects %}
       {% include projects_horizontal.liquid %}
     {% endfor %}
