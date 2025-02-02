@@ -1,11 +1,11 @@
 ---
-layout: page
 title: StudyPoweR
 description: R tool that helps researchers calculate sample size and power for different study designs and tests, ensuring robust and well-powered research.
-# img: assets/img/12.jpg
+img: assets/img/12.jpg # Uncomment or replace with a real image
 importance: 1
 category: academia
-related_publications: true
+layout: project
+permalink: /projects/studypower/
 ---
 # Research Sample Size & Power Guide
 
