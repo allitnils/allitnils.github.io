@@ -1,7 +1,7 @@
 ---
 layout: page
-title: projects
 permalink: /projects/
+title: projects
 description: A growing collection of random projects.
 nav: true
 nav_order: 4
