@@ -1,6 +1,6 @@
 ---
 layout: page
-title: StudyPoweR
+title: Statistical Power Analysis Tool
 description: R tool that helps researchers calculate sample size and power for different study designs and tests, ensuring robust and well-powered research.
 img: assets/img/12.jpg
 importance: 1
@@ -8,23 +8,13 @@ category: work
 related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+# [Sample Size & Power Guide: sampwR](https://sampwr.shinyapps.io/sampwr/)
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
-
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
-
-# Research Sample Size & Power Guide
+## Link
+[Use the Sample Size App](https://sampwr.shinyapps.io/sampwr/)
 
 ## Overview
-The **Research Sample Size & Power Guide** is an R-based tool designed to help researchers accurately estimate the required sample size to achieve desired statistical power in their studies. With this guide, users can explore how various parameters (e.g., effect size, significance level, power) impact sample size requirements across different statistical tests and study designs.
+The **Statistical Power Analysis Tool** is an R-based tool designed to help researchers accurately estimate the required sample size to achieve desired statistical power in their studies. With this guide, users can explore how various parameters (e.g., effect size, significance level, power) impact sample size requirements across different statistical tests and study designs.
 
 ## Features
 - **Sample Size Estimation**: Calculate the minimum sample size required to detect an effect with specified power and significance level.
@@ -35,16 +25,5 @@ The **Research Sample Size & Power Guide** is an R-based tool designed to help r
 
 
 {% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
 
 {% endraw %}
