@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: 🎓 Ph.D. Student | 💻 IT Geek | 📖 Storyteller | ☕ Coffee Addict | 📚 Lifelong Learner 
+subtitle: 🎓 Ph.D. | 💻 IT Geek | 📖 Storyteller | ☕ Coffee Addict | 📚 Lifelong Learner 
 
 profile:
   align: right
