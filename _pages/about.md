@@ -16,6 +16,9 @@ profile:
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
+
+# ### 📈 GitHub Stats
+# ![Ivan's GitHub Stats](https://github-readme-stats.vercel.app/api?username=allitnils&show_icons=true&theme=dracula)
 ---
 I'm **Ivan Ocampo**, a technology professional specialising in architecture, infrastructure, business improvement and design. In my current role as a solutions architect, I design and optimise systems that support growing, scalable and efficient business operations. This work leverages my extensive technical knowledge in programming, cloud platforms, and data analysis to create robust solutions tailored to organisational needs. I apply **TOGAF** principles to structure thisframework, ensuring a comprehensive and methodical approach.
 
@@ -77,11 +80,9 @@ A Shiny app that captures, analyses, and visualises text data from sources like 
 
 #### 📫 How to Reach Me
 - **Website:** [ivanocampo.com](https://ivanocampo.com)
-- **LinkedIn:** [linkedin.com/in/ivanocampo](https://www.linkedin.com/in/ivanocampo)
 - **Email:** [ivan@ivanocampo.com](mailto:ivan@ivanocampo.com)
 
-#### 📈 GitHub Stats
-![Ivan's GitHub Stats](https://github-readme-stats.vercel.app/api?username=allitnils&show_icons=true&theme=dracula)
+
 
 #### 🧩 Connect with Me
 Feel free to reach out for collaborations, projects, or just a friendly chat about data science, programming, and enterprise architecture!
