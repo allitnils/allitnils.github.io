@@ -12,58 +12,34 @@ schedule:
   - week: 1
     topic: Foundations of Business Analysis
     description: The role of the business analyst, the BA lifecycle, and how BA fits within organisational strategy and project delivery.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 2
     topic: Stakeholder Analysis and Engagement
     description: Identifying, mapping, and managing stakeholders. Techniques for eliciting requirements through interviews, workshops, and observation.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 3
     topic: Requirements Elicitation and Documentation
     description: Functional and non-functional requirements, use cases, user stories, and acceptance criteria. Writing requirements that developers and testers can act on.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 4
     topic: Business Process Modelling (BPMN)
     description: Current-state and future-state process mapping using BPMN 2.0. Identifying inefficiencies, bottlenecks, and automation opportunities.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 5
     topic: Business Case Development
     description: Structuring a compelling business case — cost-benefit analysis, ROI, risk assessment, and presenting recommendations to executive stakeholders.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 6
     topic: Agile Business Analysis
     description: BA practices in agile and hybrid delivery environments. Backlog refinement, sprint ceremonies, and maintaining traceability in iterative development.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 7
     topic: Data-Driven Decision Making
     description: Using data analytics and dashboards to validate requirements, measure outcomes, and communicate business value. Introduction to business intelligence tools.
-    materials:
-      - name: Slides
-        url: /assets/pdf/example_pdf.pdf
 
   - week: 8
     topic: Capstone — BA in Practice
-    description: Applied case study: students analyse a real-world scenario end-to-end, from stakeholder mapping through to a presented business case and process model.
-    materials:
-      - name: Case Study Brief
-        url: /assets/pdf/example_pdf.pdf
+    description: Applied case study — students analyse a real-world scenario end-to-end, from stakeholder mapping through to a presented business case and process model.
 ---
 
 ## Course Overview

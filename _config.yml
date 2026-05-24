@@ -144,6 +144,7 @@ blog_name: A day in the life # blog_name will be displayed in your blog page
 blog_description: Exploring insights and innovations across tech, research, and security. From late-night PhD struggles, to practical tech solutions, this blog is a resource for navigating complex ideas with clarity and creativity.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
+future: true # show posts dated today regardless of build-server timezone
 
 # Pagination
 pagination:
@@ -322,8 +323,8 @@ jekyll-archives:
   books:
     enabled: [year, tags, categories]
 
-display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
-display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
+display_tags: ["mcp", "architecture", "observability", "agentic-ai"] # these tags will be displayed on the front page of your blog
+display_categories: ["architecture", "observability"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
