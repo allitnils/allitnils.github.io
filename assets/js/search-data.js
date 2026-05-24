@@ -51,7 +51,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-thesis-writing-in-latex",
+        },{id: "post-opentelemetry-migration-in-production-trade-offs-every-platform-team-gets-wrong",
+        
+          title: "OpenTelemetry Migration in Production: Trade-offs Every Platform Team Gets Wrong",
+        
+        description: "Concrete collector topology decisions, SDK migration patterns, tail sampling configuration, cardinality budget management, and rollback architecture for teams migrating from proprietary agents to OpenTelemetry in Kubernetes production environments.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/opentelemetry-migration-production/";
+          
+        },
+      },{id: "post-mcp-server-architecture-and-tool-chaining-in-production-agentic-workflows",
+        
+          title: "MCP Server Architecture and Tool Chaining in Production Agentic Workflows",
+        
+        description: "Beyond the demo — concrete patterns for MCP server design, tool chaining economics, idempotency, and the architectural trade-offs that determine whether an agentic workflow survives production.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/mcp-tool-chaining-production/";
+          
+        },
+      },{id: "post-thesis-writing-in-latex",
         
           title: 'Thesis Writing in LaTeX <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
         
@@ -192,9 +214,9 @@ ninja.data = [{
           description: "Real-time text analytics platform that captures, analyses, and visualises sentiment from social media and news streams.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/sentimentscope/";
-            },},{id: "teachings-",
-          title: '',
-          description: "",
+            },},{id: "teachings-business-analysis-for-managers",
+          title: 'Business Analysis for Managers',
+          description: "A practical course in business analysis for managers, covering requirements elicitation, process modelling, stakeholder engagement, and data-driven decision-making within an enterprise context.",
           section: "Teachings",handler: () => {
               window.location.href = "/teachings/business-analysis-for-managers/";
             },},{id: "teachings-cybersecurity-for-managers",
