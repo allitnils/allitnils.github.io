@@ -3,6 +3,8 @@
   contents:
     - name: Full Name
       value: Ivan Ocampo
+    - name: Location
+      value: Australia
     - name: Languages
       value: English, Spanish
 
@@ -13,83 +15,60 @@
       institution: Australian Institute of Business
       year: 2025
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
+        - Doctoral research focused on enterprise architecture, cloud adoption, and digital transformation strategy.
     - title: MBA
       institution: University of Canberra
       year: 2019
       description:
-        - Description 1.
-        - Description 2.
+        - Master of Business Administration with focus on strategy and technology management.
 
 - title: Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Solutions Architect # TODO: update with actual job title
+      institution: # TODO: company name
+      year: # TODO: year range e.g. 2020 - Present
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - # TODO: key responsibility or achievement
+        - # TODO: key responsibility or achievement
+    - title: # TODO: previous role title
+      institution: # TODO: company name
+      year: # TODO: year range
       description:
-        - Description 1.
-        - Description 2.
+        - # TODO: key responsibility or achievement
 
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
-      description:
-
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
-
-- title: Academic Interests
+- title: Skills
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Cloud & Infrastructure
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - AWS, Azure
+        - Enterprise Architecture (TOGAF)
+        - Cloud-native design patterns
+    - title: Data & AI
       items:
-        - Description 1.
-        - Description 2.
+        - Data science and analytics
+        - Machine learning
+        - Agentic AI systems (MCP, tool use)
+    - title: Security
+      items:
+        - Cybersecurity frameworks (ISO 27001, NIST CSF, ASD Essential Eight)
+        - Security governance and risk management
 
-- title: Other Interests
-  type: list
+- title: Certifications
+  type: time_table
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - title: # TODO: certification name
+      institution: # TODO: issuing body
+      year: # TODO: year
+      description:
+        - # TODO: brief description
+
+- title: Publications & Research
+  type: time_table
+  contents:
+    - title: # TODO: publication or thesis title
+      institution: # TODO: journal or conference
+      year: # TODO: year
+      description:
+        - # TODO: brief description
