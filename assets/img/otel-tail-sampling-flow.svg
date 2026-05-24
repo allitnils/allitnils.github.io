@@ -1,0 +1,87 @@
+<svg width="820" height="560" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Segoe UI', Arial, sans-serif; background: #FAFAFA;">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4B5563"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#DC2626"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="410" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#111827">Tail Sampling: Trace-Level Decision Flow</text>
+  <text x="410" y="52" text-anchor="middle" font-size="11" fill="#6B7280">OTel Gateway Collector — spans buffered per traceId for 30s before sampling decision</text>
+
+  <!-- Step 1: Spans arrive -->
+  <rect x="285" y="70" width="250" height="55" rx="8" fill="#1D4ED8"/>
+  <text x="410" y="97" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">Span data arrives at Gateway</text>
+  <text x="410" y="113" text-anchor="middle" font-size="10" fill="#BFDBFE">OTLP/gRPC from Agent collectors</text>
+
+  <!-- Arrow down -->
+  <line x1="410" y1="125" x2="410" y2="153" stroke="#4B5563" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 2: Buffer -->
+  <rect x="285" y="155" width="250" height="55" rx="8" fill="#374151"/>
+  <text x="410" y="181" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">Buffer spans by traceId</text>
+  <text x="410" y="197" text-anchor="middle" font-size="10" fill="#D1D5DB">30s window, in-memory ring buffer</text>
+
+  <!-- Arrow down -->
+  <line x1="410" y1="210" x2="410" y2="238" stroke="#4B5563" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Step 3: Decision window closes -->
+  <rect x="285" y="240" width="250" height="55" rx="8" fill="#374151"/>
+  <text x="410" y="266" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">Window closes: evaluate policies</text>
+  <text x="410" y="282" text-anchor="middle" font-size="10" fill="#D1D5DB">all policies checked in order</text>
+
+  <!-- Four branches from decision box -->
+  <!-- Branch lines going down/out from bottom of step 3 -->
+  <!-- Policy 1: ERROR -->
+  <line x1="300" y1="295" x2="105" y2="380" stroke="#4B5563" stroke-width="1.3" marker-end="url(#arr)"/>
+  <rect x="30" y="382" width="155" height="68" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="108" y="403" text-anchor="middle" font-size="11" font-weight="bold" fill="#DC2626">Policy: ERROR</text>
+  <text x="108" y="419" text-anchor="middle" font-size="10" fill="#374151">status_code == ERROR</text>
+  <text x="108" y="435" text-anchor="middle" font-size="10" fill="#374151">always sampled</text>
+  <text x="108" y="449" text-anchor="middle" font-size="9" fill="#6B7280">~2-5% of traces</text>
+
+  <!-- Policy 2: SLOW -->
+  <line x1="370" y1="295" x2="280" y2="380" stroke="#4B5563" stroke-width="1.3" marker-end="url(#arr)"/>
+  <rect x="202" y="382" width="155" height="68" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
+  <text x="279" y="403" text-anchor="middle" font-size="11" font-weight="bold" fill="#D97706">Policy: LATENCY</text>
+  <text x="279" y="419" text-anchor="middle" font-size="10" fill="#374151">latency_ms &gt; 2000</text>
+  <text x="279" y="435" text-anchor="middle" font-size="10" fill="#374151">always sampled</text>
+  <text x="279" y="449" text-anchor="middle" font-size="9" fill="#6B7280">~3-8% of traces</text>
+
+  <!-- Policy 3: PROBABILISTIC -->
+  <line x1="450" y1="295" x2="455" y2="380" stroke="#4B5563" stroke-width="1.3" marker-end="url(#arr)"/>
+  <rect x="375" y="382" width="155" height="68" rx="6" fill="#F0FDF4" stroke="#059669" stroke-width="1.5"/>
+  <text x="452" y="403" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">Policy: RANDOM</text>
+  <text x="452" y="419" text-anchor="middle" font-size="10" fill="#374151">5% probabilistic</text>
+  <text x="452" y="435" text-anchor="middle" font-size="10" fill="#374151">catch-all baseline</text>
+  <text x="452" y="449" text-anchor="middle" font-size="9" fill="#6B7280">5% of remaining</text>
+
+  <!-- Policy 4: NO MATCH / DROP -->
+  <line x1="530" y1="295" x2="635" y2="380" stroke="#4B5563" stroke-width="1.3" marker-end="url(#arr)"/>
+  <rect x="555" y="382" width="230" height="68" rx="6" fill="#F9FAFB" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="670" y="403" text-anchor="middle" font-size="11" font-weight="bold" fill="#6B7280">No policy matched</text>
+  <text x="670" y="419" text-anchor="middle" font-size="10" fill="#6B7280">DROP all spans for trace</text>
+  <text x="670" y="435" text-anchor="middle" font-size="10" fill="#6B7280">memory reclaimed</text>
+  <text x="670" y="449" text-anchor="middle" font-size="9" fill="#6B7280">~85-90% of traces</text>
+
+  <!-- Export backend (for sampled traces) -->
+  <rect x="90" y="505" width="385" height="42" rx="6" fill="#059669"/>
+  <text x="282" y="531" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF">Export full trace to Observability Backend</text>
+
+  <!-- Arrows from sampled policies to export -->
+  <line x1="108" y1="450" x2="165" y2="505" stroke="#059669" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="279" y1="450" x2="255" y2="505" stroke="#059669" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="452" y1="450" x2="358" y2="505" stroke="#059669" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+  <!-- Policy labels on branch lines -->
+  <text x="183" y="345" font-size="9" fill="#6B7280">error path</text>
+  <text x="302" y="345" font-size="9" fill="#6B7280">slow path</text>
+  <text x="445" y="345" font-size="9" fill="#6B7280">random</text>
+  <text x="555" y="345" font-size="9" fill="#6B7280">no match</text>
+</svg>
