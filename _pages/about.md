@@ -2,7 +2,8 @@
 layout: about
 title: about
 permalink: /
-subtitle: 🎓 Ph.D. | 💻 IT Geek | 📖 Storyteller | ☕ Coffee Addict | 📚 Lifelong Learner 
+subtitle: 🎓 Ph.D. | 💻 IT Geek | 📖 Storyteller | ☕ Coffee Addict | 📚 Lifelong Learner
+description: Ivan Ocampo (Ph.D.) is a Solutions Architect specialising in cloud infrastructure, enterprise architecture, TOGAF, and data science.
 
 profile:
   align: right
@@ -23,11 +24,9 @@ social: true # includes social icons at the bottom of the page
 I'm **Ivan Ocampo**, a technology professional specialising in architecture, infrastructure, business improvement and design. In my current role as a solutions architect, I design and optimise systems that support growing, scalable and efficient business operations. This work leverages my extensive technical knowledge in programming, cloud platforms, and data analysis to create robust solutions tailored to organisational needs. I apply **TOGAF** principles to structure thisframework, ensuring a comprehensive and methodical approach.
 
 #### 🔭 Current Projects
-- [**StudyPoweR:**](https://sampwr.shinyapps.io/sampwr/) A Research Sample Size & Power Guide |
-A Shiny R app that guides researchers in calculating sample sizes and statistical power for various study designs. Users can select from common designs (e.g., two-sample t-test, ANOVA, regression) to tailor calculations for their specific studies.
+- **Claude Code Agentic Workflows:** Autonomous multi-agent software engineering system leveraging Claude's tool-use API. Orchestrates parallel sub-agents via structured JSON tool loops with permission-gated bash execution, context-window compression, and filesystem introspection — enabling autonomous, multi-step codebase modification with full rollback safety.
 
-- **SentimentScope:** Real-Time Text Analysis |
-A Shiny app that captures, analyses, and visualises text data from sources like social media and news. It enables users to track sentiment trends, spot emerging topics, and analyze shifts in tone related to specific events or keywords.
+- **Observability Stack (Grafana · Loki · Prometheus):** Production-grade observability platform with Prometheus for metrics scraping and alerting, Loki for log aggregation via LogQL, and Grafana for unified dashboards correlating metrics and logs across distributed infrastructure.
 
 #### 🌱 I’m Currently Learning 
 - **Advanced Python:** Exploring deeper functionalities and optimisation techniques.

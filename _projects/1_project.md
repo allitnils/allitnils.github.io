@@ -4,7 +4,7 @@ title: Statistical Power Analysis Tool
 description: R tool that helps researchers calculate sample size and power for different study designs and tests, ensuring robust and well-powered research.
 img: assets/img/12.jpg
 importance: 1
-category: work
+category: completed
 related_publications: true
 ---
 

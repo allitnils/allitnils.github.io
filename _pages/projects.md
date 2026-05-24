@@ -2,10 +2,10 @@
 layout: page
 title: projects
 permalink: /projects/
-description: A growing collection of projects.
+description: A growing collection of projects by Ivan Ocampo spanning cloud infrastructure, data science, machine learning, and enterprise architecture.
 nav: true
 nav_order: 3
-display_categories: [work, fun]
+display_categories: [work, completed, fun]
 horizontal: false
 ---
 
