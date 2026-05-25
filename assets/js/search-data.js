@@ -204,6 +204,11 @@ ninja.data = [{
           description: "Autonomous multi-agent software engineering system using Claude&#39;s tool-use API with parallel sub-agents, hook-driven automation, and persistent memory.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/claude_code/";
+            },},{id: "projects-cutwise",
+          title: 'CutWise',
+          description: "Browser-based cutting sheet optimiser that packs rectangular pieces onto plywood sheets with minimal waste, with PDF export and CSV import.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cutwise/";
             },},{id: "projects-observability-stack",
           title: 'Observability Stack',
           description: "Full-stack observability platform built on Prometheus, Loki, and Grafana for unified metrics, logs, and alerting across distributed infrastructure.",
