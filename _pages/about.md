@@ -30,10 +30,10 @@ I'm **Ivan Ocampo**, a technology professional specialising in architecture, inf
 
 <div class="post-tags mt-2 mb-3">
   {%- for tag in site.display_tags -%}
-    <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}" class="badge rounded-pill text-decoration-none me-1" style="font-size:0.85rem; padding:0.4em 0.85em;">{{ tag }}</a>
+    <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}" class="badge rounded-pill text-decoration-none me-1" style="font-size:0.85rem; padding:0.4em 0.85em; background-color:var(--global-theme-color); color:var(--global-card-bg-color);">{{ tag }}</a>
   {%- endfor -%}
   {%- for cat in site.display_categories -%}
-    <a href="{{ cat | slugify | prepend: '/blog/category/' | relative_url }}" class="badge rounded-pill text-decoration-none me-1" style="font-size:0.85rem; padding:0.4em 0.85em;">{{ cat }}</a>
+    <a href="{{ cat | slugify | prepend: '/blog/category/' | relative_url }}" class="badge rounded-pill text-decoration-none me-1" style="font-size:0.85rem; padding:0.4em 0.85em; background-color:var(--global-theme-color); color:var(--global-card-bg-color);">{{ cat }}</a>
   {%- endfor -%}
 </div>
 
