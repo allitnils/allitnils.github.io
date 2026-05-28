@@ -51,7 +51,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-opentelemetry-migration-in-production-trade-offs-every-platform-team-gets-wrong",
+        },{id: "post-tikz-and-pgfplots-publication-quality-figures-that-don-39-t-break-your-latex-build",
+        
+          title: "TikZ and pgfplots: Publication-Quality Figures That Don&#39;t Break Your LaTeX Build",
+        
+        description: "From first principles to production-ready diagrams: how to use TikZ and pgfplots correctly for journal and conference figures, including coordinate systems, styling architecture, common failure modes, and externalization for large documents.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/tikz-pgfplots-publication-quality-figures/";
+          
+        },
+      },{id: "post-opentelemetry-migration-in-production-trade-offs-every-platform-team-gets-wrong",
         
           title: "OpenTelemetry Migration in Production: Trade-offs Every Platform Team Gets Wrong",
         
