@@ -7,68 +7,111 @@
       value: Australia
     - name: Languages
       value: English, Spanish
+    - name: Email
+      value: ivan@ivanocampo.com
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
+    - title: PhD — Enterprise Architecture & Digital Transformation
       institution: Australian Institute of Business
       year: 2025
       description:
         - Doctoral research focused on enterprise architecture, cloud adoption, and digital transformation strategy.
-    - title: MBA
+        - Applied TOGAF and industry frameworks to model large-scale technology transition in complex organisations.
+    - title: MBA — Strategy & Technology Management
       institution: University of Canberra
       year: 2019
       description:
-        - Master of Business Administration with focus on strategy and technology management.
+        - Master of Business Administration with specialisation in strategy and technology management.
+        - Coursework spanning corporate strategy, organisational change, financial analysis, and IT governance.
 
 - title: Experience
   type: time_table
   contents:
-    - title: Solutions Architect # TODO: update with actual job title
-      institution: # TODO: company name
-      year: # TODO: year range e.g. 2020 - Present
+    - title: Cloud, Infrastructure & Solutions Architect
+      institution: Accent Group
+      year: 2022 – Present
       description:
-        - # TODO: key responsibility or achievement
-        - # TODO: key responsibility or achievement
-    - title: # TODO: previous role title
-      institution: # TODO: company name
-      year: # TODO: year range
+        - Member of the technology leadership team, driving cloud strategy and infrastructure architecture across a large-scale retail enterprise.
+        - Architect of cloud-native solutions on AWS and Azure — spanning compute, networking, storage, identity, and security — aligned to business growth and cost optimisation objectives.
+        - Lead enterprise architecture initiatives using TOGAF, establishing architecture governance, reference models, and decision frameworks across the organisation.
+        - Design and operate production observability platforms (Prometheus, Grafana, Loki) covering metrics, alerting, and log aggregation for distributed infrastructure.
+        - Define and enforce security architecture standards — ISO 27001, NIST CSF, ASD Essential Eight — including IAM, endpoint protection (CrowdStrike), SIEM (Splunk), and network security (Palo Alto, Fortinet).
+        - Drive infrastructure-as-code adoption with Terraform and containerisation strategy with Kubernetes and Docker.
+    - title: # TODO — previous role title
+      institution: # TODO — company
+      year: # TODO — year range
       description:
-        - # TODO: key responsibility or achievement
+        - # TODO
+
+- title: Teaching
+  type: time_table
+  contents:
+    - title: Lecturer — Cybersecurity for Managers
+      institution: Australian Institute of Business
+      year: Ongoing
+      description:
+        - MBA elective covering cybersecurity risk, governance, threat landscapes, incident response, and regulatory compliance (Privacy Act, GDPR, ASD Essential Eight, ISO 27001).
+        - Delivered in intensive block format to working professionals and executives.
+    - title: Lecturer — Business Analysis for Managers
+      institution: Australian Institute of Business
+      year: Ongoing
+      description:
+        - MBA elective covering requirements elicitation, BPMN process modelling, business case development, stakeholder engagement, and agile BA practices.
+        - Delivered in intensive block format to working professionals and executives.
 
 - title: Skills
   type: nested_list
   contents:
-    - title: Cloud & Infrastructure
+    - title: Cloud & Architecture
       items:
         - AWS, Azure
+        - Kubernetes, Docker
+        - Terraform (Infrastructure-as-Code)
         - Enterprise Architecture (TOGAF)
-        - Cloud-native design patterns
-    - title: Data & AI
-      items:
-        - Data science and analytics
-        - Machine learning
-        - Agentic AI systems (MCP, tool use)
+        - Cloud-native design patterns and migration strategy
     - title: Security
       items:
-        - Cybersecurity frameworks (ISO 27001, NIST CSF, ASD Essential Eight)
+        - ISO 27001, NIST CSF, ASD Essential Eight
+        - CrowdStrike, Palo Alto, Fortinet
+        - Splunk (SIEM), identity and access management
         - Security governance and risk management
+    - title: Observability & Platform Engineering
+      items:
+        - Prometheus, Grafana, Loki
+        - New Relic, Splunk
+        - Distributed systems monitoring and alerting design
+    - title: Data & AI
+      items:
+        - Python, R
+        - TensorFlow, PyTorch, scikit-learn
+        - Power BI, Tableau
+        - Agentic AI systems (MCP, Claude tool-use API)
+    - title: Databases
+      items:
+        - PostgreSQL, MySQL, Oracle
+        - MongoDB, Cassandra
+    - title: Programming & Scripting
+      items:
+        - Python, Ruby, Java, C/C++
+        - Shell scripting (Bash/Zsh)
+        - JavaScript
 
 - title: Certifications
   type: time_table
   contents:
-    - title: # TODO: certification name
-      institution: # TODO: issuing body
-      year: # TODO: year
+    - title: # TODO — certification name
+      institution: # TODO — issuing body
+      year: # TODO
       description:
-        - # TODO: brief description
+        - # TODO
 
 - title: Publications & Research
   type: time_table
   contents:
-    - title: # TODO: publication or thesis title
-      institution: # TODO: journal or conference
-      year: # TODO: year
+    - title: # TODO — PhD thesis title
+      institution: Australian Institute of Business
+      year: 2025
       description:
-        - # TODO: brief description
+        - Doctoral thesis on enterprise architecture, cloud adoption, and digital transformation strategy.
