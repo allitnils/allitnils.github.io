@@ -51,7 +51,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-security-and-credential-management-for-ai-agents-with-filesystem-and-api-access",
+        },{id: "post-latex-masterclass-week-1-what-is-latex-and-why-it-matters",
+        
+          title: "LaTeX Masterclass Week 1: What Is LaTeX and Why It Matters",
+        
+        description: "A clear, honest introduction to LaTeX for researchers, PhD students, and technical writers: what it is, how it differs from Word and Google Docs, why typesetting quality matters, and when LaTeX is the right tool — and when it isn&#39;t.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/latex-masterclass-week-1-what-is-latex-and-why-it-matters/";
+          
+        },
+      },{id: "post-security-and-credential-management-for-ai-agents-with-filesystem-and-api-access",
         
           title: "Security and Credential Management for AI Agents with Filesystem and API Access",
         
