@@ -11,7 +11,7 @@ ninja.data = [{
     },
   },{id: "nav-cv",
           title: "cv",
-          description: "Curriculum Vitae of Ivan Ocampo (Ph.D.) — Solutions Architect with expertise in cloud platforms, enterprise architecture, and data science.",
+          description: "Curriculum Vitae of Ivan Ocampo (Ph.D.) — Chief Architect at Accent Group, with expertise in enterprise architecture, cybersecurity, hybrid cloud infrastructure, and observability.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
@@ -32,7 +32,7 @@ ninja.data = [{
           },
         },{id: "nav-repositories",
           title: "repositories",
-          description: "",
+          description: "Open-source repositories and code projects by Ivan Ocampo.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/repositories/";
@@ -46,7 +46,7 @@ ninja.data = [{
           },
         },{id: "nav-blog",
           title: "blog",
-          description: "",
+          description: "Writing on enterprise architecture, cybersecurity, infrastructure, observability, and applied AI.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/blog/";
