@@ -4,41 +4,78 @@
     - name: Full Name
       value: Ivan Ocampo
     - name: Location
-      value: Australia
-    - name: Languages
-      value: English, Spanish
+      value: Melbourne, Victoria, Australia
     - name: Email
       value: ivan@ivanocampo.com
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD — Enterprise Architecture & Digital Transformation
+    - title: PhD
       institution: Australian Institute of Business
       year: 2025
       description:
-        - Doctoral research focused on enterprise architecture, cloud adoption, and digital transformation strategy.
-        - Applied TOGAF and industry frameworks to model large-scale technology transition in complex organisations.
-    - title: MBA — Strategy & Technology Management
+        - "Thesis: Space Between Spaces: Rituals, Liminality, and the Dynamics of Remote Work Intensity"
+        - Quantitative study using structural equation modelling (SEM) and confirmatory factor analysis (CFA) to validate novel constructs — Liminal Spaces, Remote Work Intensity, Technostress, Work–Life Balance, Well-being, Productivity, Creativity, and Innovation.
+        - Central contribution is the theorisation and empirical validation of liminal spaces as a mediating mechanism between remote work intensity and employee outcomes.
+    - title: MBA
       institution: University of Canberra
       year: 2019
-      description:
-        - Master of Business Administration with specialisation in strategy and technology management.
-        - Coursework spanning corporate strategy, organisational change, financial analysis, and IT governance.
 
 - title: Experience
   type: time_table
   contents:
-    - title: Cloud, Infrastructure & Solutions Architect
-      institution: Accent Group
+    - title: Chief Architect
+      institution: Accent Group (ASX&#58; AX1)
       year: 2022 – Present
       description:
-        - Member of the technology leadership team, driving cloud strategy and infrastructure architecture across a large-scale retail enterprise.
-        - Architect of cloud-native solutions on AWS and Azure — spanning compute, networking, storage, identity, and security — aligned to business growth and cost optimisation objectives.
-        - Lead enterprise architecture initiatives using TOGAF, establishing architecture governance, reference models, and decision frameworks across the organisation.
-        - Design and operate production observability platforms (Prometheus, Grafana, Loki) covering metrics, alerting, and log aggregation for distributed infrastructure.
-        - Define and enforce security architecture standards — ISO 27001, NIST CSF, ASD Essential Eight — including IAM, endpoint protection (CrowdStrike), SIEM (Splunk), and network security (Palo Alto, Fortinet).
-        - Drive infrastructure-as-code adoption with Terraform and containerisation strategy with Kubernetes and Docker.
+        - "Accent Group operates 800+ stores across Australia and New Zealand under brands including Platypus, Hype DC, Vans, Timberland, and Dr Martens."
+        - Direct reports&#58; 2.
+        - Enterprise architecture leadership across retail technology, infrastructure, cybersecurity, data, and digital platforms.
+        - TOGAF-aligned architecture governance — standards, patterns, roadmaps, and architecture review board.
+        - Hybrid cloud architecture (Azure-primary) — identity, networking, compute, storage, and data.
+        - Cybersecurity architecture — CrowdStrike EDR, Tenable vulnerability management, Splunk SIEM/SOAR, zero trust principles.
+        - Observability platform design — Grafana, Prometheus, Loki, VictoriaMetrics, OpenTelemetry.
+        - Data platform architecture — pipelines, analytics, and reporting.
+        - Applied AI and ML integration architecture — evaluation and adoption of emerging AI platforms in enterprise context.
+        - Architecture oversight of major capital investments and transformation programmes.
+        - Vendor and technology partner management at executive level.
+
+    - title: Senior Solutions Architect
+      institution: Peter MacCallum Cancer Centre
+      year: 2022
+      description:
+        - Australia's only public hospital dedicated entirely to cancer care, operating under Victorian Department of Health governance.
+        - Direct reports&#58; 5.
+        - Solutions architecture for clinical and corporate systems in a highly regulated healthcare environment.
+        - Integration architecture across clinical, imaging, and administrative platforms.
+        - Security and compliance architecture aligned to health sector regulatory requirements.
+        - Cloud adoption and hybrid infrastructure design.
+
+    - title: IT Manager
+      institution: Australian Clinical Labs
+      year: 2019 – 2022
+      description:
+        - One of Australia's largest pathology providers, operating across hospital, community, and specialist laboratory networks nationally.
+        - Direct reports&#58; 17.
+        - Full IT operations leadership — infrastructure, support, security, vendors, and budget.
+        - Cybersecurity operations — endpoint protection, vulnerability management, and patching programmes.
+        - Cloud migration and hybrid infrastructure management.
+        - ITSM design, governance, and operational management.
+        - Led IT operations through COVID-19 pandemic demands in a nationally critical pathology environment.
+
+    - title: IT Manager
+      institution: Australian National University
+      year: 2010 – 2019
+      description:
+        - Australia's leading research university, a Group of Eight member, ranked in the global top 100.
+        - Direct reports&#58; 4.
+        - IT management across faculty and division-level infrastructure and services.
+        - Enterprise Windows infrastructure — Active Directory, server, endpoint, and virtualisation.
+        - Network infrastructure management (foundational basis for CCNP expertise).
+        - IT service management, support operations, and stakeholder engagement.
+        - Budget management and vendor procurement.
+        - 9-year tenure reflecting sustained institutional trust and progressive leadership growth.
 
 - title: Teaching
   type: time_table
@@ -47,7 +84,7 @@
       institution: Australian Institute of Business
       year: Ongoing
       description:
-        - MBA elective covering cybersecurity risk, governance, threat landscapes, incident response, and regulatory compliance (Privacy Act, GDPR, ASD Essential Eight, ISO 27001).
+        - MBA elective covering cybersecurity risk, governance, threat landscapes, incident response, and regulatory compliance.
         - Delivered in intensive block format to working professionals and executives.
     - title: Lecturer — Business Analysis for Managers
       institution: Australian Institute of Business
@@ -56,40 +93,54 @@
         - MBA elective covering requirements elicitation, BPMN process modelling, business case development, stakeholder engagement, and agile BA practices.
         - Delivered in intensive block format to working professionals and executives.
 
+- title: Certifications
+  type: list
+  contents:
+    - "TOGAF 9 Certified — The Open Group"
+    - "CCNP (Cisco Certified Network Professional) — Cisco"
+    - "ITIL Foundation — Axelos / PeopleCert"
+
 - title: Skills
   type: nested_list
   contents:
-    - title: Cloud & Architecture
+    - title: Architecture & Governance
       items:
-        - AWS, Azure
-        - Kubernetes, Docker
-        - Terraform (Infrastructure-as-Code)
-        - Enterprise Architecture (TOGAF)
-        - Cloud-native design patterns and migration strategy
-    - title: Security
+        - Enterprise architecture (TOGAF)
+        - Solution architecture
+        - Hybrid cloud architecture
+        - Architecture review and governance
+        - Roadmap design
+    - title: Cloud & Infrastructure
       items:
-        - ISO 27001, NIST CSF, ASD Essential Eight
-        - CrowdStrike, Palo Alto, Fortinet
-        - Splunk (SIEM), identity and access management
-        - Security governance and risk management
-    - title: Observability & Platform Engineering
+        - Microsoft Azure
+        - VMware vSphere / vCenter
+        - Windows Server enterprise, Active Directory, Microsoft 365
+        - Hybrid cloud and on-premises datacentre
+    - title: Cybersecurity
       items:
-        - Prometheus, Grafana, Loki
-        - New Relic, Splunk
-        - Distributed systems monitoring and alerting design
-    - title: Data & AI
+        - CrowdStrike Falcon (EDR)
+        - Tenable (vulnerability management)
+        - Splunk (SIEM / SOAR)
+        - Zero trust architecture
+        - Endpoint security and security operations
+    - title: Networking
       items:
-        - Python, R
-        - TensorFlow, PyTorch, scikit-learn
-        - Power BI, Tableau
-        - Agentic AI systems (MCP, Claude tool-use API)
-    - title: Databases
+        - Cisco enterprise networking (CCNP)
+        - LAN / WAN, SD-WAN, DNS, VPN
+        - Firewall architecture
+    - title: Data & Observability
       items:
-        - PostgreSQL, MySQL, Oracle
-        - MongoDB, Cassandra
-    - title: Programming & Scripting
+        - Grafana, Prometheus, Loki, VictoriaMetrics
+        - OpenTelemetry
+        - Data platform architecture and analytics pipelines
+        - Splunk
+    - title: ITSM & Platforms
       items:
-        - Python, Ruby, Java, C/C++
-        - Shell scripting (Bash/Zsh)
-        - JavaScript
-
+        - ITIL-aligned service management
+        - Atlassian Jira / Confluence / JSM Assets
+        - GitHub / GitHub Actions
+    - title: AI & Emerging Technology
+      items:
+        - Applied enterprise AI
+        - AI integration architecture
+        - Research-informed evaluation of emerging platforms

@@ -2,7 +2,7 @@
 layout: page
 permalink: /repositories/
 title: repositories
-description:
+description: Open-source repositories and code projects by Ivan Ocampo.
 nav: true
 nav_order: 5
 ---

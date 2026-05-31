@@ -2,8 +2,8 @@
 layout: about
 title: about
 permalink: /
-subtitle: 🎓 Ph.D. | 💻 IT Geek | 📖 Storyteller | ☕ Coffee Addict | 📚 Lifelong Learner
-description: Ivan Ocampo (Ph.D.) is a Solutions Architect specialising in cloud infrastructure, enterprise architecture, TOGAF, and data science.
+subtitle: <a href="https://www.accentgroup.com.au" target="_blank">Accent Group</a> &mdash; Melbourne, Australia &mdash; Ph.D. | TOGAF | CCNP
+description: Ivan Ocampo is Chief Architect at Accent Group, with expertise spanning enterprise architecture, cybersecurity, hybrid cloud infrastructure, observability, and applied AI.
 
 profile:
   align: right
@@ -19,14 +19,26 @@ latest_posts:
   scrollable: false
   limit: 3
 ---
-I'm **Ivan Ocampo**, a technology professional specialising in architecture, infrastructure, business improvement and design. In my current role as a solutions architect, I design and optimise systems that support growing, scalable and efficient business operations. This work leverages my extensive technical knowledge in programming, cloud platforms, and data analysis to create robust solutions tailored to organisational needs. I apply **TOGAF** principles to structure this framework, ensuring a comprehensive and methodical approach.
 
-#### 🔭 Current Projects
-- **Claude Code Agentic Workflows:** Autonomous multi-agent software engineering system leveraging Claude's tool-use API. Orchestrates parallel sub-agents via structured JSON tool loops with permission-gated bash execution, context-window compression, and filesystem introspection — enabling autonomous, multi-step codebase modification with full rollback safety.
+Ivan Ocampo is Chief Architect at Accent Group (ASX: AX1), one of Australia's largest footwear and apparel retailers, operating 800+ stores across brands including Platypus, Hype DC, Vans, Timberland, and Dr Martens. His work spans enterprise and solution architecture, cybersecurity, hybrid cloud infrastructure, data platforms, and applied AI — covering both hands-on technical execution and executive governance.
 
-- **Observability Stack (Grafana · Loki · Prometheus):** Production-grade observability platform with Prometheus for metrics scraping and alerting, Loki for log aggregation via LogQL, and Grafana for unified dashboards correlating metrics and logs across distributed infrastructure.
+He holds a TOGAF certification, a CCNP, and a PhD from the Australian Institute of Business. His doctoral research theorised and empirically validated liminal spaces as a mediating mechanism between remote work intensity and employee outcomes — work that informs how he thinks about technology-mediated work design and organisational change.
 
-#### 🏷️ Explore by Topic
+Before Accent Group, he held senior technical leadership roles at Peter MacCallum Cancer Centre, Australian Clinical Labs, and the Australian National University — accumulating 15+ years of experience across healthcare, higher education, and enterprise retail.
+
+## Technical Competencies
+
+| Domain | Platforms & Tools |
+|---|---|
+| Architecture & Governance | TOGAF, enterprise architecture, solution architecture, architecture review boards |
+| Cloud & Infrastructure | Microsoft Azure, VMware vSphere, Windows Server, Active Directory, Microsoft 365 |
+| Cybersecurity | CrowdStrike Falcon, Tenable, Splunk SIEM/SOAR, zero trust architecture |
+| Networking | Cisco enterprise networking (CCNP), LAN/WAN, SD-WAN, DNS, VPN, firewall architecture |
+| Data & Observability | Grafana, Prometheus, Loki, VictoriaMetrics, OpenTelemetry, Splunk |
+| ITSM & Platforms | ITIL, Atlassian Jira/Confluence/JSM, GitHub/GitHub Actions |
+| AI & Emerging Technology | Applied enterprise AI, AI integration architecture |
+
+## Explore by Topic
 
 <div class="post-tags mt-2 mb-3">
   {%- for tag in site.display_tags -%}
@@ -37,20 +49,6 @@ I'm **Ivan Ocampo**, a technology professional specialising in architecture, inf
   {%- endfor -%}
 </div>
 
-#### 💻 Skills
+## Contact
 
-| Domain | Tools |
-|---|---|
-| Cloud & Architecture | AWS · Azure · Kubernetes · Docker · Terraform · TOGAF |
-| Security & Networking | ISO 27001 · NIST CSF · CrowdStrike · Palo Alto · Splunk · Fortinet |
-| Data & AI | Python · R · TensorFlow · PyTorch · scikit-learn · Power BI · Tableau |
-| Observability | Prometheus · Grafana · Loki · New Relic · Splunk |
-| Databases | PostgreSQL · MySQL · MongoDB · Oracle · Cassandra |
-| Languages | Python · Ruby · Java · C/C++ · Shell · JavaScript |
-
-#### 📫 How to Reach Me
-- **Website:** [ivanocampo.com](https://ivanocampo.com)
-- **Email:** [ivan@ivanocampo.com](mailto:ivan@ivanocampo.com)
-
-#### 🧩 Connect with Me
-Feel free to reach out for collaborations, projects, or just a friendly chat about data science, programming, and enterprise architecture!
+Email: [ivan@ivanocampo.com](mailto:ivan@ivanocampo.com)

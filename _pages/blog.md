@@ -2,6 +2,7 @@
 layout: default
 permalink: /blog/
 title: blog
+description: Writing on enterprise architecture, cybersecurity, infrastructure, observability, and applied AI.
 nav: true
 nav_order: 10
 pagination:

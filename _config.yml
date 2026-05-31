@@ -2,18 +2,18 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: blank # the website title (if blank, full name will be used instead)
+title: Ivan Ocampo — Chief Architect # the website title (if blank, full name will be used instead)
 first_name: Ivan
 middle_name:
 last_name: Ocampo
 email: ivan@ivanocampo.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Ivan Ocampo (Ph.D.) is a Solutions Architect specialising in cloud infrastructure, enterprise architecture, and data science. Based at ivanocampo.com.
+  Ivan Ocampo (Ph.D.) is Chief Architect at Accent Group, with expertise in enterprise architecture, cybersecurity, hybrid cloud infrastructure, observability, and applied AI.
 footer_text: >
- <a href="https://jekyllrb.com/" target="_blank">💎 Powered by Jekyll</a> | 
-  <a href="https://pages.github.com/" target="_blank">☁️  Hosted by GitHub Pages</a> | Built with ❤️  and ☕
+  <a href="https://jekyllrb.com/" target="_blank">Powered by Jekyll</a> |
+  <a href="https://pages.github.com/" target="_blank">Hosted by GitHub Pages</a>
 
-keywords: Ivan Ocampo, solutions architect, enterprise architecture, TOGAF, cloud infrastructure, PhD, data science, cybersecurity, AWS, Azure
+keywords: Ivan Ocampo, Chief Architect, enterprise architecture, TOGAF, CCNP, cybersecurity, hybrid cloud, Azure, observability, Grafana, Splunk, CrowdStrike, Accent Group, PhD
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
@@ -141,7 +141,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: A day in the life # blog_name will be displayed in your blog page
-blog_description: Exploring insights and innovations across tech, research, and security. From late-night PhD struggles, to practical tech solutions, this blog is a resource for navigating complex ideas with clarity and creativity.
+blog_description: Writing on enterprise architecture, cybersecurity, infrastructure, observability, and applied AI.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 future: true # show posts dated today regardless of build-server timezone
@@ -209,7 +209,7 @@ collections:
     output: true
 
 announcements:
-  enabled: true
+  enabled: false
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
 
