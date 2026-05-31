@@ -51,7 +51,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-tikz-and-pgfplots-publication-quality-figures-that-don-39-t-break-your-latex-build",
+        },{id: "post-security-and-credential-management-for-ai-agents-with-filesystem-and-api-access",
+        
+          title: "Security and Credential Management for AI Agents with Filesystem and API Access",
+        
+        description: "Concrete attack vectors, secrets management integration, filesystem sandboxing, agent identity patterns, and the production failure modes that credential-bearing AI agents introduce — written for engineers building or operating them.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/ai-agent-credential-security/";
+          
+        },
+      },{id: "post-tikz-and-pgfplots-publication-quality-figures-that-don-39-t-break-your-latex-build",
         
           title: "TikZ and pgfplots: Publication-Quality Figures That Don&#39;t Break Your LaTeX Build",
         
