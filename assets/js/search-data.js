@@ -51,7 +51,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-claude-code-as-an-orchestration-layer-across-multi-system-enterprise-environments",
+        },{id: "post-promql-optimisation-patterns-for-high-cardinality-environments",
+        
+          title: "PromQL Optimisation Patterns for High-Cardinality Environments",
+        
+        description: "Concrete PromQL optimisation techniques for platform engineers operating at high cardinality: label matchers, recording rules, histogram strategies, aggregation ordering, and failure modes that silently degrade query performance in production.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/promql-optimisation-high-cardinality/";
+          
+        },
+      },{id: "post-claude-code-as-an-orchestration-layer-across-multi-system-enterprise-environments",
         
           title: "Claude Code as an Orchestration Layer Across Multi-System Enterprise Environments",
         
