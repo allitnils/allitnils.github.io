@@ -51,7 +51,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-latex-masterclass-week-1-what-is-latex-and-why-it-matters",
+        },{id: "post-claude-code-as-an-orchestration-layer-across-multi-system-enterprise-environments",
+        
+          title: "Claude Code as an Orchestration Layer Across Multi-System Enterprise Environments",
+        
+        description: "How Claude Code&#39;s sub-agent model, hook system, MCP integration, and worktree isolation compose into a production-grade orchestration layer for multi-system enterprise workflows — with architecture patterns, failure modes, and a practical implementation checklist.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/claude-code-enterprise-orchestration/";
+          
+        },
+      },{id: "post-latex-masterclass-week-1-what-is-latex-and-why-it-matters",
         
           title: "LaTeX Masterclass Week 1: What Is LaTeX and Why It Matters",
         
