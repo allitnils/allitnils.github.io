@@ -51,7 +51,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-promql-optimisation-patterns-for-high-cardinality-environments",
+        },{id: "post-practical-mcp-server-development-for-internal-tooling",
+        
+          title: "Practical MCP Server Development for Internal Tooling",
+        
+        description: "A deep, hands-on guide to building production MCP servers for internal engineering tooling — transport selection, the 2025-06-18 OAuth resource-server model, token-audience binding, tool design, and the confused-deputy failure mode that takes teams down.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/mcp-server-development-internal-tooling/";
+          
+        },
+      },{id: "post-claude-code-as-an-orchestration-layer-across-multi-system-enterprise-environments",
+        
+          title: 'Claude Code as an Orchestration Layer Across Multi-System Enterprise Environments <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://ivan-ocampo.medium.com/claude-code-as-an-orchestration-layer-across-multi-system-enterprise-environments-32e8328f38a7?source=rss-eaef8062a2b8------2", "_blank");
+          
+        },
+      },{id: "post-promql-optimisation-patterns-for-high-cardinality-environments",
         
           title: "PromQL Optimisation Patterns for High-Cardinality Environments",
         
@@ -225,17 +247,6 @@ ninja.data = [{
         handler: () => {
           
             window.open("https://ivan-ocampo.medium.com/the-top-10-hacking-movies-of-all-time-cbbbcb92bf26?source=rss-eaef8062a2b8------2", "_blank");
-          
-        },
-      },{id: "post-cybersecurity-in-a-connected-world",
-        
-          title: 'Cybersecurity in a Connected World <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://ivan-ocampo.medium.com/cybersecurity-in-a-connected-world-8e33d2e4200d?source=rss-eaef8062a2b8------2", "_blank");
           
         },
       },{id: "books-the-godfather",
