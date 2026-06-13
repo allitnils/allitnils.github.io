@@ -51,7 +51,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-practical-mcp-server-development-for-internal-tooling",
+        },{id: "post-mcp-goes-stateless-durable-tasks-the-death-of-sessions-and-what-the-2026-draft-means-for-production-agents",
+        
+          title: "MCP Goes Stateless: Durable Tasks, the Death of Sessions, and What the 2026...",
+        
+        description: "The MCP spec is quietly throwing out the foundations most production servers were built on — sessions, the initialize handshake, server-initiated sampling. Here is what the 2025-11-25 revision and the current draft actually change, why durable async tasks are the real story, and how to build for it without rewriting twice.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/mcp-stateless-durable-tasks-production/";
+          
+        },
+      },{id: "post-practical-mcp-server-development-for-internal-tooling",
         
           title: "Practical MCP Server Development for Internal Tooling",
         
