@@ -13,3 +13,11 @@ node_modules/
 vendor
 .idea
 .venv
+
+dist/
+.astro/
+node_modules/
+screenshots/
+astro-build/
+.astro/
+screenshots/

@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { AUTHOR } from '../data/author';
+
+const dissertationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Thesis',
+  name: 'Space Between Spaces: Rituals, Liminality, and the Dynamics of Remote Work Intensity',
+  author: {
+    '@type': 'Person',
+    name: 'Ivan Ocampo',
+    url: 'https://ivanocampo.com',
+    sameAs: [...AUTHOR.sameAs],
+    identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: 'https://orcid.org/0000-0002-8532-0673' }],
+  },
+  datePublished: '2025',
+  inSupportOf: 'Doctor of Philosophy',
+  sourceOrganization: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
+  about: ['Liminality','Remote Work','Phenomenology','Organisational Behaviour'],
+  url: 'https://ivanocampo.com/research',
+};
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR.name,
+  url: AUTHOR.url,
+  sameAs: [...AUTHOR.sameAs],
+  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
+};
+
+const researchInterests = [
+  'Remote Work', 'Liminality', 'Technostress', 'Work-Life Balance',
+  'Phenomenology', 'Organisational Behaviour', 'SEM', 'CFA',
+  'Distributed Work', 'Human-Computer Interaction', 'AI in the Workplace',
+  'Digital Transformation', 'Technology-Mediated Work Design',
+];
+
+const publications = [
+  {
+    type: 'book-chapter',
+    label: 'Book Chapter',
+    authors: 'Ocampo, I.',
+    year: '2025',
+    title: 'The Economic Benefits of Liminal Spaces in CSR: A Case Study Approach',
+    venue: 'Socially Responsible Business Models for International Brands',
+    detail: 'Chapter 5, pp. 73–100',
+    month: 'December 2025',
+    doi: '10.1142/9789819814916_0005',
+  },
+  {
+    type: 'conference',
+    label: 'Conference Paper',
+    authors: 'Ocampo, I., Qesja, B., Soleimani, S., & Patel, P.',
+    year: '2022',
+    title: 'Liminal Spaces in Remote Work: Mediating Remote Work Intensity and Employee Well-being',
+    venue: 'Proceedings of the Australian and New Zealand Marketing Academy Conference (ANZMAC)',
+    detail: 'Perth, Australia, December 2022',
+    doi: null,
+  },
+  {
+    type: 'journal',
+    label: 'Journal Article',
+    authors: 'Ocampo, I., Qesja, B., Soleimani, S., & Patel, P.',
+    year: '2022',
+    title: 'Leaving It All Behind: Evolution of the Work Environment and Liminal Spaces in the New Industrial Revolution 4.0',
+    venue: 'AIB Review',
+    detail: 'Australian Institute of Business, March 2022',
+    doi: null,
+  },
+  {
+    type: 'conference',
+    label: 'Conference Paper',
+    authors: 'Ocampo, I., Qesja, B., Soleimani, S., & Patel, P.',
+    year: '2021',
+    title: 'Impact of Workspace Design on Employee Satisfaction and Well-being: Juxtaposing Face-to-Face and Remote-Working',
+    venue: 'Environments by Design: Health, Wellbeing and Place Conference',
+    detail: 'Syracuse University, Syracuse, USA, November 2021',
+    doi: null,
+  },
+  {
+    type: 'journal',
+    label: 'Journal Article',
+    authors: 'Ocampo, I.',
+    year: '2018',
+    title: 'Exploring the Role of Emergent Digital Technologies in the Workplace of the Future: Strategies to Integrate Activity-Based Working for Millennial Employees',
+    venue: 'University of Canberra',
+    detail: 'Vol. 15, No. 2, pp. 123–145',
+    doi: null,
+  },
+];
+
+const typeColour: Record<string, string> = {
+  'book-chapter': 'var(--accent)',
+  'journal': 'var(--text-secondary)',
+  'conference': 'var(--text-muted)',
+};
+---
+<BaseLayout
+  title="Research — Ivan Ocampo | PhD, AIB 2025"
+  description="PhD research by Ivan Ocampo on liminality, remote work intensity, and the phenomenology of distributed organisations. Australian Institute of Business, 2025. Publications, conference papers, and book chapters."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(dissertationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+  <div class="site-container" style="padding-top:4rem;padding-bottom:6rem;">
+    <h1 style="font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.04em;margin:0 0 0.5rem;">Research</h1>
+    <p style="color:var(--text-secondary);margin:0 0 4rem;max-width:55ch;line-height:1.7;">
+      Empirical and theoretical work at the intersection of remote work, liminality, and organisational phenomenology.
+    </p>
+
+    <!-- Dissertation -->
+    <section style="margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);">
+      <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;">
+        <span style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Dissertation</span>
+        <span class="tag-chip" style="background:var(--accent);color:#fff;border-color:var(--accent);">Published 2025</span>
+      </div>
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.75rem);letter-spacing:-0.025em;line-height:1.2;margin:0 0 0.5rem;">
+        Space Between Spaces: Rituals, Liminality, and the Dynamics of Remote Work Intensity
+      </h2>
+      <p style="color:var(--text-secondary);font-size:0.9375rem;margin:0 0 1.25rem;">
+        Australian Institute of Business &mdash; Doctor of Philosophy, 2025
+      </p>
+      <p style="line-height:1.8;max-width:68ch;color:var(--text-secondary);margin:0 0 1.5rem;">
+        A quantitative study using structural equation modelling (SEM, n=717) and confirmatory factor analysis (CFA) to validate novel constructs including Liminal Spaces, Remote Work Intensity, Technostress, Work–Life Balance, Well-being, Productivity, Creativity, and Innovation. The central contribution is the theorisation and empirical validation of liminal spaces as a mediating mechanism between remote work intensity and employee outcomes.
+      </p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        {['Liminality', 'Remote Work', 'SEM n=717', 'CFA', 'Phenomenology', 'Technostress', 'Work-Life Balance'].map(t => (
+          <span class="tag-chip">{t}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Manuscript in development -->
+    <section style="margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);">
+      <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;">
+        <span style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Manuscript</span>
+        <span class="terminal-badge dim">In Development</span>
+      </div>
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.75rem);letter-spacing:-0.025em;line-height:1.2;margin:0 0 0.5rem;">
+        The Body Between: Embodied Liminality and the Phenomenology of Remote Work Space
+      </h2>
+      <p style="color:var(--text-secondary);font-size:0.9375rem;margin:0 0 1.25rem;">
+        Target: <em>Organization Studies</em> Special Issue 2026
+      </p>
+      <p style="line-height:1.8;max-width:68ch;color:var(--text-secondary);margin:0 0 1.5rem;">
+        Drawing on Merleau-Ponty's phenomenology of embodiment, Csordas's somatic modes of attention, and Wacquant's carnal sociology to theorise the embodied dimensions of liminal workspace experience. Bridges the quantitative SEM findings from the dissertation with phenomenological depth accounts of how remote workers navigate threshold states between domestic and professional being.
+      </p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        {['Merleau-Ponty', 'Csordas', 'Wacquant', 'Embodiment', 'Organization Studies'].map(t => (
+          <span class="tag-chip">{t}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section style="margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);">
+      <h2 style="font-weight:700;font-size:clamp(1.125rem,2vw,1.375rem);letter-spacing:-0.02em;margin:0 0 2rem;">Publications</h2>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        {publications.map((pub, i) => (
+          <div style={`padding:1.5rem 0;${i < publications.length - 1 ? 'border-bottom:1px solid var(--border);' : ''}`}>
+            <div style="display:flex;gap:0.75rem;align-items:baseline;flex-wrap:wrap;margin-bottom:0.5rem;">
+              <span style={`font-family:'Fira Code Variable',monospace;font-size:0.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:${typeColour[pub.type]};`}>
+                {pub.label}
+              </span>
+              <span style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;color:var(--text-muted);">{pub.year}</span>
+            </div>
+            <p style="font-weight:600;font-size:0.9375rem;color:var(--text-primary);margin:0 0 0.25rem;line-height:1.4;">
+              {pub.doi
+                ? <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener noreferrer" style="color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--border-mid);">{pub.title} &nearr;</a>
+                : pub.title
+              }
+            </p>
+            <p style="font-size:0.875rem;color:var(--text-secondary);margin:0 0 0.125rem;font-style:italic;">{pub.venue}</p>
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin:0;">{pub.authors} &mdash; {pub.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Research Interests -->
+    <section style="margin-bottom:4rem;">
+      <h2 style="font-weight:600;font-size:1.125rem;letter-spacing:-0.02em;margin:0 0 1.25rem;">Research Interests</h2>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        {researchInterests.map(interest => (
+          <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-secondary);padding:0.25rem 0.6rem;border:1px solid var(--border);border-radius:4px;">{interest}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Profile links -->
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border);">
+      <a href="https://scholar.google.com/citations?user=QEOarFgAAAAJ" target="_blank" rel="noopener noreferrer"
+         style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">Google Scholar &nearr;</a>
+      <a href="https://orcid.org/0000-0002-8532-0673" target="_blank" rel="noopener noreferrer"
+         style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">ORCID &nearr;</a>
+      <a href="https://www.researchgate.net/profile/Ivan-Ocampo-2" target="_blank" rel="noopener noreferrer"
+         style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">ResearchGate &nearr;</a>
+    </div>
+    <p style="margin-top:2rem;">
+      <a href="/" style="color:var(--text-secondary);font-size:0.875rem;text-decoration:none;">&larr; Home</a>
+      &nbsp;&nbsp;
+      <a href="/blog/mcp-tool-chaining-production" style="color:var(--accent);font-size:0.875rem;font-weight:500;text-decoration:none;">Read: MCP in Production &rarr;</a>
+    </p>
+  </div>
+</BaseLayout>

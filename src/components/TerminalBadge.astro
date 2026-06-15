@@ -1,0 +1,8 @@
+---
+interface Props {
+  label: string;
+  dim?: boolean;
+}
+const { label, dim = false } = Astro.props;
+---
+<span class={`terminal-badge${dim ? ' dim' : ''}`}>{label}</span>

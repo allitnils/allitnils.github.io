@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TerminalBadge from '../components/TerminalBadge.astro';
+import { AUTHOR } from '../data/author';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR.name,
+  url: AUTHOR.url,
+  image: `${AUTHOR.url}${AUTHOR.image}`,
+  jobTitle: AUTHOR.role,
+  worksFor: { '@type': 'Organization', name: AUTHOR.org },
+  alumniOf: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
+  description: AUTHOR.description,
+  sameAs: [...AUTHOR.sameAs],
+  address: { '@type': 'PostalAddress', addressLocality: AUTHOR.city, addressCountry: AUTHOR.country },
+  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
+};
+
+const competencies = [
+  { domain: 'Architecture & Governance', detail: 'TOGAF, enterprise architecture, solution architecture, architecture review boards, roadmap design' },
+  { domain: 'Cloud & Infrastructure', detail: 'Microsoft Azure (AZ-305), AWS (SAA), VMware vSphere/vCenter, hybrid cloud, on-premises datacentre' },
+  { domain: 'Microsoft Stack', detail: 'Windows Server, Active Directory, Microsoft 365, Entra ID, SharePoint, Exchange, PowerShell, Intune, Defender' },
+  { domain: 'Linux & UNIX', detail: 'RHEL, Fedora, Ubuntu, Debian — production server administration; familiarity with BSD and Solaris variants' },
+  { domain: 'Cybersecurity', detail: 'CrowdStrike Falcon (EDR), Tenable (vulnerability management), Splunk (SIEM/SOAR), zero trust architecture, CISSP, CISM' },
+  { domain: 'Networking', detail: 'Cisco enterprise networking (CCNP), LAN/WAN, SD-WAN, DNS, VPN, firewall architecture, Meraki, Cloudflare' },
+  { domain: 'Data & Observability', detail: 'Grafana, Prometheus, Loki, VictoriaMetrics, OpenTelemetry, Splunk, data platform architecture, ADF pipelines' },
+  { domain: 'Data Analysis', detail: 'R (tidyverse, ggplot2, Shiny), Python (pandas, NumPy, scikit-learn), SPSS, Leximancer, SEM/CFA (lavaan, AMOS), BibTeX' },
+  { domain: 'Programming & Scripting', detail: 'Python, Bash/Shell, PowerShell, R, Java, C/C++ (foundational), SQL, YAML, Bicep/ARM' },
+  { domain: 'Document & Research Tools', detail: 'LaTeX, BibTeX, Overleaf, Markdown, Quarto — academic typesetting and research publication pipelines' },
+  { domain: 'ITSM & Platforms', detail: 'ITIL-aligned service management, Atlassian Jira/Confluence/JSM Assets, GitHub/GitHub Actions, PMP' },
+  { domain: 'AI & Emerging Technology', detail: 'Applied enterprise AI, agentic workflow architecture, MCP, Claude API, prompt engineering, LLM integration patterns' },
+];
+
+const roles = [
+  {
+    title: 'Chief Architect',
+    org: 'Accent Group (ASX: AX1)',
+    period: '2022 – present',
+    context: 'One of Australia\'s largest footwear and apparel retailers, operating 800+ stores across brands including Platypus, Hype DC, Vans, Timberland, and Dr Martens.',
+    reports: 2,
+    bullets: [
+      'Enterprise architecture leadership across retail technology, infrastructure, cybersecurity, data, and digital platforms',
+      'TOGAF-aligned architecture governance — standards, patterns, roadmaps, and architecture review board',
+      'Hybrid cloud architecture (Azure-primary) — identity, networking, compute, storage, and data',
+      'Cybersecurity architecture — CrowdStrike EDR, Tenable vulnerability management, Splunk SIEM/SOAR, zero trust principles',
+      'Observability platform design — Grafana, Prometheus, Loki, VictoriaMetrics, OpenTelemetry',
+      'Data platform architecture — pipelines, analytics, and reporting',
+      'Applied AI and ML integration architecture — evaluation and adoption of emerging AI platforms in enterprise context',
+      'Architecture oversight of major capital investments and transformation programmes',
+      'Vendor and technology partner management at executive level',
+    ],
+  },
+  {
+    title: 'Senior Solutions Architect',
+    org: 'Peter MacCallum Cancer Centre',
+    period: '2022',
+    context: 'Australia\'s only public hospital dedicated entirely to cancer care, operating under Victorian Department of Health governance.',
+    reports: 5,
+    bullets: [
+      'Solutions architecture for clinical and corporate systems in a highly regulated healthcare environment',
+      'Integration architecture across clinical, imaging, and administrative platforms',
+      'Security and compliance architecture aligned to health sector regulatory requirements',
+      'Cloud adoption and hybrid infrastructure design',
+    ],
+  },
+  {
+    title: 'IT Manager',
+    org: 'Australian Clinical Labs',
+    period: '2019 – 2022',
+    context: 'One of Australia\'s largest pathology providers, operating across hospital, community, and specialist laboratory networks nationally.',
+    reports: 17,
+    bullets: [
+      'Full IT operations leadership — infrastructure, support, security, vendors, and budget',
+      'Cybersecurity operations — endpoint protection, vulnerability management, and patching programmes',
+      'Cloud migration and hybrid infrastructure management',
+      'ITSM design, governance, and operational management',
+      'Led IT operations through COVID-19 pandemic demands in a nationally critical pathology environment',
+      'Team leadership across technical, infrastructure, and support functions at scale',
+    ],
+  },
+  {
+    title: 'IT Manager',
+    org: 'Australian National University',
+    period: '2010 – 2019',
+    context: 'Australia\'s leading research university, a Group of Eight member, ranked in the global top 100.',
+    reports: 4,
+    bullets: [
+      'IT management across faculty and division-level infrastructure and services',
+      'Enterprise Windows infrastructure — Active Directory, server, endpoint, and virtualisation',
+      'Network infrastructure management (foundational basis for CCNP expertise)',
+      'IT service management, support operations, and stakeholder engagement',
+      'Budget management and vendor procurement',
+      '9-year tenure reflecting sustained institutional trust and progressive leadership growth',
+    ],
+  },
+];
+---
+<BaseLayout
+  title="About Ivan Ocampo — Chief Architect, Melbourne"
+  description="Ivan Ocampo (PhD) is Chief Architect at Accent Group, Melbourne. 24 years across enterprise architecture, cybersecurity, cloud infrastructure, and data platforms. TOGAF, CCNP, ITIL certified. PhD, Australian Institute of Business, 2025."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+  <div class="site-container" style="padding-top:4rem;padding-bottom:6rem;">
+
+    <!-- Identity -->
+    <div style="margin-bottom:4rem;max-width:68ch;">
+      <h1 style="font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.04em;margin:0 0 0.5rem;">
+        Ivan Ocampo
+      </h1>
+      <p style="font-family:'Fira Code Variable',monospace;font-size:0.8125rem;color:var(--text-muted);margin:0 0 2rem;">
+        PhD &nbsp;·&nbsp; Chief Architect, Accent Group &nbsp;·&nbsp; Melbourne, Australia
+      </p>
+      <p style="font-size:1.0625rem;line-height:1.85;color:var(--text-secondary);margin:0 0 1.25rem;">
+        Ivan Ocampo is Chief Architect at Accent Group (ASX: AX1), one of Australia's largest footwear and apparel retailers, operating 800+ stores across brands including Platypus, Hype DC, Vans, Timberland, and Dr Martens. His work spans enterprise and solution architecture, cybersecurity, hybrid cloud infrastructure, data platforms, and applied AI — covering both hands-on technical execution and executive governance.
+      </p>
+      <p style="font-size:1.0625rem;line-height:1.85;color:var(--text-secondary);margin:0;">
+        He holds a TOGAF certification, a CCNP, and a PhD from the Australian Institute of Business. His doctoral research theorised and empirically validated liminal spaces as a mediating mechanism between remote work intensity and employee outcomes — work that informs how he thinks about technology-mediated work design and organisational change.
+      </p>
+    </div>
+
+    <!-- Credentials -->
+    <div style="margin-bottom:3.5rem;">
+      <h2 style="font-weight:700;font-size:0.8125rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Credentials</h2>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        {AUTHOR.certifications.map(cert => <TerminalBadge label={cert} />)}
+      </div>
+    </div>
+
+    <!-- Technical Competencies -->
+    <div style="margin-bottom:4rem;">
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.5rem);letter-spacing:-0.025em;margin:0 0 1.5rem;">Technical Competencies</h2>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        {competencies.map((item, i) => (
+          <div style={`display:grid;grid-template-columns:220px 1fr;gap:1.5rem;padding:0.875rem 0;border-bottom:1px solid var(--border);${i === 0 ? 'border-top:1px solid var(--border);' : ''}`}>
+            <span style="font-weight:600;font-size:0.875rem;color:var(--text-primary);">{item.domain}</span>
+            <span style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;">{item.detail}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div style="margin-bottom:4rem;">
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.5rem);letter-spacing:-0.025em;margin:0 0 2rem;">Experience</h2>
+      <div style="display:flex;flex-direction:column;gap:3rem;">
+        {roles.map(role => (
+          <div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.25rem;">
+              <h3 style="font-weight:700;font-size:1.0625rem;margin:0;">{role.title}</h3>
+              <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);">{role.period}</span>
+            </div>
+            <p style="font-weight:600;font-size:0.875rem;color:var(--accent);margin:0 0 0.5rem;">{role.org}</p>
+            <p style="font-size:0.875rem;color:var(--text-muted);margin:0 0 0.25rem;line-height:1.6;">{role.context}</p>
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin:0 0 1rem;font-family:'Fira Code Variable',monospace;">Direct reports: {role.reports}</p>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.5rem;">
+              {role.bullets.map(b => (
+                <li style="font-size:0.9rem;color:var(--text-secondary);line-height:1.65;padding-left:1.25rem;position:relative;">
+                  <span style="position:absolute;left:0;top:0.55rem;width:4px;height:4px;background:var(--border-mid);border-radius:50%;display:inline-block;"></span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div style="margin-bottom:4rem;">
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.5rem);letter-spacing:-0.025em;margin:0 0 2rem;">Education</h2>
+      <div style="display:flex;flex-direction:column;gap:2rem;">
+        <div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.25rem;">
+            <h3 style="font-weight:700;font-size:1.0625rem;margin:0;">Doctor of Philosophy</h3>
+            <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);">2025</span>
+          </div>
+          <p style="font-weight:600;font-size:0.875rem;color:var(--accent);margin:0 0 0.5rem;">Australian Institute of Business</p>
+          <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 0.25rem;line-height:1.7;">
+            <em>Space Between Spaces: Rituals, Liminality, and the Dynamics of Remote Work Intensity</em>
+          </p>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin:0;line-height:1.7;">
+            Quantitative study using structural equation modelling (SEM) and confirmatory factor analysis (CFA).
+            Central contribution: theorisation and empirical validation of liminal spaces as a mediating mechanism
+            between remote work intensity and employee outcomes.
+          </p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.25rem;">
+            <h3 style="font-weight:700;font-size:1.0625rem;margin:0;">Master of Business Administration</h3>
+            <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);">2019</span>
+          </div>
+          <p style="font-weight:600;font-size:0.875rem;color:var(--accent);margin:0;">University of Canberra</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile links -->
+    <div style="margin-bottom:3rem;">
+      <h2 style="font-weight:700;font-size:0.8125rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Profiles</h2>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <a href="https://github.com/allitnils" target="_blank" rel="noopener noreferrer"
+           style="color:var(--accent);text-decoration:none;font-size:0.9375rem;">GitHub — allitnils &nearr;</a>
+        <a href="https://scholar.google.com/citations?user=QEOarFgAAAAJ" target="_blank" rel="noopener noreferrer"
+           style="color:var(--accent);text-decoration:none;font-size:0.9375rem;">Google Scholar &nearr;</a>
+        <a href="https://orcid.org/0000-0002-8532-0673" target="_blank" rel="noopener noreferrer"
+           style="color:var(--accent);text-decoration:none;font-size:0.9375rem;">ORCID 0000-0002-8532-0673 &nearr;</a>
+        <a href="https://www.researchgate.net/profile/Ivan-Ocampo-2" target="_blank" rel="noopener noreferrer"
+           style="color:var(--accent);text-decoration:none;font-size:0.9375rem;">ResearchGate &nearr;</a>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border);">
+      <a href="/research" style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">Research &rarr;</a>
+      <a href="/teaching" style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">Teaching &rarr;</a>
+      <a href="/blog" style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">Blog &rarr;</a>
+    </div>
+
+  </div>
+</BaseLayout>

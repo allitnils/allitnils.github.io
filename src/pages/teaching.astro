@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { AUTHOR } from '../data/author';
+
+const courses = [
+  {
+    id: 'artificial-intelligence-for-managers',
+    title: 'Artificial Intelligence for Managers',
+    term: 'MBA Elective · Australian Institute of Business · Intensive block delivery',
+    description: 'A management-level course in artificial intelligence, covering AI fundamentals, enterprise AI strategy, ethics, governance, large language models, and the practical application of AI in business contexts — for leaders who need to make informed decisions about AI adoption without requiring a technical background.',
+    outcomes: [
+      'Articulate how core AI and machine learning techniques work and where they add business value',
+      'Develop an enterprise AI adoption strategy aligned to organisational risk appetite and capability',
+      'Evaluate AI tools, vendors, and platforms using a structured governance framework',
+      'Identify and mitigate ethical risks in AI deployment — bias, transparency, accountability, and privacy',
+      'Design AI governance structures appropriate to their organisation\'s size, sector, and regulatory environment',
+    ],
+    schedule: [
+      { week: 1, topic: 'What Is AI? Demystifying the Technology', description: 'Machine learning, deep learning, generative AI, and large language models — what they are, how they work, and what they can and cannot do.' },
+      { week: 2, topic: 'AI in the Enterprise Landscape', description: 'Current AI adoption patterns across industries. Case studies in retail, healthcare, finance, and the public sector. Where AI creates value and where it fails.' },
+      { week: 3, topic: 'Building an AI Strategy', description: 'Aligning AI investment with business strategy. Identifying AI-ready problems, evaluating build vs. buy decisions, and defining success metrics for AI initiatives.' },
+      { week: 4, topic: 'Data Foundations for AI', description: 'Why data quality determines AI outcomes. Data governance, data literacy, and the organisational capabilities required to sustain AI at scale.' },
+      { week: 5, topic: 'AI Ethics and Responsible Use', description: 'Bias in algorithms, transparency and explainability, accountability frameworks, and the regulatory landscape — Australia\'s AI Ethics Principles and the EU AI Act.' },
+      { week: 6, topic: 'AI Governance and Risk Management', description: 'Establishing an AI governance structure. Risk classification of AI systems, procurement due diligence for AI vendors, and third-party model accountability.' },
+      { week: 7, topic: 'Generative AI and the Future of Work', description: 'Large language models, copilots, and agentic AI in the workplace. Workforce implications, change management, and sustaining human oversight.' },
+      { week: 8, topic: 'Capstone — AI Adoption Proposal', description: 'Students present an AI adoption proposal for a real or hypothetical organisation — strategy, governance, ethics considerations, and a business case.' },
+    ],
+    assessment: [
+      { item: 'AI Adoption Strategy Report', weight: '40%' },
+      { item: 'AI Ethics Case Analysis', weight: '30%' },
+      { item: 'Class Participation', weight: '30%' },
+    ],
+  },
+  {
+    id: 'business-analysis-for-managers',
+    title: 'Business Analysis for Managers',
+    term: 'MBA Elective · Australian Institute of Business · Intensive block delivery',
+    description: 'A practical course in business analysis for managers, covering requirements elicitation, process modelling, stakeholder engagement, and data-driven decision-making within an enterprise context.',
+    outcomes: [
+      'Apply structured techniques to elicit and document business requirements',
+      'Model current and future business processes using BPMN',
+      'Develop a business case with financial and risk analysis',
+      'Work effectively in agile delivery environments as a BA contributor',
+      'Use data to validate requirements and communicate value to stakeholders',
+    ],
+    schedule: [
+      { week: 1, topic: 'Foundations of Business Analysis', description: 'The role of the business analyst, the BA lifecycle, and how BA fits within organisational strategy and project delivery.' },
+      { week: 2, topic: 'Stakeholder Analysis and Engagement', description: 'Identifying, mapping, and managing stakeholders. Techniques for eliciting requirements through interviews, workshops, and observation.' },
+      { week: 3, topic: 'Requirements Elicitation and Documentation', description: 'Functional and non-functional requirements, use cases, user stories, and acceptance criteria.' },
+      { week: 4, topic: 'Business Process Modelling (BPMN)', description: 'Current-state and future-state process mapping using BPMN 2.0. Identifying inefficiencies, bottlenecks, and automation opportunities.' },
+      { week: 5, topic: 'Business Case Development', description: 'Structuring a compelling business case — cost-benefit analysis, ROI, risk assessment, and presenting recommendations to executive stakeholders.' },
+      { week: 6, topic: 'Agile Business Analysis', description: 'BA practices in agile and hybrid delivery environments. Backlog refinement, sprint ceremonies, and maintaining traceability in iterative development.' },
+      { week: 7, topic: 'Data-Driven Decision Making', description: 'Using data analytics and dashboards to validate requirements, measure outcomes, and communicate business value.' },
+      { week: 8, topic: 'Capstone — BA in Practice', description: 'Applied case study — students analyse a real-world scenario end-to-end, from stakeholder mapping through to a presented business case and process model.' },
+    ],
+    assessment: [
+      { item: 'Business Case Assignment', weight: '40%' },
+      { item: 'Process Modelling Exercise', weight: '30%' },
+      { item: 'Class Participation', weight: '30%' },
+    ],
+  },
+  {
+    id: 'cybersecurity-for-managers',
+    title: 'Cybersecurity for Managers',
+    term: 'MBA Elective · Australian Institute of Business · Intensive block delivery',
+    description: 'A management-level course in cybersecurity, covering risk frameworks, governance, threat landscapes, incident response, and regulatory compliance for non-technical leaders.',
+    outcomes: [
+      'Assess organisational cybersecurity risk using established frameworks (NIST CSF, ISO 27001, ASD Essential Eight)',
+      'Design and oversee a security governance structure appropriate to their organisation',
+      'Develop and test an incident response plan',
+      'Navigate Australian and international compliance obligations (Privacy Act, GDPR, NDB scheme)',
+      'Evaluate vendor and cloud security posture as part of procurement and partnership decisions',
+    ],
+    schedule: [
+      { week: 1, topic: 'The Cybersecurity Landscape', description: 'Current threat actors, attack vectors, and high-profile case studies. Why cybersecurity is a board-level concern.' },
+      { week: 2, topic: 'Risk Management Frameworks', description: 'Introduction to ISO/IEC 27001, NIST Cybersecurity Framework, and Australia\'s ASD Essential Eight.' },
+      { week: 3, topic: 'Security Governance and Strategy', description: 'Establishing a security governance structure, defining roles (CISO, security champions), aligning security investment with business risk appetite.' },
+      { week: 4, topic: 'Identity, Access, and Data Protection', description: 'Principles of least privilege, identity and access management (IAM), data classification, and encryption.' },
+      { week: 5, topic: 'Threat Detection and Incident Response', description: 'Building and testing an incident response plan. Roles during a cyber incident, communication strategies, containment and recovery.' },
+      { week: 6, topic: 'Regulatory Compliance and Legal Obligations', description: 'Australian Privacy Act, GDPR for international operations, Notifiable Data Breaches scheme, and sector-specific requirements.' },
+      { week: 7, topic: 'Vendor and Supply Chain Risk', description: 'Assessing third-party security posture, cloud provider shared responsibility models, and managing outsourced technology risk.' },
+      { week: 8, topic: 'Security Culture and Awareness', description: 'Building a security-aware workforce. Social engineering defences, phishing simulations, and embedding security into organisational culture.' },
+    ],
+    assessment: [
+      { item: 'Security Risk Assessment Report', weight: '40%' },
+      { item: 'Incident Response Plan', weight: '30%' },
+      { item: 'Class Participation', weight: '30%' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Teaching — Ivan Ocampo | AIB MBA Electives"
+  description="Ivan Ocampo teaches MBA electives at the Australian Institute of Business — Business Analysis for Managers and Cybersecurity for Managers. Practice-grounded courses bridging management and technology."
+>
+  <div class="site-container" style="padding-top:4rem;padding-bottom:6rem;">
+    <h1 style="font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.04em;margin:0 0 0.75rem;">Teaching</h1>
+    <p style="font-size:1.0625rem;color:var(--text-secondary);margin:0 0 4rem;line-height:1.7;max-width:60ch;">
+      MBA electives taught at the <a href="https://www.aib.edu.au" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(146,64,14,0.25);">Australian Institute of Business</a>.
+      Intensive block delivery — practice-grounded, grounded in current industry experience.
+    </p>
+
+    {courses.map((course, i) => (
+      <article id={course.id} style={`margin-bottom:${i < courses.length - 1 ? '5rem' : '0'};padding-bottom:${i < courses.length - 1 ? '5rem' : '0'};border-bottom:${i < courses.length - 1 ? '1px solid var(--border)' : 'none'};`}>
+        <h2 style="font-weight:700;font-size:clamp(1.4rem,3vw,1.875rem);letter-spacing:-0.03em;margin:0 0 0.5rem;">{course.title}</h2>
+        <p style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);margin:0 0 1.25rem;">{course.term}</p>
+        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.8;margin:0 0 2rem;max-width:65ch;">{course.description}</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:2.5rem;">
+          <!-- Schedule -->
+          <div>
+            <h3 style="font-weight:700;font-size:0.8125rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Schedule</h3>
+            <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.875rem;">
+              {course.schedule.map(week => (
+                <li style="display:flex;gap:1rem;align-items:flex-start;">
+                  <span style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;color:var(--accent);min-width:2.5rem;padding-top:0.2rem;flex-shrink:0;">W{week.week}</span>
+                  <div>
+                    <p style="font-weight:600;font-size:0.875rem;margin:0 0 0.125rem;color:var(--text-primary);">{week.topic}</p>
+                    <p style="font-size:0.8125rem;color:var(--text-secondary);margin:0;line-height:1.55;">{week.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <!-- Outcomes + Assessment -->
+          <div>
+            <h3 style="font-weight:700;font-size:0.8125rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Learning Outcomes</h3>
+            <ul style="list-style:none;margin:0 0 2rem;padding:0;display:flex;flex-direction:column;gap:0.625rem;">
+              {course.outcomes.map(outcome => (
+                <li style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;padding-left:1rem;position:relative;">
+                  <span style="position:absolute;left:0;top:0.35rem;width:4px;height:4px;background:var(--accent);border-radius:50%;display:inline-block;"></span>
+                  {outcome}
+                </li>
+              ))}
+            </ul>
+
+            <h3 style="font-weight:700;font-size:0.8125rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Assessment</h3>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+              {course.assessment.map(a => (
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);">
+                  <span style="font-size:0.875rem;color:var(--text-secondary);">{a.item}</span>
+                  <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--accent);font-weight:500;">{a.weight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+
+    <div style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);">
+      <a href="/about" style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.9rem;">About Ivan Ocampo &rarr;</a>
+    </div>
+  </div>
+</BaseLayout>

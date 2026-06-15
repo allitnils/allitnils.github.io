@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { AUTHOR } from '../data/author';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const latestPosts = allPosts.slice(0, 3);
+
+const tagCounts: Record<string, number> = {};
+allPosts.forEach(p => p.data.tags?.forEach(t => { tagCounts[t] = (tagCounts[t] ?? 0) + 1; }));
+const topics = Object.entries(tagCounts)
+  .sort((a, b) => b[1] - a[1])
+  .map(([tag]) => tag)
+  .slice(0, 16);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR.name,
+  url: AUTHOR.url,
+  image: `${AUTHOR.url}${AUTHOR.image}`,
+  jobTitle: AUTHOR.role,
+  worksFor: { '@type': 'Organization', name: AUTHOR.org },
+  alumniOf: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
+  description: AUTHOR.description,
+  sameAs: [...AUTHOR.sameAs],
+  knowsAbout: ['Enterprise Architecture','Cloud Infrastructure','Azure','Observability',
+               'Phenomenology','Remote Work','Liminality','Organisation Studies'],
+  address: { '@type': 'PostalAddress', addressLocality: AUTHOR.city, addressCountry: AUTHOR.country },
+  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: `${AUTHOR.name} — Blog`,
+  url: AUTHOR.url,
+  author: { '@type': 'Person', name: AUTHOR.name },
+  description: AUTHOR.description,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: `${AUTHOR.url}/blog?tag={search_term_string}` },
+    'query-input': 'required name=search_term_string',
+  },
+};
+---
+<BaseLayout title={AUTHOR.name} description={AUTHOR.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
+  <!-- ── 1. Hero — name / blurb / certs ───────────────────────────── -->
+  <section style="position:relative;min-height:88svh;display:flex;align-items:center;overflow:hidden;">
+    <div class="hero-bg"></div>
+    <div class="site-container" style="position:relative;z-index:1;padding-top:5rem;padding-bottom:4rem;width:100%;">
+
+      <div style="display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;">
+        <div>
+          <div class="hero-prompt" style="margin-bottom:1.25rem;">
+            <span style="font-family:'Fira Code Variable',monospace;font-size:0.9rem;color:var(--accent);font-weight:500;">$</span><span class="cursor"></span>
+          </div>
+
+          <div class="hero-headline" style="margin-bottom:0.625rem;">
+            <h1 style="font-weight:700;font-size:clamp(2.75rem,6vw,5rem);letter-spacing:-0.04em;line-height:1.0;margin:0;">
+              Ivan Ocampo
+            </h1>
+          </div>
+
+          <p class="hero-sub" style="font-size:clamp(0.8125rem,1.4vw,0.9375rem);color:var(--text-muted);margin:0 0 1.5rem;font-family:'Fira Code Variable',monospace;">
+            PhD (AIB, 2025) &nbsp;·&nbsp; Chief Architect, Accent Group &nbsp;·&nbsp; Melbourne, AU
+          </p>
+
+          <p style="font-weight:400;font-size:1.0625rem;color:var(--text-secondary);line-height:1.8;margin:0 0 2rem;max-width:56ch;">
+            Senior technology executive with hands-on architectural depth across enterprise infrastructure,
+            cybersecurity, cloud, data, and applied AI. PhD research on remote work intensity, liminality,
+            and technology-mediated organisational design.
+          </p>
+
+          <div class="hero-actions" style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.25rem;">
+            <a href="/blog" style="display:inline-flex;align-items:center;padding:0.625rem 1.25rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:6px;font-weight:600;font-size:0.875rem;">
+              Read the Blog
+            </a>
+            <a href="/about" style="display:inline-flex;align-items:center;padding:0.625rem 1.25rem;border:1px solid var(--border-mid);color:var(--text-primary);text-decoration:none;border-radius:6px;font-weight:500;font-size:0.875rem;">
+              About &rarr;
+            </a>
+            <a href="/projects" style="display:inline-flex;align-items:center;padding:0.625rem 1.25rem;border:1px solid var(--border-mid);color:var(--text-primary);text-decoration:none;border-radius:6px;font-weight:500;font-size:0.875rem;">
+              Projects &rarr;
+            </a>
+          </div>
+
+          <!-- Cert row -->
+          <div class="hero-stat-row" style="display:flex;gap:0.5rem;flex-wrap:wrap;padding-top:1.75rem;border-top:1px solid var(--border);">
+            {AUTHOR.certifications.map(cert => (
+              <span style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;color:var(--text-muted);border:1px solid var(--border);padding:0.2rem 0.55rem;border-radius:4px;white-space:nowrap;">
+                {cert}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Profile photo -->
+        <div class="hero-headline" style="flex-shrink:0;">
+          <picture>
+            <img
+              src="/images/ivan-ocampo.jpg"
+              alt="Ivan Ocampo, Chief Architect at Accent Group, Melbourne"
+              width="220" height="220"
+              loading="eager"
+              fetchpriority="high"
+              style="border-radius:50%;object-fit:cover;width:clamp(140px,18vw,220px);height:clamp(140px,18vw,220px);border:3px solid var(--border-mid);box-shadow:0 4px 24px rgba(0,0,0,0.1);"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. Explore by Topic ───────────────────────────────────────── -->
+  <section style="padding:3rem 0;background:var(--mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="site-container">
+      <h2 style="font-weight:700;font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Explore by Topic</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+        {topics.map(tag => (
+          <a href={`/blog?tag=${tag}`} class="tag-chip">{tag}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. Technical Scope ────────────────────────────────────────── -->
+  <section style="padding:3.5rem 0;border-bottom:1px solid var(--border);">
+    <div class="site-container">
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.625rem);letter-spacing:-0.03em;margin:0 0 1.5rem;">Technical Scope</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0.875rem;">
+        {[
+          { domain: 'Architecture & Governance', detail: 'TOGAF, enterprise & solution architecture, ARB, roadmaps' },
+          { domain: 'Cloud & Infrastructure', detail: 'Azure (AZ-305), AWS, VMware, Windows Server, AD, M365' },
+          { domain: 'Cybersecurity', detail: 'CrowdStrike, Tenable, Splunk SIEM/SOAR, zero trust (CISSP, CISM)' },
+          { domain: 'Data & Observability', detail: 'Grafana, Prometheus, Loki, VictoriaMetrics, OpenTelemetry' },
+          { domain: 'Networking', detail: 'CCNP — LAN/WAN, SD-WAN, DNS, VPN, firewall architecture' },
+          { domain: 'AI & Emerging Technology', detail: 'Applied enterprise AI, agentic workflows, integration architecture' },
+        ].map(item => (
+          <div style="padding:1.125rem;background:var(--paper);border:1px solid var(--border);border-radius:8px;">
+            <p style="font-weight:700;font-size:0.8125rem;margin:0 0 0.3rem;color:var(--text-primary);">{item.domain}</p>
+            <p style="font-size:0.775rem;color:var(--text-secondary);margin:0;line-height:1.55;">{item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. Latest Posts ──────────────────────────────────────────── -->
+  <section style="padding:3.5rem 0;border-bottom:1px solid var(--border);">
+    <div class="site-container">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.75rem;">
+        <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.625rem);letter-spacing:-0.03em;margin:0;">Latest Posts</h2>
+        <a href="/blog" style="color:var(--accent);font-size:0.875rem;font-weight:500;text-decoration:none;">All posts &rarr;</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        {latestPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            slug={post.id}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. Latest Projects ──────────────────────────────────────── -->
+  <section style="padding:3.5rem 0;border-bottom:1px solid var(--border);">
+    <div class="site-container">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.75rem;">
+        <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.625rem);letter-spacing:-0.03em;margin:0;">Latest Projects</h2>
+        <a href="/projects" style="color:var(--accent);font-size:0.875rem;font-weight:500;text-decoration:none;">All projects &rarr;</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
+        {[
+          { title: 'Claude Code Agentic Workflows', desc: 'Autonomous multi-agent system using Claude\'s tool-use API — parallel sub-agents, hook-driven automation, persistent memory.', stack: ['Claude API', 'Python', 'Bash'], href: '/projects' },
+          { title: 'Enterprise Observability Stack', desc: 'Production-grade metrics, logs, and alerting across distributed infrastructure using Prometheus, Loki, and Grafana.', stack: ['Prometheus', 'Loki', 'Grafana'], href: '/projects' },
+          { title: 'CutWise', desc: 'Browser-based cutting sheet optimiser. Zero-dependency, runs entirely in-browser with PDF export and CSV import.', stack: ['JavaScript', 'Canvas API'], href: 'https://ivanocampo.com/CutWise/' },
+        ].map(p => (
+          <a href={p.href} class="post-card" style="display:flex;flex-direction:column;padding:1.25rem;text-decoration:none;color:inherit;gap:0.5rem;" target={p.href.startsWith('http') ? '_blank' : undefined} rel={p.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+            <h3 style="font-weight:700;font-size:1rem;letter-spacing:-0.015em;margin:0;color:var(--text-primary);">{p.title}</h3>
+            <p style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.6;margin:0;flex:1;">{p.desc}</p>
+            <div style="display:flex;gap:0.375rem;flex-wrap:wrap;margin-top:0.25rem;">
+              {p.stack.map(s => <span class="tag-chip">{s}</span>)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. Contact ───────────────────────────────────────────────── -->
+  <section style="padding:3.5rem 0;background:var(--mid);">
+    <div class="site-container">
+      <h2 style="font-weight:700;font-size:clamp(1.25rem,2.5vw,1.625rem);letter-spacing:-0.03em;margin:0 0 0.75rem;">Contact</h2>
+      <p style="font-size:1rem;color:var(--text-secondary);margin:0 0 1.25rem;line-height:1.7;max-width:52ch;">
+        For enquiries about architecture consulting, academic collaboration, or teaching — reach out by email.
+      </p>
+      <a href="mailto:ivan@ivanocampo.com"
+        style="font-family:'Fira Code Variable',monospace;font-size:0.9375rem;color:var(--accent);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(180,83,9,0.3);padding-bottom:1px;">
+        ivan@ivanocampo.com
+      </a>
+      <div style="margin-top:1.5rem;display:flex;gap:1.25rem;flex-wrap:wrap;">
+        <a href="https://github.com/allitnils" target="_blank" rel="noopener noreferrer"
+           style="font-size:0.875rem;color:var(--text-secondary);text-decoration:none;">GitHub &nearr;</a>
+        <a href="https://scholar.google.com/citations?user=QEOarFgAAAAJ" target="_blank" rel="noopener noreferrer"
+           style="font-size:0.875rem;color:var(--text-secondary);text-decoration:none;">Google Scholar &nearr;</a>
+        <a href="https://orcid.org/0000-0002-8532-0673" target="_blank" rel="noopener noreferrer"
+           style="font-size:0.875rem;color:var(--text-secondary);text-decoration:none;">ORCID &nearr;</a>
+        <a href="https://www.researchgate.net/profile/Ivan-Ocampo-2" target="_blank" rel="noopener noreferrer"
+           style="font-size:0.875rem;color:var(--text-secondary);text-decoration:none;">ResearchGate &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

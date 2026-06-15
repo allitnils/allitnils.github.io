@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Claude Code Agentic Workflows',
+    category: 'Work',
+    status: 'Active',
+    description: 'Autonomous multi-agent software engineering system using Claude\'s tool-use API with parallel sub-agents, hook-driven automation, and persistent memory. Enables autonomous, multi-step codebase modification with full rollback safety.',
+    stack: ['Claude Sonnet / Opus (Anthropic API)', 'Claude Code CLI', 'Python', 'Bash', 'YAML', 'Git worktrees'],
+    highlights: [
+      'Parallel sub-agents (Explore, Plan, Review) coordinated via message passing',
+      'Structured JSON tool calls (Read, Edit, Bash, Write) with permission gating and sandboxed execution',
+      'File-backed persistent memory system across sessions (user, feedback, project, reference types)',
+      'Hook-driven automation wired to tool lifecycle events',
+      'Worktree isolation for safe, reversible parallel code changes',
+    ],
+    link: null,
+    github: 'https://github.com/allitnils',
+  },
+  {
+    title: 'Enterprise Observability Stack',
+    category: 'Work',
+    status: 'Production',
+    description: 'Full-stack observability platform built on Prometheus, Loki, and Grafana for unified metrics, logs, and alerting across distributed infrastructure. Production-grade, deployed at enterprise scale.',
+    stack: ['Prometheus + Alertmanager', 'Loki + Promtail', 'Grafana', 'Docker Compose / Kubernetes', 'PromQL', 'LogQL', 'OpenTelemetry'],
+    highlights: [
+      'PromQL alerting rules with severity tiers routed via Alertmanager',
+      'Node Exporter, cAdvisor, and Blackbox Exporter integrations',
+      'Label-based log indexing via Loki for efficient storage without full-text overhead',
+      'Templated Grafana dashboards with multi-environment variable switching',
+      'Alert notification channels: email, Slack, PagerDuty',
+    ],
+    link: null,
+    github: null,
+  },
+  {
+    title: 'Agent Harness — ECC',
+    category: 'Work',
+    status: 'Active',
+    description: 'Performance optimisation system for AI coding agents. Skills, instincts, memory, security, and research-first development patterns for Claude Code, Codex, Opencode, Cursor and beyond.',
+    stack: ['Claude Code', 'Markdown / YAML', 'Bash', 'JSON'],
+    highlights: [
+      'Skill system for reusable agent behaviours across sessions',
+      'Memory and instinct layers for context persistence',
+      'Security-first patterns for agentic code modification',
+      'Research-first development methodology baked into agent instructions',
+    ],
+    link: null,
+    github: 'https://github.com/allitnils/ecc',
+  },
+  {
+    title: 'Fake News Detector',
+    category: 'Research',
+    status: 'Completed',
+    description: 'Recurrent neural network model for automated fake news detection from article text. Trained on labelled news corpora using LSTM architecture to classify credibility at inference time.',
+    stack: ['Python', 'TensorFlow / Keras', 'LSTM', 'NLP', 'pandas', 'NumPy'],
+    highlights: [
+      'LSTM-based sequence model capturing long-range textual dependencies',
+      'Text pre-processing pipeline: tokenisation, stop-word removal, embedding',
+      'Binary credibility classification with confidence scoring',
+      'Evaluated against labelled fake news benchmark datasets',
+    ],
+    link: null,
+    github: 'https://github.com/allitnils/fake_news',
+  },
+  {
+    title: 'SentimentScope',
+    category: 'Research',
+    status: 'Completed',
+    description: 'Real-time text analytics platform built in R/Shiny that captures, analyses, and visualises sentiment from social media and news streams. Interactive dashboards with topic modelling and trend detection.',
+    stack: ['R', 'Shiny', 'tidytext', 'quanteda', 'sentimentr', 'ggplot2', 'plotly', 'wordcloud2'],
+    highlights: [
+      'Lexicon-based and ML sentiment classification (positive / negative / neutral)',
+      'LDA topic modelling for emerging theme detection across document collections',
+      'Real-time filtering by source, keyword, and date range',
+      'Multi-source ingestion: Twitter/X, RSS feeds, custom text uploads',
+      'Interactive Shiny dashboards with wordcloud and time-series views',
+    ],
+    link: null,
+    github: null,
+  },
+  {
+    title: 'Twitter Sentiment Analysis',
+    category: 'Research',
+    status: 'Completed',
+    description: 'Jupyter-based NLP pipeline for predicting sentiment from Twitter posts using machine learning. Applies text classification to infer positive, negative, or neutral sentiment from social media data.',
+    stack: ['Python', 'Jupyter Notebook', 'scikit-learn', 'NLTK', 'pandas', 'matplotlib'],
+    highlights: [
+      'Tweet pre-processing: tokenisation, hashtag handling, URL stripping, lemmatisation',
+      'Multiple classifier comparison: Naïve Bayes, SVM, Logistic Regression',
+      'Sentiment polarity prediction with confidence scores',
+      'Visualisation of sentiment distribution and temporal trends',
+    ],
+    link: null,
+    github: 'https://github.com/allitnils/sentiment_analysis',
+  },
+  {
+    title: 'Research LaTeX Template',
+    category: 'Tools',
+    status: 'Active',
+    description: 'Modular LaTeX template system for academic research papers, theses, and conference submissions. Supports BibTeX bibliography management, APA/IEEE citation styles, and reproducible document pipelines.',
+    stack: ['LaTeX', 'BibTeX', 'TikZ', 'pgfplots', 'Overleaf-compatible'],
+    highlights: [
+      'Modular chapter and section structure for large documents',
+      'Pre-configured APA and IEEE bibliography styles via BibTeX',
+      'TikZ and pgfplots integration for publication-quality figures and charts',
+      'Overleaf-compatible — no local TeX installation required',
+      'Used as the foundation for PhD thesis and conference paper submissions',
+    ],
+    link: null,
+    github: 'https://github.com/allitnils/research-latex-template',
+  },
+  {
+    title: 'CutWise',
+    category: 'Tools',
+    status: 'Live',
+    description: 'Browser-based cutting sheet optimiser that packs rectangular pieces onto plywood sheets with minimal waste. Zero-dependency, runs entirely in-browser with PDF export and CSV import.',
+    stack: ['HTML', 'CSS', 'Vanilla JavaScript', 'Canvas API', 'jsPDF', 'GitHub Pages'],
+    highlights: [
+      'Guillotine Best-Area-Fit packing algorithm — pieces sorted largest-to-smallest by area',
+      'Grain direction lock with dual-orientation (0°/90°) evaluation per placement',
+      'Named pieces with unique colour coding for at-a-glance identification',
+      'CSV drag-and-drop import for cut lists (name, width, height, quantity)',
+      'Per-sheet utilisation percentage and print-ready PDF export',
+    ],
+    link: 'https://ivanocampo.com/CutWise/',
+    github: 'https://github.com/allitnils/CutWise',
+  },
+];
+
+const categoryOrder = ['Work', 'Research', 'Tools'];
+const grouped = categoryOrder.map(cat => ({
+  cat,
+  items: projects.filter(p => p.category === cat),
+}));
+
+const statusColour: Record<string, string> = {
+  'Active':     'var(--accent)',
+  'Production': '#16a34a',
+  'Live':       '#16a34a',
+  'Completed':  'var(--text-muted)',
+};
+---
+<BaseLayout
+  title="Projects — Ivan Ocampo"
+  description="Technical projects by Ivan Ocampo — enterprise observability, agentic AI workflows, NLP and sentiment analysis, browser tools, and research LaTeX templates. Chief Architect at Accent Group, Melbourne."
+>
+  <div class="site-container" style="padding-top:4rem;padding-bottom:6rem;">
+    <h1 style="font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.04em;margin:0 0 0.5rem;">Projects</h1>
+    <p style="font-size:1rem;color:var(--text-secondary);margin:0 0 4rem;max-width:58ch;line-height:1.7;">
+      A selection of technical work — production systems, research tooling, and applied experiments spanning infrastructure, AI, and data science.
+    </p>
+
+    {grouped.map(({ cat, items }) => items.length > 0 && (
+      <div style="margin-bottom:4rem;">
+        <h2 style="font-weight:600;font-size:0.8125rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);">{cat}</h2>
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          {items.map(project => (
+            <article class="post-card" style="padding:1.75rem;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.625rem;">
+                <h3 style="font-weight:700;font-size:clamp(1rem,2vw,1.25rem);letter-spacing:-0.02em;margin:0;">
+                  {project.link
+                    ? <a href={project.link} target="_blank" rel="noopener noreferrer" style="color:var(--text-primary);text-decoration:none;">{project.title} &nearr;</a>
+                    : project.title
+                  }
+                </h3>
+                <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0;">
+                  <span style={`font-family:'Fira Code Variable',monospace;font-size:0.625rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:${statusColour[project.status] ?? 'var(--text-muted)'};`}>
+                    {project.status}
+                  </span>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer"
+                       style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:0.15rem 0.5rem;border-radius:4px;">
+                      GitHub &nearr;
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 1.125rem;line-height:1.7;">{project.description}</p>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+                <div>
+                  <p style="font-weight:700;font-size:0.6875rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 0.5rem;">Highlights</p>
+                  <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.375rem;">
+                    {project.highlights.map(h => (
+                      <li style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5;padding-left:0.875rem;position:relative;">
+                        <span style="position:absolute;left:0;top:0.42rem;width:3px;height:3px;background:var(--accent);border-radius:50%;display:inline-block;"></span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p style="font-weight:700;font-size:0.6875rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 0.5rem;">Stack</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:0.375rem;">
+                    {project.stack.map(s => <span class="tag-chip">{s}</span>)}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <div style="padding-top:2rem;border-top:1px solid var(--border);">
+      <a href="/about" style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.875rem;">About Ivan Ocampo &rarr;</a>
+    </div>
+  </div>
+</BaseLayout>
