@@ -108,7 +108,7 @@ const websiteSchema = {
               width="220" height="220"
               loading="eager"
               fetchpriority="high"
-              style="border-radius:50%;object-fit:cover;width:clamp(140px,18vw,220px);height:clamp(140px,18vw,220px);border:3px solid var(--border-mid);box-shadow:0 4px 24px rgba(0,0,0,0.1);"
+              style="border-radius:10px;object-fit:cover;width:clamp(140px,18vw,220px);height:clamp(140px,18vw,220px);border:1px solid var(--border-mid);box-shadow:0 4px 24px rgba(0,0,0,0.1);"
             />
           </picture>
         </div>
@@ -117,12 +117,21 @@ const websiteSchema = {
   </section>
 
   <!-- ── 2. Explore by Topic ───────────────────────────────────────── -->
-  <section style="padding:3rem 0;background:var(--mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <section style="padding:2.5rem 0;background:var(--mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div class="site-container">
-      <h2 style="font-weight:700;font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Explore by Topic</h2>
+      <div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <h2 style="font-weight:700;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:0;">Explore by Topic</h2>
+        <a href="/blog" style="font-size:0.8125rem;color:var(--accent);text-decoration:none;font-weight:500;">All posts &rarr;</a>
+      </div>
       <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
         {topics.map(tag => (
-          <a href={`/blog?tag=${tag}`} class="tag-chip">{tag}</a>
+          <a
+            href={`/blog#${tag}`}
+            data-tag={tag}
+            class="tag-chip topic-filter-link"
+            style="text-decoration:none;"
+            onclick={`event.preventDefault();window.location.href='/blog?tag='+encodeURIComponent('${tag}')`}
+          >{tag}</a>
         ))}
       </div>
     </div>

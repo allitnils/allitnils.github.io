@@ -6,40 +6,145 @@ import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const tagCounts: Record<string, number> = {};
+allPosts.forEach(p => p.data.tags?.forEach(t => { tagCounts[t] = (tagCounts[t] ?? 0) + 1; }));
+const allTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).map(([t]) => t);
+
 const featuredPost = allPosts.find(p => p.data.featured);
 const restPosts = allPosts.filter(p => p !== featuredPost);
+
+const postsJson = JSON.stringify(allPosts.map(p => ({
+  id: p.id,
+  title: p.data.title,
+  description: p.data.description,
+  pubDate: p.data.pubDate.toISOString(),
+  tags: p.data.tags ?? [],
+  featured: p.data.featured ?? false,
+})));
 ---
 <BaseLayout
-  title="Blog"
+  title="Blog — Ivan Ocampo"
   description={`Writing on enterprise infrastructure, cloud architecture, observability, agentic AI, and the phenomenology of distributed work — by ${AUTHOR.name}.`}
 >
   <div class="site-container" style="padding-top:4rem;padding-bottom:6rem;">
     <h1 style="font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.04em;margin:0 0 0.5rem;">Blog</h1>
-    <p style="color:var(--text-secondary);margin:0 0 3rem;max-width:55ch;line-height:1.7;">
+    <p style="color:var(--text-secondary);margin:0 0 2rem;max-width:55ch;line-height:1.7;">
       Writing on enterprise architecture, observability, agentic AI systems, and the phenomenology of distributed work.
     </p>
 
-    {featuredPost && (
-      <PostCard
-        title={featuredPost.data.title}
-        description={featuredPost.data.description}
-        pubDate={featuredPost.data.pubDate}
-        slug={featuredPost.id}
-        tags={featuredPost.data.tags}
-        featured={true}
-      />
-    )}
-
-    <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;">
-      {restPosts.map(post => (
-        <PostCard
-          title={post.data.title}
-          description={post.data.description}
-          pubDate={post.data.pubDate}
-          slug={post.id}
-          tags={post.data.tags}
-        />
-      ))}
+    <!-- Tag filter -->
+    <div style="margin-bottom:2.5rem;padding:1.25rem;background:var(--mid);border:1px solid var(--border);border-radius:8px;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.875rem;flex-wrap:wrap;">
+        <span style="font-weight:700;font-size:0.6875rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);">Filter by topic</span>
+        <button id="clear-filter" style="display:none;font-size:0.75rem;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;font-weight:500;">Clear &times;</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+        {allTags.map(tag => (
+          <button
+            class="tag-btn"
+            data-tag={tag}
+            style="font-family:'Fira Code Variable',monospace;font-size:0.6875rem;padding:0.25rem 0.6rem;border:1px solid var(--border);border-radius:4px;background:var(--paper);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;"
+          >{tag}</button>
+        ))}
+      </div>
     </div>
+
+    <!-- Post list -->
+    <div id="post-list"></div>
+    <p id="no-results" style="display:none;color:var(--text-muted);font-size:0.9375rem;padding:2rem 0;">No posts match that topic.</p>
   </div>
+
+  <script define:vars={{ postsJson, featuredId: featuredPost?.id ?? null }}>
+    const posts = JSON.parse(postsJson);
+    let activeTag = null;
+
+    // Read tag from URL on load
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tag')) activeTag = params.get('tag');
+
+    function formatDate(iso) {
+      return new Date(iso).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function renderPosts() {
+      const filtered = activeTag ? posts.filter(p => p.tags.includes(activeTag)) : posts;
+      const list = document.getElementById('post-list');
+      const none = document.getElementById('no-results');
+      const clearBtn = document.getElementById('clear-filter');
+
+      clearBtn.style.display = activeTag ? 'inline' : 'none';
+
+      // Sync button states
+      document.querySelectorAll('.tag-btn').forEach(btn => {
+        const active = btn.dataset.tag === activeTag;
+        btn.style.background = active ? 'var(--accent)' : 'var(--paper)';
+        btn.style.color = active ? '#fff' : 'var(--text-secondary)';
+        btn.style.borderColor = active ? 'var(--accent)' : 'var(--border)';
+      });
+
+      if (filtered.length === 0) {
+        list.innerHTML = '';
+        none.style.display = 'block';
+        return;
+      }
+      none.style.display = 'none';
+
+      list.innerHTML = filtered.map((p, i) => {
+        const isFeatured = p.id === featuredId && !activeTag;
+        const tags = p.tags.map(t =>
+          `<span style="font-family:'Fira Code Variable',monospace;font-size:0.625rem;padding:0.15rem 0.45rem;border:1px solid var(--border);border-radius:3px;color:var(--text-muted);background:var(--mid);">${t}</span>`
+        ).join('');
+
+        if (isFeatured) {
+          return `<a href="/blog/${p.id}" style="display:block;padding:1.75rem;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:inherit;margin-bottom:1rem;background:var(--paper);transition:transform 0.15s,border-color 0.15s;"
+            onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='var(--accent)'"
+            onmouseout="this.style.transform='';this.style.borderColor='var(--border)'">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+              <span style="font-family:'Fira Code Variable',monospace;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);border:1px solid var(--accent);padding:0.15rem 0.5rem;border-radius:3px;">Featured</span>
+            </div>
+            <h2 style="font-weight:700;font-size:clamp(1.1rem,2.5vw,1.5rem);letter-spacing:-0.025em;margin:0 0 0.625rem;color:var(--text-primary);">${p.title}</h2>
+            <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.7;margin:0 0 1rem;">${p.description}</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+              <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);">${formatDate(p.pubDate)}</span>
+              ${tags}
+            </div>
+          </a>`;
+        }
+
+        return `<a href="/blog/${p.id}" style="display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;padding:1rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:color 0.15s;"
+          onmouseover="this.querySelector('.post-title').style.color='var(--accent)'"
+          onmouseout="this.querySelector('.post-title').style.color='var(--text-primary)'">
+          <div style="flex:1;min-width:0;">
+            <h2 class="post-title" style="font-weight:600;font-size:1rem;margin:0 0 0.3rem;color:var(--text-primary);transition:color 0.15s;line-height:1.4;">${p.title}</h2>
+            <p style="font-size:0.8125rem;color:var(--text-secondary);margin:0 0 0.5rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.description}</p>
+            <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">${tags}</div>
+          </div>
+          <span style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);white-space:nowrap;flex-shrink:0;padding-top:0.15rem;">${formatDate(p.pubDate)}</span>
+        </a>`;
+      }).join('');
+    }
+
+    // Wire up buttons
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTag = activeTag === btn.dataset.tag ? null : btn.dataset.tag;
+        const url = new URL(window.location);
+        if (activeTag) url.searchParams.set('tag', activeTag);
+        else url.searchParams.delete('tag');
+        window.history.replaceState({}, '', url);
+        renderPosts();
+      });
+    });
+
+    document.getElementById('clear-filter').addEventListener('click', () => {
+      activeTag = null;
+      const url = new URL(window.location);
+      url.searchParams.delete('tag');
+      window.history.replaceState({}, '', url);
+      renderPosts();
+    });
+
+    renderPosts();
+  </script>
 </BaseLayout>
