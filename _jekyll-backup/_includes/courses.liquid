@@ -1,0 +1,30 @@
+{% if site.teachings %}
+  <div class="courses">
+    {% assign sorted_courses = site.teachings | sort: 'title' %}
+    {% for course in sorted_courses %}
+      <div class="course-item">
+        <h3 class="course-title">
+          <a href="{{ course.url | relative_url }}">{{ course.title }}</a>
+        </h3>
+
+        <div class="course-meta">
+          {% if course.term %}
+            <span class="course-term">{{ course.term }}</span>
+          {% endif %}
+
+          {% if course.instructor %}
+            <span class="course-instructor">{{ course.instructor }}</span>
+          {% endif %}
+        </div>
+
+        {% if course.description %}
+          <div class="course-description">
+            {{ course.description | markdownify }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No courses available yet.</p>
+{% endif %}
