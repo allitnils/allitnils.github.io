@@ -24,6 +24,7 @@ const projects = [
     category: 'Work',
     topics: ['Infrastructure', 'Observability', 'DevOps'],
     status: 'Production',
+    github: 'https://github.com/allitnils/enterprise-observability-stack',
     description: 'Full-stack observability platform built on Prometheus, Loki, and Grafana for unified metrics, logs, and alerting across distributed infrastructure. Production-grade, deployed at enterprise scale.',
     stack: ['Prometheus + Alertmanager', 'Loki + Promtail', 'Grafana', 'Docker Compose / Kubernetes', 'PromQL', 'LogQL', 'OpenTelemetry'],
     highlights: [
@@ -34,7 +35,6 @@ const projects = [
       'Alert notification channels: email, Slack, PagerDuty',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Agent Harness — ECC',
@@ -74,6 +74,7 @@ const projects = [
     category: 'Work',
     topics: ['Security', 'Networking', 'Architecture'],
     status: 'Production',
+    github: 'https://github.com/allitnils/zero-trust-architecture',
     description: 'Enterprise zero trust architecture design and implementation — replacing legacy VPN with identity-aware, device-posture-verified, least-privilege network access across cloud and on-premises resources.',
     stack: ['Entra ID', 'Microsoft Entra Private Access', 'CrowdStrike Falcon', 'Cloudflare', 'Conditional Access'],
     highlights: [
@@ -84,7 +85,6 @@ const projects = [
       'Phased migration playbook from legacy VPN without service disruption',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'SIEM Detection Engineering Playbook',
@@ -108,6 +108,7 @@ const projects = [
     category: 'Work',
     topics: ['Cloud', 'Data', 'Automation'],
     status: 'Production',
+    github: 'https://github.com/allitnils/adf-pipeline-framework',
     description: 'Parameterised Azure Data Factory pipeline framework for ELT orchestration across on-premises SQL, cloud data stores, and REST APIs. Includes retry logic, metadata-driven loading, and alerting integration.',
     stack: ['Azure Data Factory', 'Azure SQL', 'Bicep', 'PowerShell', 'Logic Apps', 'Azure Monitor'],
     highlights: [
@@ -118,7 +119,6 @@ const projects = [
       'Deployed and configured as code via Bicep and ADF REST API',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Fake News Detector',
@@ -174,6 +174,7 @@ const projects = [
     category: 'Research',
     topics: ['Research', 'Data Science', 'R'],
     status: 'Completed',
+    github: 'https://github.com/allitnils/remote-work-survey-instrument',
     description: 'Validated psychometric survey instrument developed for PhD research — measuring Remote Work Intensity, Liminal Spaces, Technostress, Work-Life Balance, and employee outcomes. Used in n=717 SEM study.',
     stack: ['R', 'lavaan', 'AMOS', 'SPSS', 'Qualtrics', 'BibTeX'],
     highlights: [
@@ -184,13 +185,13 @@ const projects = [
       'Common method bias controls: Harman\'s single-factor test, marker variable technique',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Leximancer Thematic Analysis Pipeline',
     category: 'Research',
     topics: ['Research', 'Data Science', 'NLP'],
     status: 'Completed',
+    github: 'https://github.com/allitnils/leximancer-analysis-pipeline',
     description: 'Automated qualitative-to-quantitative thematic analysis pipeline using Leximancer for corpus-level concept mapping. Applied to interview transcripts and open-text survey responses in remote work research.',
     stack: ['Leximancer', 'Python', 'pandas', 'SPSS', 'R'],
     highlights: [
@@ -201,7 +202,6 @@ const projects = [
       'Used to validate and refine liminal space construct items pre-CFA',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Kubernetes Cluster Hardening Baseline',
@@ -276,6 +276,7 @@ const projects = [
     category: 'Work',
     topics: ['AI', 'Architecture', 'Research'],
     status: 'Active',
+    github: 'https://github.com/allitnils/ai-governance-framework',
     description: 'Enterprise AI governance framework covering AI risk classification, vendor evaluation criteria, acceptable use policy, human oversight requirements, and AI ethics alignment for Australian regulatory context.',
     stack: ['Markdown / Confluence', 'Python (risk scoring)', 'YAML (policy-as-code)'],
     highlights: [
@@ -286,7 +287,6 @@ const projects = [
       'Published as internal policy with version control and annual review cadence',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'MCP Server for Enterprise Systems',
@@ -310,6 +310,7 @@ const projects = [
     category: 'Work',
     topics: ['Security', 'Networking', 'Architecture'],
     status: 'Production',
+    github: 'https://github.com/allitnils/retail-network-segmentation',
     description: 'Network segmentation architecture for 800+ retail store locations — separating POS, guest Wi-Fi, IoT/CCTV, and back-office traffic into isolated zones with centralised firewall policy management.',
     stack: ['Cisco Meraki', 'Umbrella DNS', 'Cloudflare', 'VLANs', '802.1X', 'SD-WAN'],
     highlights: [
@@ -320,13 +321,13 @@ const projects = [
       'Centralised Meraki dashboard with template-based config push across all sites',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Publication-Quality Figure Generator',
     category: 'Research',
     topics: ['Research', 'Data Science', 'R'],
     status: 'Active',
+    github: 'https://github.com/allitnils/publication-figure-generator',
     description: 'R and TikZ/pgfplots pipeline for generating publication-ready SEM path diagrams, CFA factor loadings plots, and statistical summary figures aligned to journal submission standards.',
     stack: ['R', 'ggplot2', 'lavaan', 'semPlot', 'LaTeX', 'TikZ', 'pgfplots'],
     highlights: [
@@ -337,7 +338,6 @@ const projects = [
       'Reproducible rendering pipeline — figures re-generated from data, not manual edits',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Research LaTeX Template',
@@ -361,6 +361,7 @@ const projects = [
     category: 'Tools',
     topics: ['Infrastructure', 'Automation', 'Security'],
     status: 'Active',
+    github: 'https://github.com/allitnils/powershell-dsc-baseline',
     description: 'PowerShell Desired State Configuration (DSC) resource library for Windows Server hardening — implementing CIS Benchmark controls, audit policy, and enterprise baseline configurations as declarative state.',
     stack: ['PowerShell DSC', 'PSDesiredStateConfiguration', 'Pester', 'GitHub Actions', 'Azure Automation'],
     highlights: [
@@ -371,7 +372,6 @@ const projects = [
       'Pull server mode with scheduled consistency checks and drift alerts',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'CutWise',
