@@ -3,6 +3,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const projects = [
   {
+    title: 'Papertrail',
+    category: 'Research',
+    topics: ['Academic', 'Python', 'AI'],
+    status: 'Active',
+    description: 'Self-hosted academic literature management and citation graph platform. Ingest papers via PDF upload or DOI, enrich metadata via CrossRef and Semantic Scholar APIs, generate 384-dim vector embeddings for semantic search with pgvector, and visualise citation networks as interactive D3 force graphs. Full async stack: FastAPI, Celery workers, PostgreSQL + pgvector, Redis, Alembic migrations, Obsidian/Zotero/GraphML export.',
+    stack: ['FastAPI (Python 3.12)', 'PostgreSQL + pgvector', 'Celery + Redis', 'sentence-transformers (all-MiniLM-L6-v2)', 'NetworkX', 'D3 v7', 'Docker Compose', 'Alembic'],
+    highlights: [
+      'Async ingestion pipeline: PDF → PyMuPDF → CrossRef → Semantic Scholar → ORCID → embed',
+      'pgvector cosine-distance semantic search with IVFFlat index for sub-millisecond queries',
+      'NetworkX graph analytics: PageRank, betweenness centrality, label-propagation clustering',
+      'D3 v7 force simulation with node radius = PageRank, colour = community cluster',
+      'Export to Obsidian vault, Zotero RDF, and GraphML in a single API call',
+    ],
+    link: 'https://github.com/allitnils/papertrail',
+    github: 'https://github.com/allitnils/papertrail',
+  },
+  {
     title: 'Claude Code Agentic Workflows',
     category: 'Work',
     topics: ['AI', 'Automation', 'Python'],
