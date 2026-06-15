@@ -2,7 +2,7 @@
 title: "PromQL Optimisation Patterns for High-Cardinality Environments"
 description: "Concrete PromQL optimisation techniques for platform engineers operating at high cardinality: label matchers, recording rules, histogram strategies, aggregation ordering, and failure modes that silently degrade query performance in production."
 pubDate: 2026-06-07
-tags: [prometheus, promql, observability, sre, platform-engineering, grafana, cardinality, metrics]
+tags: [observability, architecture]
 category: observability
 featured: false
 ---

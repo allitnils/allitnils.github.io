@@ -2,7 +2,7 @@
 title: "MCP Server Architecture and Tool Chaining in Production Agentic Workflows"
 description: "Beyond the demo — concrete patterns for MCP server design, tool chaining economics, idempotency, and the architectural trade-offs that determine whether an agentic workflow survives production."
 pubDate: 2026-05-25
-tags: [mcp, agentic-ai, architecture, production, llm, enterprise, tool-use]
+tags: [agentic-ai, architecture, automation]
 category: architecture
 featured: true
 ---

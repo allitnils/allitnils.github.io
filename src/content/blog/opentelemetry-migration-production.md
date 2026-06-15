@@ -2,7 +2,7 @@
 title: "OpenTelemetry Migration in Production: Trade-offs Every Platform Team Gets Wrong"
 description: "Concrete collector topology decisions, SDK migration patterns, tail sampling configuration, cardinality budget management, and rollback architecture for teams migrating from proprietary agents to OpenTelemetry in Kubernetes production environments."
 pubDate: 2026-05-25
-tags: [opentelemetry, otel, observability, sre, platform-engineering, tracing, metrics, collector, sampling, migration, kubernetes]
+tags: [observability, cloud, architecture]
 category: observability
 featured: false
 ---

@@ -2,7 +2,7 @@
 title: "Security and Credential Management for AI Agents with Filesystem and API Access"
 description: "Concrete attack vectors, secrets management integration, filesystem sandboxing, agent identity patterns, and the production failure modes that credential-bearing AI agents introduce — written for engineers building or operating them."
 pubDate: 2026-05-31
-tags: [security, ai-agents, mcp, architecture, credential-management, enterprise, agentic-ai]
+tags: [security, agentic-ai, architecture]
 category: security
 featured: true
 ---
