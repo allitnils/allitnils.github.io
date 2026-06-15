@@ -57,6 +57,7 @@ const projects = [
     category: 'Work',
     topics: ['Cloud', 'Infrastructure', 'Automation'],
     status: 'Production',
+    github: 'https://github.com/allitnils/azure-landing-zone',
     description: 'Bicep-based Azure landing zone accelerator covering hub-spoke networking, identity, policy, and governance. Parameterised for multi-environment deployment with what-if dry-run gating built into the pipeline.',
     stack: ['Bicep', 'Azure Policy', 'GitHub Actions', 'PowerShell', 'Azure CLI', 'Entra ID'],
     highlights: [
@@ -67,7 +68,6 @@ const projects = [
       'Parameterised environments: dev, staging, production from a single template set',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Zero Trust Network Access Architecture',
@@ -91,6 +91,7 @@ const projects = [
     category: 'Work',
     topics: ['Security', 'Observability'],
     status: 'Active',
+    github: 'https://github.com/allitnils/splunk-detection-library',
     description: 'Structured detection engineering programme for Splunk SIEM — covering detection-as-code, alert lifecycle management, false-positive reduction, and MITRE ATT&CK alignment across enterprise telemetry sources.',
     stack: ['Splunk SIEM', 'SPL', 'MITRE ATT&CK', 'CrowdStrike Falcon', 'Tenable', 'Python'],
     highlights: [
@@ -101,7 +102,6 @@ const projects = [
       'SOAR playbook integration for tier-1 triage automation',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'ADF Pipeline Orchestration Framework',
@@ -141,6 +141,7 @@ const projects = [
     category: 'Research',
     topics: ['Data Science', 'R', 'Visualisation'],
     status: 'Completed',
+    github: 'https://github.com/allitnils/sentimentscope',
     description: 'Real-time text analytics platform built in R/Shiny that captures, analyses, and visualises sentiment from social media and news streams. Interactive dashboards with topic modelling and trend detection.',
     stack: ['R', 'Shiny', 'tidytext', 'quanteda', 'sentimentr', 'ggplot2', 'plotly', 'wordcloud2'],
     highlights: [
@@ -151,7 +152,6 @@ const projects = [
       'Interactive Shiny dashboards with wordcloud and time-series views',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Twitter Sentiment Analysis',
@@ -208,6 +208,7 @@ const projects = [
     category: 'Work',
     topics: ['Security', 'Infrastructure', 'DevOps'],
     status: 'Active',
+    github: 'https://github.com/allitnils/k8s-hardening-baseline',
     description: 'CIS Kubernetes Benchmark-aligned hardening baseline for AKS clusters — covering control plane configuration, RBAC, network policy, pod security standards, and runtime threat detection.',
     stack: ['AKS', 'Bicep', 'Kyverno', 'Falco', 'Cilium', 'OPA / Gatekeeper', 'Trivy'],
     highlights: [
@@ -218,7 +219,6 @@ const projects = [
       'Pod Security Standards enforced at namespace level via admission controller',
     ],
     link: null,
-    github: null,
   },
   {
     title: 'Network Topology Visualiser',
@@ -303,7 +303,7 @@ const projects = [
       'Enables AI coding agents to query ticket context and asset relationships',
     ],
     link: null,
-    github: null,
+    github: 'https://github.com/allitnils/mcp-enterprise-server',
   },
   {
     title: 'Retail Network Segmentation Model',
@@ -498,8 +498,8 @@ const projectsJson = JSON.stringify(projects.map(p => ({
                 onmouseout="this.style.transform='';this.style.borderColor='var(--border)'">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.625rem;">
                   <h3 style="font-weight:700;font-size:clamp(1rem,2vw,1.25rem);letter-spacing:-0.02em;margin:0;">
-                    ${p.link
-                      ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer" style="color:var(--text-primary);text-decoration:none;">${p.title} ↗</a>`
+                    ${(p.link || p.github)
+                      ? `<a href="${p.link || p.github}" target="_blank" rel="noopener noreferrer" style="color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--border-mid);padding-bottom:1px;">${p.title} ↗</a>`
                       : p.title
                     }
                   </h3>
