@@ -17,6 +17,34 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'stack-decoder',
+    title: 'Stack Decoder',
+    category: 'Tools',
+    status: 'Live',
+    topics: ['AI', 'Tools', 'Python'],
+    featured: false,
+    createdYear: 2026,
+    summary: 'Paste any tech job description — get a plain-English analysis of the stack modernity, tech debt signals, culture red flags, and 5 tailored interview questions.',
+    description: 'AI-powered job description analyser built in Streamlit. Decodes tech JDs to reveal stack modernity score (0–10), tech debt signal, role type classification, culture red and green flags, a plain-English "what you\'re actually walking into" summary, and five tailored interview questions. Shareable result card for LinkedIn. Powered by Claude, deployed free on Streamlit Community Cloud.',
+    narrative: [
+      'The idea started from a simple observation: most tech job descriptions are written by recruiters or HR using a template, and the real signal about a company\'s engineering culture, technical maturity, and day-to-day reality is buried in the language choices, the stack they mention, and the requirements they include. Engineers read dozens of JDs while job hunting and mostly go in blind.',
+      'Stack Decoder applies a structured analysis framework to surface what\'s actually there. Stack modernity is scored based on the technologies mentioned — Kubernetes, Terraform, OpenTelemetry, and Rust score high; SVN, WebSphere, and JSP score low. Tech debt signal estimates the maintenance burden based on what\'s listed and what\'s absent. Culture signals come from the language itself: "fast-paced environment" and "wear many hats" mean different things at a 15-person startup versus an 800-person enterprise.',
+      'The interview questions are the feature engineers find most useful. They\'re generated specifically for what\'s in the JD — not generic. If the description mentions "migrating from monolith to microservices", the questions probe how far along that migration is, who owns it, and what the timeline looks like. That turns a passive read into an active evaluation.',
+    ],
+    highlights: [
+      'Stack modernity score 0–10 with per-technology classification',
+      'Tech debt signal (Low/Medium/High) from stack and language analysis',
+      'Role type classification: Greenfield Builder, Maintenance Mode, Modernisation, etc.',
+      'Culture red/green flag detection from JD language patterns',
+      'Seniority reality check — what the role actually demands vs what it claims',
+      '5 interview questions tailored to the specific JD content',
+      'Shareable result card formatted for LinkedIn/Hacker News',
+    ],
+    stack: ['Python', 'Streamlit', 'Anthropic Claude (haiku)', 'Streamlit Community Cloud'],
+    githubUrl: 'https://github.com/allitnils/decoded',
+    demoUrl: 'https://stack-decoder.streamlit.app',
+  },
+  {
     id: 'papertrail',
     title: 'Papertrail',
     category: 'Research',
