@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects';
+
+const featuredProjects = projects.filter(p => p.featured);
+const allTopics = [...new Set(projects.flatMap(p => p.topics))].sort();
+const allStatuses = [...new Set(projects.map(p => p.status))].sort();
+const categoryOrder = ['Work', 'Research', 'Tools'];
+
+const projectsJson = JSON.stringify(projects);
+---
+<BaseLayout
+  title="Projects — Ivan Ocampo"
+  description="Technical projects by Ivan Ocampo — enterprise observability, agentic AI workflows, NLP and sentiment analysis, qualitative research tools, and infrastructure automation."
+>
+  <div class="site-container" style="padding-top:4rem;padding-bottom:6rem;">
+    <h1 style="font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.04em;margin:0 0 0.5rem;">Projects</h1>
+    <p style="font-size:1rem;color:var(--text-secondary);margin:0 0 3rem;max-width:58ch;line-height:1.7;">
+      Production systems, research tooling, and applied experiments spanning infrastructure, AI, security, and data science.
+    </p>
+
+    {featuredProjects.length > 0 && (
+      <div id="featured-row" style="margin-bottom:3rem;">
+        <p style="font-weight:700;font-size:0.6875rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:0 0 1rem;">Featured</p>
+        <div class="featured-grid">
+          {featuredProjects.map(p => (
+            <a href={`/projects/${p.id}`}
+               class="featured-card"
+               style="display:block;padding:1.5rem;border:1px solid var(--border-mid);border-radius:10px;background:var(--mid);text-decoration:none;color:inherit;transition:transform 0.15s,border-color 0.15s,box-shadow 0.15s;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.625rem;">
+                <span style="font-weight:700;font-size:1.0625rem;letter-spacing:-0.02em;color:var(--text-primary);">{p.title}</span>
+                <span style="font-family:'Fira Code Variable',monospace;font-size:0.5625rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;padding:0.2rem 0.5rem;border-radius:3px;background:var(--accent-light, #FEF3C7);color:var(--accent);">{p.status}</span>
+              </div>
+              <p style="font-size:0.875rem;color:var(--text-secondary);margin:0 0 1rem;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{p.summary}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
+                {p.topics.map(t => (
+                  <span style="font-family:'Fira Code Variable',monospace;font-size:0.5625rem;padding:0.2rem 0.45rem;border:1px solid var(--border);border-radius:3px;color:var(--text-muted);background:var(--paper);">{t}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Filter bar -->
+    <div style="margin-bottom:1.5rem;padding:1.25rem;background:var(--mid);border:1px solid var(--border);border-radius:8px;display:flex;flex-direction:column;gap:0.875rem;">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Search projects…"
+        style="width:100%;padding:0.5rem 0.75rem;border:1px solid var(--border-mid);border-radius:6px;background:var(--paper);color:var(--text-primary);font-size:0.875rem;font-family:inherit;box-sizing:border-box;"
+      />
+      <div>
+        <p style="font-weight:700;font-size:0.625rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:0 0 0.5rem;">Topic</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.35rem;">
+          {allTopics.map(topic => (
+            <button class="topic-btn" data-topic={topic}>{topic}</button>
+          ))}
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:flex-start;">
+        <div>
+          <p style="font-weight:700;font-size:0.625rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:0 0 0.5rem;">Status</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.35rem;">
+            <button class="status-btn active-filter" data-status="">All</button>
+            {allStatuses.map(s => (
+              <button class="status-btn" data-status={s}>{s}</button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:700;font-size:0.625rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:0 0 0.5rem;">Category</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.35rem;">
+            <button class="cat-btn active-filter" data-cat="">All</button>
+            {categoryOrder.map(c => (
+              <button class="cat-btn" data-cat={c}>{c}</button>
+            ))}
+          </div>
+        </div>
+        <div style="margin-left:auto;align-self:flex-end;">
+          <button id="clear-all" style="font-size:0.75rem;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;font-weight:500;display:none;">Clear filters ×</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="project-count" style="font-family:'Fira Code Variable',monospace;font-size:0.75rem;color:var(--text-muted);margin:0 0 1.5rem;"></p>
+
+    <div id="project-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;transition:opacity 0.18s ease;"></div>
+    <p id="no-results" style="display:none;color:var(--text-muted);font-size:0.9375rem;padding:2rem 0;">No projects match those filters.</p>
+
+    <div style="padding-top:2.5rem;border-top:1px solid var(--border);margin-top:3rem;">
+      <a href="/about" style="color:var(--accent);font-weight:500;text-decoration:none;font-size:0.875rem;">About Ivan Ocampo &rarr;</a>
+    </div>
+  </div>
+
+  <style>
+    .featured-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .featured-card:hover { transform:translateY(-3px); border-color:var(--accent) !important; box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+    .topic-btn, .status-btn, .cat-btn {
+      font-family:'Fira Code Variable',monospace;
+      font-size:0.625rem;
+      padding:0.2rem 0.55rem;
+      border:1px solid var(--border);
+      border-radius:4px;
+      background:var(--paper);
+      color:var(--text-secondary);
+      cursor:pointer;
+      transition:all 0.12s;
+    }
+    .active-filter { background:var(--accent) !important; color:#fff !important; border-color:var(--accent) !important; }
+    #search-input:focus { border-color:var(--accent); outline:none; }
+    @media (max-width:1023px) { #project-grid { grid-template-columns:repeat(2,1fr) !important; } .featured-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:639px) { #project-grid { grid-template-columns:1fr !important; } .featured-grid { grid-template-columns:1fr; } }
+  </style>
+
+  <script define:vars={{ projectsJson }}>
+    const projects = JSON.parse(projectsJson);
+    let activeTopics = new Set();
+    let activeStatus = '';
+    let activeCat = '';
+    let searchQuery = '';
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('topic')) params.get('topic').split(',').forEach(t => activeTopics.add(t));
+    if (params.get('status')) activeStatus = params.get('status');
+    if (params.get('cat')) activeCat = params.get('cat');
+    if (params.get('q')) searchQuery = params.get('q');
+
+    function statusColor(s) {
+      if (s === 'Production' || s === 'Live') return '#16a34a';
+      if (s === 'Active') return 'var(--accent)';
+      return 'var(--text-muted)';
+    }
+
+    function chip(s) {
+      return `<span style="font-family:'Fira Code Variable',monospace;font-size:0.5625rem;padding:0.15rem 0.4rem;border:1px solid var(--border);border-radius:3px;color:var(--text-muted);background:var(--mid);">${s}</span>`;
+    }
+
+    function updateURL() {
+      const u = new URL(window.location);
+      if (activeTopics.size) u.searchParams.set('topic', [...activeTopics].join(','));
+      else u.searchParams.delete('topic');
+      if (activeStatus) u.searchParams.set('status', activeStatus);
+      else u.searchParams.delete('status');
+      if (activeCat) u.searchParams.set('cat', activeCat);
+      else u.searchParams.delete('cat');
+      if (searchQuery) u.searchParams.set('q', searchQuery);
+      else u.searchParams.delete('q');
+      window.history.replaceState({}, '', u);
+    }
+
+    function renderGrid() {
+      const q = searchQuery.toLowerCase();
+      const filtered = projects.filter(p => {
+        if (activeTopics.size && ![...activeTopics].some(t => p.topics.includes(t))) return false;
+        if (activeStatus && p.status !== activeStatus) return false;
+        if (activeCat && p.category !== activeCat) return false;
+        if (q && !p.title.toLowerCase().includes(q) && !p.summary.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      const grid = document.getElementById('project-grid');
+      const none = document.getElementById('no-results');
+      const count = document.getElementById('project-count');
+      const clearBtn = document.getElementById('clear-all');
+
+      const hasFilter = activeTopics.size || activeStatus || activeCat || searchQuery;
+      clearBtn.style.display = hasFilter ? 'inline' : 'none';
+      count.textContent = `Showing ${filtered.length} of ${projects.length} projects`;
+
+      document.querySelectorAll('.topic-btn').forEach(btn => {
+        btn.classList.toggle('active-filter', activeTopics.has(btn.dataset.topic));
+      });
+      document.querySelectorAll('.status-btn').forEach(btn => {
+        btn.classList.toggle('active-filter', btn.dataset.status === activeStatus);
+      });
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.toggle('active-filter', btn.dataset.cat === activeCat);
+      });
+
+      if (filtered.length === 0) {
+        grid.style.opacity = '0';
+        none.style.display = 'block';
+        return;
+      }
+      none.style.display = 'none';
+      grid.style.opacity = '0';
+      grid.innerHTML = filtered.map(p => {
+        const visibleStack = p.stack.slice(0, 4);
+        const extra = p.stack.length - 4;
+        return `<a href="/projects/${p.id}" class="proj-card" style="display:flex;flex-direction:column;padding:1.25rem 1.375rem;border:1px solid var(--border);border-radius:8px;background:var(--paper);text-decoration:none;color:inherit;transition:transform 0.15s,border-color 0.15s,box-shadow 0.15s;min-height:160px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;margin-bottom:0.4rem;">
+            <span style="font-weight:700;font-size:0.9375rem;letter-spacing:-0.015em;color:var(--text-primary);line-height:1.3;">${p.title}</span>
+            <span style="font-family:'Fira Code Variable',monospace;font-size:0.5rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:${statusColor(p.status)};flex-shrink:0;padding-top:2px;">${p.status}</span>
+          </div>
+          <p style="font-size:0.8125rem;color:var(--text-secondary);margin:0 0 auto;line-height:1.55;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${p.summary}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.875rem;">
+            ${visibleStack.map(chip).join('')}
+            ${extra > 0 ? `<span style="font-family:'Fira Code Variable',monospace;font-size:0.5625rem;padding:0.15rem 0.4rem;border:1px solid var(--border);border-radius:3px;color:var(--text-muted);">+${extra}</span>` : ''}
+          </div>
+        </a>`;
+      }).join('');
+
+      // Hover effects via JS (SSR-safe)
+      grid.querySelectorAll('.proj-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-2px)';
+          card.style.borderColor = 'var(--border-mid)';
+          card.style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.borderColor = 'var(--border)';
+          card.style.boxShadow = '';
+        });
+      });
+
+      requestAnimationFrame(() => { grid.style.opacity = '1'; });
+    }
+
+    document.querySelectorAll('.topic-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const t = btn.dataset.topic;
+        if (activeTopics.has(t)) activeTopics.delete(t); else activeTopics.add(t);
+        updateURL(); renderGrid();
+      });
+    });
+    document.querySelectorAll('.status-btn').forEach(btn => {
+      btn.addEventListener('click', () => { activeStatus = btn.dataset.status; updateURL(); renderGrid(); });
+    });
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => { activeCat = btn.dataset.cat; updateURL(); renderGrid(); });
+    });
+    const searchInput = document.getElementById('search-input');
+    searchInput.value = searchQuery;
+    searchInput.addEventListener('input', e => { searchQuery = e.target.value.trim(); updateURL(); renderGrid(); });
+    document.getElementById('clear-all').addEventListener('click', () => {
+      activeTopics.clear(); activeStatus = ''; activeCat = ''; searchQuery = ''; searchInput.value = '';
+      updateURL(); renderGrid();
+    });
+
+    renderGrid();
+  </script>
+</BaseLayout>
