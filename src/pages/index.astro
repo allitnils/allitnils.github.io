@@ -59,12 +59,12 @@ const websiteSchema = {
         <div>
           <div class="hero-headline" style="margin-bottom:0.625rem;">
             <h1 style="font-weight:700;font-size:clamp(2rem,4.5vw,3.75rem);letter-spacing:-0.04em;line-height:1.05;margin:0;display:flex;align-items:baseline;gap:0.35em;flex-wrap:wrap;">
-              <span>Ivan Ocampo</span><span style="font-family:'Fira Code Variable',monospace;color:var(--accent);font-weight:500;"><span>$</span><span class="cursor">_</span></span>
+              <span id="typed-name"></span><span style="font-family:'Fira Code Variable',monospace;color:var(--accent);font-weight:500;"><span>$</span><span class="cursor">_</span></span>
             </h1>
           </div>
 
-          <p class="hero-sub" style="font-size:clamp(0.8125rem,1.4vw,0.9375rem);color:var(--text-muted);margin:0 0 1.5rem;font-family:'Fira Code Variable',monospace;">
-            PhD (AIB, 2025) &nbsp;·&nbsp; Chief Architect, Accent Group &nbsp;·&nbsp; Melbourne, AU
+          <p class="hero-sub" style="font-size:clamp(0.8125rem,1.4vw,0.9375rem);color:var(--text-muted);margin:0 0 1.5rem;font-family:'Fira Code Variable',monospace;min-height:1.4em;">
+            <span id="typed-sub"></span>
           </p>
 
           <p style="font-weight:400;font-size:1.0625rem;color:var(--text-secondary);line-height:1.8;margin:0 0 2rem;max-width:56ch;">
@@ -224,5 +224,42 @@ const websiteSchema = {
       </div>
     </div>
   </section>
+
+  <script>
+    const NAME = 'Ivan Ocampo';
+    const SUB  = 'PhD (AIB, 2025)  ·  Chief Architect, Accent Group  ·  Melbourne, AU';
+
+    const nameEl = document.getElementById('typed-name');
+    const subEl  = document.getElementById('typed-sub');
+
+    // Respect prefers-reduced-motion — show text immediately
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      nameEl.textContent = NAME;
+      subEl.textContent  = SUB;
+    } else {
+      let ni = 0;
+      function typeName() {
+        nameEl.textContent = NAME.slice(0, ni);
+        ni++;
+        if (ni <= NAME.length) {
+          setTimeout(typeName, 62);
+        } else {
+          // name done — short pause, then type subtitle
+          setTimeout(typeSub, 320);
+        }
+      }
+
+      let si = 0;
+      function typeSub() {
+        subEl.textContent = SUB.slice(0, si);
+        si++;
+        if (si <= SUB.length) {
+          setTimeout(typeSub, 22);
+        }
+      }
+
+      typeName();
+    }
+  </script>
 
 </BaseLayout>
