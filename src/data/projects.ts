@@ -5,6 +5,7 @@ export interface Project {
   category: 'Work' | 'Research' | 'Tools';
   summary: string;
   description: string;
+  narrative: string[];
   highlights: string[];
   stack: string[];
   topics: string[];
@@ -25,6 +26,12 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Self-hosted academic literature management and citation graph platform.',
     description: 'Self-hosted academic literature management and citation graph platform. Ingest papers via PDF upload or DOI, enrich metadata via CrossRef and Semantic Scholar APIs, generate 384-dim vector embeddings for semantic search with pgvector, and visualise citation networks as interactive D3 force graphs. Full async stack: FastAPI, Celery workers, PostgreSQL + pgvector, Redis, Alembic migrations, Obsidian/Zotero/GraphML export.',
+    narrative: [
+      'During the final stages of my PhD, I was managing close to 400 papers across Zotero, PDFs scattered across drives, and browser bookmarks I\'d stopped trusting. The problem wasn\'t access — it was findability. I knew a paper about liminal space existed somewhere in that pile, but keyword search across filenames wasn\'t going to find it. What I actually wanted was semantic search: show me papers that are conceptually related to this one, regardless of whether they share exact terminology.',
+      'The starting point was straightforward: ingest a DOI, hit CrossRef and Semantic Scholar, store structured metadata. But once I had metadata, I wanted to understand the citation graph — which papers were foundational, which were peripheral, where the clusters of closely related work sat. That led to NetworkX for graph analytics, PageRank for influence scoring, and D3 force simulation for interactive visualisation. The visual output was immediately useful: you can see at a glance where the dense theoretical clusters are and which papers bridge otherwise separate bodies of work.',
+      'The vector search layer came later. Sentence-transformers with all-MiniLM-L6-v2 generates embeddings per abstract, stored in pgvector with an IVFFlat index. Querying by semantic similarity rather than keyword changes how you navigate a literature — instead of searching for a paper you remember, you describe the idea and let the index surface what\'s relevant. The Celery worker architecture keeps ingestion async so the API stays responsive even when enrichment hits rate limits on external APIs.',
+      'Export to Obsidian vault was a practical addition — I wanted to write directly in the same environment I was using for notes, with citation backlinks wired in automatically. The Zotero RDF and GraphML exports were for collaborators who hadn\'t made the switch. It\'s still in active use.',
+    ],
     stack: ['FastAPI (Python 3.12)', 'PostgreSQL + pgvector', 'Celery + Redis', 'sentence-transformers (all-MiniLM-L6-v2)', 'NetworkX', 'D3 v7', 'Docker Compose', 'Alembic'],
     highlights: [
       'Async ingestion pipeline: PDF → PyMuPDF → CrossRef → Semantic Scholar → ORCID → embed',
@@ -46,6 +53,12 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Self-hosted qualitative research platform for thematic coding, grounded theory analysis, and co-occurrence visualisation.',
     description: 'Self-hosted qualitative research platform for thematic coding, grounded theory analysis, and co-occurrence visualisation. Pure HTML/CSS/JS frontend with no build step — text selection maps directly to char offsets, codes are applied in-browser, and D3 v7 renders a live force graph of code co-occurrence across transcripts. SQLite backend, zero config.',
+    narrative: [
+      'I had 60 interview transcripts and needed a way to code them that didn\'t involve sending research data to a cloud service or paying for NVivo licences. The problem with most qualitative research tools is that they\'re either expensive, require institutional IT involvement to deploy, or both. I wanted something I could run on a server I controlled, share with supervisors via a URL, and own completely.',
+      'The core interaction — select text, apply a code — sounds simple but requires some care to get right in a browser. I used mouseup events with window.getSelection() to capture selection boundaries, then mapped them to character offsets within the transcript text. That offset pair is what gets stored, which means the same segment can carry multiple codes and the data remains stable if you edit the display layer. No React, no build step — the entire frontend is plain HTML, CSS, and vanilla JavaScript, which means it works anywhere Node.js runs without any toolchain friction.',
+      'The co-occurrence graph was the feature that made the tool genuinely analytical rather than just a bookmarking system. When you code 60 interviews, patterns emerge in the graph before you\'ve consciously noticed them in the text. Nodes that cluster tightly together are signalling a theme — D3\'s force simulation makes that visible. Node size encodes segment count, edge thickness encodes co-occurrence weight, and dragging nodes to reposition them lets you explore the structure without changing the data.',
+      'Memos complete the loop: the graph surfaces a pattern, you write a memo while it\'s fresh, and that memo becomes the first draft of the theoretical chapter. The export to NVivo-compatible format was added for collaborators who needed to import my coding work into their existing environment. The platform is deployed on Fly.io on the free tier — it sleeps between sessions, which is fine for the usage pattern.',
+    ],
     stack: ['Node.js + Express', 'better-sqlite3 (SQLite)', 'WebSockets (ws)', 'D3 v7 (CDN, no build)', 'Pure HTML/CSS/JS', 'NVivo-compatible export'],
     highlights: [
       'mouseup + getSelection + char offsets for in-browser text coding without any framework',
@@ -67,6 +80,12 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Full-stack observability platform built on Prometheus, Loki, and Grafana for unified metrics, logs, and alerting across distributed infrastructure.',
     description: 'Full-stack observability platform built on Prometheus, Loki, and Grafana for unified metrics, logs, and alerting across distributed infrastructure. Production-grade, deployed at enterprise scale.',
+    narrative: [
+      'Before this platform existed, the monitoring story at Accent Group was fragmented: some teams had Datadog agents on some servers, others had nothing, and alerting was a mix of email thresholds and manual checks. The business operates 800+ retail stores with dependencies across point-of-sale systems, payment gateways, inventory management, and e-commerce. When something goes wrong, you need to know within minutes — not from a customer complaint.',
+      'I chose the open-source PLG stack (Prometheus, Loki, Grafana) deliberately. Vendor lock-in with observability tooling is expensive and limits your ability to evolve the platform. Prometheus gives you a pull-based metrics model that scales predictably, Loki indexes log streams by label without parsing the full text (which keeps storage costs rational), and Grafana provides a query and visualisation layer that anyone on the team can learn. The total cost is infrastructure — no per-seat or per-host licensing.',
+      'The alerting model was the hardest part to get right. Raw Prometheus alerts are easy to create and easy to make noisy. I built a severity tiering framework that distinguishes between symptoms (a metric threshold breached) and causes (a service genuinely degraded), and routed each tier differently — critical pages on-call via PagerDuty, high goes to Slack, medium to email digest. That discipline reduced alert fatigue significantly and improved the signal-to-noise ratio for the operations team.',
+      'The templated Grafana dashboards with multi-environment variable switching mean the same dashboard works for dev, staging, and production — engineers drill down by selecting the environment rather than maintaining separate dashboards. OpenTelemetry instrumentation was added progressively as applications were updated, giving us trace-level visibility in addition to metrics and logs.',
+    ],
     stack: ['Prometheus + Alertmanager', 'Loki + Promtail', 'Grafana', 'Docker Compose / Kubernetes', 'PromQL', 'LogQL', 'OpenTelemetry'],
     highlights: [
       'PromQL alerting rules with severity tiers routed via Alertmanager',
@@ -88,6 +107,12 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Command-line tool for auditing Azure infrastructure — tagging compliance, encryption posture, ARM template drift detection, cost analysis, and Azure Policy evaluation.',
     description: 'Command-line tool for auditing Azure infrastructure — tagging compliance, encryption posture, ARM template drift detection, cost analysis, and Azure Policy evaluation. Mock-client architecture enables CI-clean builds without live credentials. Table, JSON, and HTML output formats via lipgloss.',
+    narrative: [
+      'The audit work I do across the Accent Group Azure estate is repetitive in the right way — the same questions need answering regularly: are resources tagged correctly, is encryption enabled everywhere it should be, have any ARM deployments drifted from their templates, where is spend concentrating? I was doing this manually across the portal and via ad-hoc Az CLI commands. infractl is the automation of that routine.',
+      'I chose Go because CLI tooling in Go produces a single binary with no runtime dependencies, which makes distribution across the team straightforward. Cobra gives you a consistent command structure with built-in help generation, and Viper handles config file and environment variable layering so the tool can be configured differently per environment. The lipgloss library from Charmbracelet lets you write terminal output that looks deliberate rather than like raw text.',
+      'The interface-driven AzureClient design was a specific decision driven by CI. If the Azure SDK calls are behind an interface, you can swap in a MockClient that returns pre-defined fixture data for testing — the build pipeline passes without any Azure credentials present. That pattern makes the tool safe to develop and test in isolation, and keeps the CI green regardless of credential availability.',
+      'The five audit checks (tagging, encryption, networking, identity, backup) are all aligned to CIS Benchmark controls, which means the output maps directly to the frameworks we reference in security assessments. Output in table format works for interactive use; JSON output feeds into downstream automation and reporting pipelines; HTML generates a report you can attach to a change advisory board submission.',
+    ],
     stack: ['Go 1.22', 'Cobra + Viper', 'lipgloss (Charmbracelet)', 'Azure SDK (interface-driven)', 'goreleaser'],
     highlights: [
       'Five audit checks: tagging, encryption, networking, identity, backup — all CIS-benchmark aligned',
@@ -109,6 +134,12 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Self-hosted LLM evaluation platform for side-by-side model comparison, automated scoring, and experiment tracking.',
     description: 'Self-hosted LLM evaluation platform for side-by-side model comparison, automated scoring, and experiment tracking. TypeScript monorepo with Express API, React 18 frontend, Prisma ORM, and a Python FastAPI scorer microservice for ROUGE and BERTScore metrics. SSE-driven live run progress.',
+    narrative: [
+      'When evaluating which language model to use for a given enterprise task, the honest answer is that you have to run them on your actual data. Generic benchmarks tell you something about model capability in the abstract, but they don\'t tell you which model performs best on your specific corpus with your specific prompts. The LLM Eval Harness was built to make that comparative evaluation systematic rather than ad-hoc.',
+      'The architecture reflects a few practical constraints. The scoring layer needs Python because the best NLP evaluation libraries (rouge-score, bert-score) are in the Python ecosystem. The API and frontend are TypeScript because that\'s where most of the team is comfortable and where the build tooling is mature. Separating these into a monorepo with npm workspaces gives clean boundaries without requiring a full microservices deployment — you run them together with Docker Compose.',
+      'The SSE-driven live run progress was a deliberate UX choice. Evaluation runs can take minutes when you\'re running multiple models against a large dataset. Showing progress in real time — model by model, prompt by prompt — keeps the experience from feeling like a black box. Polling would have been simpler to implement but would have introduced either latency or excessive server load.',
+      'The Prisma schema is normalised around the right domain objects: a User creates Experiments, each Experiment has multiple Runs, each Run produces Results per dataset item with JSON score payloads. That structure makes it straightforward to query "which model performed best on this experiment" or "how has model X\'s performance changed over time" without schema gymnastics.',
+    ],
     stack: ['TypeScript (npm workspaces)', 'Express + Prisma (PostgreSQL)', 'React 18 + Vite', 'Python FastAPI (scorer)', 'Bull (job queue)', 'Docker Compose'],
     highlights: [
       'npm workspaces monorepo: packages/api, packages/web, packages/scorer',
@@ -130,6 +161,12 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Autonomous multi-agent software engineering system using Claude\'s tool-use API with parallel sub-agents, hook-driven automation, and persistent memory.',
     description: 'Autonomous multi-agent software engineering system using Claude\'s tool-use API with parallel sub-agents, hook-driven automation, and persistent memory. Enables autonomous, multi-step codebase modification with full rollback safety.',
+    narrative: [
+      'The question I was trying to answer: how far can you push an AI coding agent before you need to hand control back to a human? The practical limit isn\'t capability — modern models can read, reason about, and modify code at a level that makes most routine tasks tractable. The limit is safety and coherence: can the agent maintain a consistent mental model of the codebase across many steps, and can you trust that it won\'t take a destructive action you didn\'t intend?',
+      'The architecture I built uses specialised sub-agents for different phases — Explore agents map the codebase structure, Plan agents reason about the implementation approach, Review agents verify the output against the original intent. These run in parallel where the tasks are independent, coordinated via message passing. The Claude tool-use API (Read, Edit, Bash, Write) with permission gating means every file modification or shell command can be audited before execution.',
+      'The persistent memory system was necessary because a single context window isn\'t enough for a long-running project. I implemented file-backed memory across four types: user (preferences and working style), feedback (corrections the agent learns from), project (current state and decisions), and reference (where to find things in external systems). Each session starts by loading the relevant memory files, which gives continuity without requiring the full conversation history.',
+      'Worktree isolation is the safety mechanism: every significant change happens in a separate git worktree, which means the main branch is always clean and any failed or unwanted change can be discarded without leaving the codebase in a broken state. The workflow runs autonomously between explicit human review points — those gates are the answer to the safety question.',
+    ],
     stack: ['Claude Sonnet / Opus (Anthropic API)', 'Claude Code CLI', 'Python', 'Bash', 'YAML', 'Git worktrees'],
     highlights: [
       'Parallel sub-agents (Explore, Plan, Review) coordinated via message passing',
@@ -151,6 +188,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Performance optimisation system for AI coding agents with skills, instincts, memory, security, and research-first development patterns.',
     description: 'Performance optimisation system for AI coding agents. Skills, instincts, memory, security, and research-first development patterns for Claude Code, Codex, Opencode, Cursor and beyond.',
+    narrative: [
+      'After working extensively with AI coding agents, I noticed that a large fraction of the errors and inefficiencies weren\'t capability failures — they were context failures. The agent didn\'t know what approach had already been tried, didn\'t remember that a particular pattern had caused problems before, or didn\'t have access to the non-obvious constraints that a human engineer carries implicitly. ECC is a harness for solving those problems systematically.',
+      'The skill system allows common agent behaviours to be codified and reused across sessions. Instead of re-specifying how to handle a database migration or how to structure a PR, you reference a skill by name and the agent has a complete, validated procedure to follow. This is analogous to runbooks in operations — the skill doesn\'t replace judgment, but it gives the agent a proven starting point.',
+      'The instinct layer is different from skills: instincts are patterns the agent should apply automatically without being instructed. Things like "always check for environment variable exposure before committing", "prefer editing existing files over creating new ones", or "read before writing". These are the accumulated lessons from many sessions distilled into standing instructions. The memory system persists findings and decisions across sessions so context doesn\'t reset to zero each time.',
+    ],
     stack: ['Claude Code', 'Markdown / YAML', 'Bash', 'JSON'],
     highlights: [
       'Skill system for reusable agent behaviours across sessions',
@@ -171,6 +213,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Bicep-based Azure landing zone accelerator covering hub-spoke networking, identity, policy, and governance.',
     description: 'Bicep-based Azure landing zone accelerator covering hub-spoke networking, identity, policy, and governance. Parameterised for multi-environment deployment with what-if dry-run gating built into the pipeline.',
+    narrative: [
+      'Landing zone design is the foundation of everything that runs in Azure. Get it wrong and you spend years correcting networking topology, re-scoping policy initiatives, or untangling RBAC assignments that were made without a pattern. The goal with this accelerator was to establish an opinionated, enterprise-grade baseline that could be deployed consistently across dev, staging, and production with zero manual steps.',
+      'The hub-spoke topology was chosen for Accent Group\'s specific profile: multiple distinct workloads (retail, corporate, data platform) that need network isolation from each other but share connectivity to on-premises through a single hub. Peering management and user-defined routing are codified in Bicep so the topology is reproducible. Azure Policy initiatives at management group scope enforce the guardrails across all child subscriptions — things like required tags, allowed regions, and encryption at rest — without requiring individual subscription-level configuration.',
+      'The what-if gating in the GitHub Actions pipeline was non-negotiable. For infrastructure that controls networking and identity, you need to see the planned changes before they\'re applied, not after. Every pipeline run shows a what-if diff and pauses for approval before touching the live environment. That pattern has prevented several significant misconfigurations that would have been disruptive to recover from.',
+    ],
     stack: ['Bicep', 'Azure Policy', 'GitHub Actions', 'PowerShell', 'Azure CLI', 'Entra ID'],
     highlights: [
       'Hub-spoke virtual network topology with peering and UDR management',
@@ -192,6 +239,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Enterprise zero trust architecture design and implementation — replacing legacy VPN with identity-aware, least-privilege network access.',
     description: 'Enterprise zero trust architecture design and implementation — replacing legacy VPN with identity-aware, device-posture-verified, least-privilege network access across cloud and on-premises resources.',
+    narrative: [
+      'The legacy VPN model is a perimeter that no longer makes sense when your workforce is remote, your applications are in the cloud, and your attackers are specifically targeting VPN appliances. The zero trust project at Accent Group was driven by a combination of risk posture work and a practical observation: the VPN was a single point of failure and a source of constant friction for end users. Replacing it required a fundamental architectural shift rather than a product swap.',
+      'The design centres on identity and device posture as the access control plane. Entra ID with Conditional Access evaluates every access request — who is the user, what device are they on, is the device compliant per CrowdStrike, what is the risk signal? Access is granted per application, not per network segment. That means a compromised credential gives an attacker access to what that user can access, not to the entire network.',
+      'Microsoft Entra Private Access replaced the VPN for internal application access. Cloudflare handles external traffic and provides an additional layer of zero trust enforcement at the edge. The migration was phased across three months — we moved workload by workload rather than cutting over wholesale, which allowed us to validate the new access patterns in production before decommissioning the VPN entirely. The result was improved security posture and a materially better user experience: no VPN client to connect, no latency through a concentrator.',
+    ],
     stack: ['Entra ID', 'Microsoft Entra Private Access', 'CrowdStrike Falcon', 'Cloudflare', 'Conditional Access'],
     highlights: [
       'Identity-based perimeter replacing implicit network trust',
@@ -213,6 +265,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Structured detection engineering programme for Splunk SIEM — covering detection-as-code, alert lifecycle management, and MITRE ATT&CK alignment.',
     description: 'Structured detection engineering programme for Splunk SIEM — covering detection-as-code, alert lifecycle management, false-positive reduction, and MITRE ATT&CK alignment across enterprise telemetry sources.',
+    narrative: [
+      'A SIEM without a detection engineering discipline is expensive noise generation. The Splunk deployment at Accent Group had accumulated hundreds of alerts over several years, many of them poorly tuned, most of them generating more tickets than could be actionably worked. The detection engineering programme was an intervention: reset the approach, version-control everything, and build quality gates into the process.',
+      'Detection-as-code means every SPL rule lives in version control with a description, severity, MITRE ATT&CK mapping, false-positive guidance, and a peer review requirement before it goes live. That discipline forces you to think through the detection before you deploy it — what exactly is this detecting, what are the benign triggers, what does an analyst need to know to triage it? The review gate catches poorly-scoped rules before they generate noise.',
+      'The MITRE ATT&CK coverage map was built to identify gaps rather than celebrate coverage. Knowing which techniques you\'re detecting is less useful than knowing which high-risk techniques you\'re not detecting. The map drives prioritisation: build detections for the techniques most relevant to your threat model first, not the ones that are easiest to write. SOAR playbook integration handles the tier-1 triage for common, well-understood alert types, which frees analysts for investigation work.',
+    ],
     stack: ['Splunk SIEM', 'SPL', 'MITRE ATT&CK', 'CrowdStrike Falcon', 'Tenable', 'Python'],
     highlights: [
       'Detection-as-code: all rules version-controlled with peer review gates',
@@ -234,6 +291,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Parameterised Azure Data Factory pipeline framework for ELT orchestration across on-premises SQL, cloud data stores, and REST APIs.',
     description: 'Parameterised Azure Data Factory pipeline framework for ELT orchestration across on-premises SQL, cloud data stores, and REST APIs. Includes retry logic, metadata-driven loading, and alerting integration.',
+    narrative: [
+      'The data platform at Accent Group needs to bring together data from on-premises SQL servers (point-of-sale history, inventory), cloud APIs (e-commerce, supplier integrations), and various line-of-business systems, and land it in a consistent, governed form for analytics. Azure Data Factory is the orchestration layer, but without a framework around it, you end up with hundreds of individual pipelines that each hard-code their source connection details and loading logic.',
+      'The metadata-driven approach solves this by separating the orchestration logic from the configuration. A control table defines source, destination, watermark column, and load strategy for each dataset. The master pipeline reads that table and dispatches to a generic loading pipeline with those parameters. Adding a new data source means adding a row to the control table — not creating a new pipeline. That design reduced the time to onboard a new source from days to hours.',
+      'The watermark-based change detection handles incremental loading: each run records the highest value seen in the watermark column (usually a timestamp or sequence), and the next run picks up from there. Retry logic with exponential backoff handles transient network failures against on-premises sources. Failure alerts via Logic Apps give the data team visibility into pipeline health without requiring them to watch the ADF monitoring console.',
+    ],
     stack: ['Azure Data Factory', 'Azure SQL', 'Bicep', 'PowerShell', 'Logic Apps', 'Azure Monitor'],
     highlights: [
       'Metadata-driven pipeline configuration — new sources added without pipeline changes',
@@ -255,6 +317,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'CIS Kubernetes Benchmark-aligned hardening baseline for AKS clusters — RBAC, network policy, pod security standards, and runtime threat detection.',
     description: 'CIS Kubernetes Benchmark-aligned hardening baseline for AKS clusters — covering control plane configuration, RBAC, network policy, pod security standards, and runtime threat detection.',
+    narrative: [
+      'Default AKS cluster configuration is not a security baseline. Out of the box, you get a functional cluster, not a hardened one. The gap between "running" and "secure" is significant: permissive RBAC, no network policy, no admission control, no runtime threat detection. The hardening baseline closes that gap systematically, starting from the CIS Kubernetes Benchmark and adapting it to AKS specifics.',
+      'Cilium as the network layer rather than the Azure CNI default was a deliberate choice — Cilium provides eBPF-based network policy enforcement with significantly more granularity than standard Kubernetes NetworkPolicy objects, and integrates with Hubble for network flow observability. Kyverno handles policy-as-code at the admission layer: every pod creation is evaluated against policies before it\'s scheduled. Falco monitors runtime behaviour and alerts on syscall anomalies that indicate compromise.',
+      'Trivy in the CI pipeline is the supply chain control: images are scanned for CVEs before they\'re deployed, and the pipeline blocks on critical findings. This shifts the security check left rather than discovering vulnerabilities in production. The full baseline is parameterised as Bicep so it can be applied consistently to new clusters and drift-checked against existing ones.',
+    ],
     stack: ['AKS', 'Bicep', 'Kyverno', 'Falco', 'Cilium', 'OPA / Gatekeeper', 'Trivy'],
     highlights: [
       'CIS Benchmark controls mapped to Bicep parameters and Kyverno policies',
@@ -276,6 +343,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Grafana-based vulnerability management dashboard ingesting Tenable scan data — asset risk scores, patch velocity, SLA compliance, and trend analysis.',
     description: 'Grafana-based vulnerability management dashboard that ingests Tenable scan data and surfaces asset risk scores, patch velocity, SLA compliance, and trend analysis across the enterprise asset estate.',
+    narrative: [
+      'Vulnerability management without measurement is remediation theatre. You can run Tenable scans and generate a list of findings, but without tracking patch velocity, SLA compliance, and trend direction over time, you don\'t actually know if your security posture is improving. The dashboard was built to answer that question continuously rather than at point-in-time report intervals.',
+      'The Tenable.io API exposes rich scan data but in a format that requires normalisation before it\'s useful for aggregated analysis. The Python ingestion pipeline pulls scan results, normalises them against the asset inventory, computes composite risk scores (CVSS adjusted for asset criticality and exposure), and stores them in PostgreSQL. Grafana queries that store for the dashboard panels, which means the visualisation layer is separate from the data layer and can be modified independently.',
+      'The SLA compliance tracking was the feature that had the most operational impact. When you can show that 23% of critical vulnerabilities are past their 7-day remediation SLA by name, owner, and days overdue, it changes the conversation with teams responsible for patching. The executive summary panel translates that detail into board-level risk language — trend direction, outstanding critical count, and compliance rate over the past quarter.',
+    ],
     stack: ['Grafana', 'Tenable.io API', 'Python', 'PostgreSQL', 'Prometheus', 'Docker'],
     highlights: [
       'Tenable.io API ingestion pipeline normalising vulnerability data into PostgreSQL',
@@ -297,6 +369,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Python-based Azure cost anomaly detection system that monitors daily spend patterns and alerts on unexpected cost spikes.',
     description: 'Python-based Azure cost anomaly detection system that monitors daily spend patterns, identifies statistical outliers, and alerts on unexpected cost spikes before they compound across billing cycles.',
+    narrative: [
+      'Cloud cost surprises are avoidable with the right instrumentation, but the Azure Cost Management portal is built for analysis after the fact, not for operational alerting. By the time an unexpected cost spike shows up in the monthly bill review, it\'s too late to do much about it. The anomaly detector shifts that window significantly earlier by monitoring daily spend patterns and alerting within 24 hours of a statistical deviation.',
+      'The detection approach is intentionally simple: Z-score and IQR-based outlier detection on rolling 30-day windows per resource group and service. More sophisticated models exist but they require more data and more tuning, and the simple models catch the scenarios that actually matter — a forgotten test environment left running, a misconfigured autoscale policy, an accidental deployment of an expensive SKU. The alert includes enough context (resource group, service type, deviation magnitude) to investigate without opening the portal.',
+      'Tag-based cost allocation enforcement was added as a complementary feature: any resource without required tags is flagged separately. Untagged resources are both a governance failure and a cost attribution failure — you can\'t allocate cost to a business unit if the resource isn\'t tagged correctly. Power BI provides the trend visualisation and forecast-vs-actuals view for finance and leadership stakeholders who need a different level of granularity than the operational alerts.',
+    ],
     stack: ['Python', 'Azure Cost Management API', 'pandas', 'scikit-learn', 'Azure Logic Apps', 'Power BI'],
     highlights: [
       'Daily cost ingestion from Azure Cost Management API by resource group and service',
@@ -318,6 +395,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Enterprise AI governance framework covering AI risk classification, vendor evaluation, acceptable use policy, and ethics alignment for Australian regulatory context.',
     description: 'Enterprise AI governance framework covering AI risk classification, vendor evaluation criteria, acceptable use policy, human oversight requirements, and AI ethics alignment for Australian regulatory context.',
+    narrative: [
+      'By mid-2024, Accent Group had AI tools running in production, AI tools being trialled by business units, and AI tools being requested by every part of the organisation — all without a coherent framework for evaluating risk or governing use. The governance framework was built in response to that reality: not to slow adoption, but to make it sustainable and defensible.',
+      'The risk classification matrix draws on the EU AI Act tiers and Australia\'s AI Ethics Principles, adapted for a retail enterprise context. The key question for each AI system is: what\'s the consequence of a failure, and who bears it? A content recommendation system failing silently is a revenue impact. An HR screening tool failing silently is a legal liability. The classification determines the oversight requirements — automated, periodic human review, or full human decision authority.',
+      'The vendor due diligence checklist was the most practically requested output. Business units were signing up to AI SaaS products before procurement or security had reviewed them, often because the product felt low-stakes. The checklist creates a consistent standard: data residency, model training on customer data, audit logging, human escalation paths, and data deletion capability. The acceptable use policy covers generative AI specifically — what you can and cannot put into an LLM prompt that has external API calls. That last point matters because employees sharing confidential information with commercial LLMs is a real data protection risk.',
+    ],
     stack: ['Markdown / Confluence', 'Python (risk scoring)', 'YAML (policy-as-code)'],
     highlights: [
       'AI risk classification matrix aligned to EU AI Act and Australia\'s AI Ethics Principles',
@@ -339,6 +421,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Model Context Protocol server exposing internal enterprise data sources — ITSM tickets, CMDB assets, and change records — to AI agents with read-only access controls.',
     description: 'Model Context Protocol server exposing internal enterprise data sources — ITSM tickets, CMDB assets, and change records — to AI agents with read-only, least-privilege access controls.',
+    narrative: [
+      'The practical limit on AI coding agent usefulness in an enterprise context is access to internal context. An agent that can read public documentation and reason about code can take you a long way, but it can\'t tell you that a deployment is blocked because of a change freeze in ITSM, or that the asset it\'s querying is marked as end-of-life in the CMDB, or that there\'s an open incident affecting the service it\'s trying to modify. That context lives in internal systems, and getting it into the agent\'s context window requires a protocol bridge.',
+      'MCP (Model Context Protocol) is that bridge. The server exposes resources — Jira issues, Confluence pages, JSM Assets records — through a standard interface that AI agents can query using tool calls. The design is deliberately read-only: the server has no write paths. An agent can read a ticket, but it cannot close it; it can read asset records, but it cannot modify them. That constraint is security-by-design rather than a limitation — it keeps the agent in an advisory role while the human retains execution authority.',
+      'OAuth 2.0 token-based authentication with per-tool scope constraints means each type of resource access requires explicit authorisation. Prompt injection defences — schema validation on inputs, output sanitisation before returning data to the agent — address the risk that a maliciously crafted document in Confluence could attempt to redirect the agent\'s behaviour. The server is the right pattern for AI-augmented enterprise workflows: give the agent context it needs, keep it out of systems it shouldn\'t touch.',
+    ],
     stack: ['Python', 'MCP SDK', 'Jira REST API', 'Confluence REST API', 'JSM Assets API', 'OAuth 2.0'],
     highlights: [
       'MCP resource exposure for Jira issues, Confluence pages, and CMDB assets',
@@ -360,6 +447,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Network segmentation architecture for 800+ retail store locations — separating POS, guest Wi-Fi, IoT/CCTV, and back-office traffic into isolated zones.',
     description: 'Network segmentation architecture for 800+ retail store locations — separating POS, guest Wi-Fi, IoT/CCTV, and back-office traffic into isolated zones with centralised firewall policy management.',
+    narrative: [
+      'Retail store networks are a particularly challenging segmentation problem. A single store location might have point-of-sale terminals processing card transactions, guest Wi-Fi for customers, security cameras and IoT door sensors, back-office workstations, and staff mobile devices — all potentially on the same physical infrastructure. PCI-DSS requirements mandate that cardholder data environments are isolated from other traffic. Getting that wrong is both a regulatory failure and a breach risk.',
+      'The segmentation model uses VLAN isolation as the foundational control, with 802.1X port authentication on wired endpoints in high-risk zones. The VLAN structure is standardised across all 800+ sites: POS traffic never touches the same broadcast domain as guest Wi-Fi, and IoT devices have no route to anything they shouldn\'t reach. Cisco Meraki\'s centralised management model makes template-based policy push practical at that scale — you define the policy once and push to all sites rather than configuring each store independently.',
+      'SD-WAN with dual-ISP failover means store connectivity is resilient: a single ISP failure doesn\'t take POS offline, which would be a direct revenue impact. QoS policy prioritises POS traffic on the WAN links to ensure card transaction latency stays within payment network thresholds even during periods of high bandwidth use. Umbrella DNS filtering at store egress catches malware callbacks and blocks access to categories of sites that create risk — ransomware operators frequently use DNS as an early-stage C2 channel.',
+    ],
     stack: ['Cisco Meraki', 'Umbrella DNS', 'Cloudflare', 'VLANs', '802.1X', 'SD-WAN'],
     highlights: [
       'Per-store VLAN segmentation: POS, staff, guest, IoT, management',
@@ -381,6 +473,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Recurrent neural network model for automated fake news detection from article text using LSTM architecture.',
     description: 'Recurrent neural network model for automated fake news detection from article text. Trained on labelled news corpora using LSTM architecture to classify credibility at inference time.',
+    narrative: [
+      'This was an exploration of text classification using sequence models, motivated by the question of whether surface-level linguistic patterns in news articles are predictive of credibility. The hypothesis is that manipulated or fabricated content has systematic stylistic signatures — specific vocabulary choices, sentence structures, or narrative patterns — that a trained model can learn to detect.',
+      'LSTM architecture was the right choice for this problem because news articles are sequences where long-range dependencies matter — the relationship between the opening framing and the conclusion carries information about credibility that a bag-of-words model would miss. The text pre-processing pipeline handles the noisy input typical of news text: tokenisation, stop-word removal, and embedding to convert text into the vector representations the network needs.',
+      'The honest conclusion from this project is that the problem is harder than the benchmarks suggest. A model that performs well on labelled datasets built from known fact-checked sources doesn\'t necessarily generalise to novel misinformation. The lexical patterns associated with unreliable sources in 2019 are not identical to those in 2024. That limitation is important context for anyone considering deploying a classifier of this type in production: it\'s a useful signal, not a definitive oracle.',
+    ],
     stack: ['Python', 'TensorFlow / Keras', 'LSTM', 'NLP', 'pandas', 'NumPy'],
     highlights: [
       'LSTM-based sequence model capturing long-range textual dependencies',
@@ -401,6 +498,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Real-time text analytics platform in R/Shiny that captures, analyses, and visualises sentiment from social media and news streams.',
     description: 'Real-time text analytics platform built in R/Shiny that captures, analyses, and visualises sentiment from social media and news streams. Interactive dashboards with topic modelling and trend detection.',
+    narrative: [
+      'SentimentScope grew out of a need to monitor public discourse around specific topics in real time rather than retrospectively. The use case was understanding how sentiment around retail brands shifts in response to product launches, PR incidents, or seasonal events — information that has commercial value but is otherwise buried in raw social media volume.',
+      'R/Shiny was the natural choice for rapid development of interactive analytics dashboards — the tidytext and quanteda ecosystems give you robust NLP primitives, and Shiny makes it straightforward to wire those to interactive UI components without writing JavaScript. The lexicon-based sentiment analysis (using sentimentr) runs fast enough for real-time use; the LDA topic modelling runs as a scheduled background job over larger corpora.',
+      'The multi-source ingestion architecture means the same dashboard can show Twitter/X, RSS news feeds, and manually uploaded text side by side. That flexibility was important because different research questions require different sources, and building in extensibility from the start avoided re-work later. The wordcloud and time-series views are the outputs that stakeholders without a data science background found most accessible.',
+    ],
     stack: ['R', 'Shiny', 'tidytext', 'quanteda', 'sentimentr', 'ggplot2', 'plotly', 'wordcloud2'],
     highlights: [
       'Lexicon-based and ML sentiment classification (positive / negative / neutral)',
@@ -422,6 +524,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Jupyter-based NLP pipeline for predicting sentiment from Twitter posts using machine learning classifiers.',
     description: 'Jupyter-based NLP pipeline for predicting sentiment from Twitter posts using machine learning. Applies text classification to infer positive, negative, or neutral sentiment from social media data.',
+    narrative: [
+      'This project was a comparative study of classical ML classifiers applied to a well-understood NLP task. Twitter sentiment analysis is a benchmark problem with known challenges: the informal language, heavy use of abbreviations, irony, and the brevity of the format all make it harder than standard document classification.',
+      'The value of the multi-classifier comparison (Naïve Bayes, SVM, Logistic Regression) was less about identifying a single winner and more about understanding the trade-offs. Naïve Bayes trains fast and performs surprisingly well on short texts because the independence assumption is less wrong for tweets than for longer documents. SVM with an appropriate kernel handles the high-dimensional feature space well but is sensitive to the feature engineering choices upstream. Logistic Regression is interpretable — you can inspect the feature weights to understand what the model has learned.',
+      'The pre-processing pipeline handles the specifics of tweet data: hashtags are stripped but preserved as signals (a tweet with #angry is different from one without), URLs are removed, user mentions are normalised. Lemmatisation reduces vocabulary dimensionality without losing the root meaning of terms. The temporal trend visualisation was added to make the output useful for longitudinal analysis rather than just point-in-time classification.',
+    ],
     stack: ['Python', 'Jupyter Notebook', 'scikit-learn', 'NLTK', 'pandas', 'matplotlib'],
     highlights: [
       'Tweet pre-processing: tokenisation, hashtag handling, URL stripping, lemmatisation',
@@ -442,6 +549,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Validated psychometric survey instrument for PhD research — measuring Remote Work Intensity, Liminal Spaces, Technostress, and employee outcomes across n=717.',
     description: 'Validated psychometric survey instrument developed for PhD research — measuring Remote Work Intensity, Liminal Spaces, Technostress, Work-Life Balance, and employee outcomes. Used in n=717 SEM study.',
+    narrative: [
+      'The survey instrument is the foundation of the empirical work in my PhD thesis. The constructs I needed to measure — Remote Work Intensity, Liminal Spaces, Technostress (three dimensions), Work-Life Balance, and four outcome variables — don\'t all have off-the-shelf validated scales. Liminal Spaces in a remote work context is a construct I developed specifically for this research; the other constructs were adapted from existing scales with modifications appropriate to the remote work context.',
+      'Construct development follows a specific sequence: conceptual definition, item generation, expert review, pilot testing, and then CFA to assess psychometric properties. Each of the eight latent variables has four to six indicator items. The CFA results assess convergent validity (indicators load highly on their intended factor) and discriminant validity (factors are distinct from each other). Both need to be established before you can trust the SEM results that follow.',
+      'The n=717 sample was collected via Qualtrics with stratified recruitment to ensure representation across industry sectors and remote work intensity levels. Common method bias is a persistent concern in self-report survey research — I addressed it with Harman\'s single-factor test and a marker variable technique. The full Lavaan and AMOS code for the CFA and SEM models, along with the cleaned dataset structure, are documented in the repository.',
+    ],
     stack: ['R', 'lavaan', 'AMOS', 'SPSS', 'Qualtrics', 'BibTeX'],
     highlights: [
       'Construct operationalisation across eight latent variables',
@@ -463,6 +575,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Automated qualitative-to-quantitative thematic analysis pipeline using Leximancer for corpus-level concept mapping from interview transcripts.',
     description: 'Automated qualitative-to-quantitative thematic analysis pipeline using Leximancer for corpus-level concept mapping. Applied to interview transcripts and open-text survey responses in remote work research.',
+    narrative: [
+      'The qualitative component of the PhD involved 60 semi-structured interviews with remote workers across Australia. Manually coding 60 interviews is tractable but slow. Leximancer provides a computational alternative: it generates concept maps from text corpora by identifying co-occurring concepts and their relative importance, which gives you a quantitative view of what themes are present and how they relate before you begin detailed manual coding.',
+      'The pipeline automates the pre-processing work that would otherwise be repetitive and error-prone: transcript cleaning (removing interviewer prompts, filler words, PII), speaker diarisation (separating participant responses from interviewer questions), and stopword tuning (domain-specific terms that are frequent but not conceptually meaningful need to be suppressed). The output of the pipeline feeds directly into Leximancer without manual steps.',
+      'The most valuable output was the concept co-occurrence matrix, which I used to triangulate against the SEM constructs before running CFA. If Leximancer identified "liminal space" and "disconnection" as co-occurring concepts in the interview data, but the survey items for Liminal Spaces didn\'t load onto a coherent factor, that\'s a signal that the operationalisation needed revision. Using qualitative and quantitative approaches in parallel created a feedback loop that strengthened both.',
+    ],
     stack: ['Leximancer', 'Python', 'pandas', 'SPSS', 'R'],
     highlights: [
       'Concept map generation from unstructured interview transcripts',
@@ -484,6 +601,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'R and TikZ/pgfplots pipeline for generating publication-ready SEM path diagrams, CFA factor loadings plots, and statistical figures.',
     description: 'R and TikZ/pgfplots pipeline for generating publication-ready SEM path diagrams, CFA factor loadings plots, and statistical summary figures aligned to journal submission standards.',
+    narrative: [
+      'Journal figures are a specific craft: they need to be precise enough to communicate statistical findings unambiguously, legible at the print dimensions specified by the journal, and consistent in typography and style with the manuscript body. Manually creating these in a GUI tool like Excel or even ggplot without a systematic template produces figures that look different from each other and often don\'t survive journal formatting requirements.',
+      'The pipeline starts from the model objects produced by lavaan (for SEM and CFA) and generates figures programmatically. That means if the model is re-estimated with updated data, re-running the pipeline re-generates all figures automatically — no manual updating of coefficient labels or significance stars. The TikZ integration for path diagrams gives precise control over layout that R\'s semPlot package alone doesn\'t provide.',
+      'The output format requirements vary by journal: some require EPS, some PDF, some TIFF at specific DPI. The pipeline handles these via exportation wrappers so you can generate all required formats from the same source in a single step. The reproducibility principle here is the same as for code: if a figure can\'t be regenerated from the data with a single command, it\'s a manual artefact and will diverge from the data eventually.',
+    ],
     stack: ['R', 'ggplot2', 'lavaan', 'semPlot', 'LaTeX', 'TikZ', 'pgfplots'],
     highlights: [
       'SEM path diagrams with standardised coefficients and significance stars',
@@ -505,6 +627,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Python-based tool that ingests Cisco device configs and generates interactive network topology diagrams for enterprise documentation.',
     description: 'Python-based tool that ingests Cisco device configs (LLDP, CDP, routing tables) and generates interactive network topology diagrams. Useful for enterprise network documentation and change planning.',
+    narrative: [
+      'Network documentation is perpetually out of date. Engineers make changes, diagrams aren\'t updated, and six months later the diagram no longer reflects what\'s actually connected. The Topology Visualiser inverts that: instead of maintaining a diagram and hoping it stays accurate, you generate it from the live device state on demand. The source of truth becomes the devices themselves, not the Visio file.',
+      'Netmiko handles the SSH collection layer — it abstracts the differences between IOS, NX-OS, and other Cisco variants and gives you a consistent interface for running show commands and parsing output. LLDP and CDP neighbour tables are the primary discovery mechanism: from any single device, you can walk the graph of directly connected neighbours and build the topology structure automatically. Routing tables add Layer 3 context — where the subnet boundaries are, how traffic flows between segments.',
+      'The NetworkX graph model stores the topology in a form that supports both visualisation and analysis: you can query shortest paths, identify bottlenecks, or export the adjacency structure for import into other tools. Graphviz provides the layout algorithms for static output; the interactive variant uses a JavaScript force-directed graph rendered from a DOT file export. The YAML inventory file means you can define the seed devices for discovery without hardcoding them into the script.',
+    ],
     stack: ['Python', 'Netmiko', 'NetworkX', 'Graphviz', 'Matplotlib', 'YAML'],
     highlights: [
       'SSH-based config collection from Cisco IOS/NX-OS via Netmiko',
@@ -526,6 +653,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Modular LaTeX template system for academic research papers, theses, and conference submissions with BibTeX and reproducible pipelines.',
     description: 'Modular LaTeX template system for academic research papers, theses, and conference submissions. Supports BibTeX bibliography management, APA/IEEE citation styles, and reproducible document pipelines.',
+    narrative: [
+      'LaTeX produces better academic documents than Word. That\'s not an opinion — the typography, equation rendering, BibTeX reference management, and structural consistency are materially superior. The barrier is the learning curve and the setup friction. This template system exists to lower that barrier: a working document structure with sensible defaults that you can build on without understanding every LaTeX primitive.',
+      'The modular structure matters for large documents like a thesis. A single monolithic .tex file becomes unmanageable beyond fifty pages. The template uses \\input directives to split chapters into separate files, which means you can compile a single chapter during writing and the full document for submission. Figures and bibliography are referenced symbolically rather than by filename, which keeps the source clean as the document grows.',
+      'The TikZ and pgfplots integration enables the same figure generation pipeline used in the Publication Figure Generator — if you\'re writing a manuscript and building figures in R, the LaTeX template and figure generator are designed to work together. The Overleaf compatibility means collaborators without a local TeX installation can still work on the document, which is a practical requirement when working with supervisors and co-authors.',
+    ],
     stack: ['LaTeX', 'BibTeX', 'TikZ', 'pgfplots', 'Overleaf-compatible'],
     highlights: [
       'Modular chapter and section structure for large documents',
@@ -547,6 +679,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'PowerShell Desired State Configuration resource library for Windows Server hardening — CIS Benchmark controls as declarative state.',
     description: 'PowerShell Desired State Configuration (DSC) resource library for Windows Server hardening — implementing CIS Benchmark controls, audit policy, and enterprise baseline configurations as declarative state.',
+    narrative: [
+      'Windows Server hardening at enterprise scale requires that you can apply a consistent baseline to many servers and detect when they drift from it. Manual hardening scripts run once and can\'t detect drift; Group Policy is powerful but complex to version-control and audit. DSC gives you a declarative model: you describe the desired state, and the DSC engine enforces it continuously and reports on compliance.',
+      'The CIS Windows Server 2022 Benchmark has several hundred controls across multiple levels. I implemented the Level 1 and Level 2 controls that are applicable in an enterprise domain environment as DSC resources. Each resource is a self-contained unit that checks and enforces a specific configuration — password policy, account lockout thresholds, service states, audit policy settings, registry hardening. Pester tests validate that each resource correctly detects both compliant and non-compliant states.',
+      'The Azure Automation State Configuration integration is what makes this practical at fleet scale. Servers register with the Automation account as DSC nodes, pull their configuration on a schedule, and report compliance status back centrally. When a server drifts from the baseline — because someone made a manual change, a software installation modified a setting, or a policy isn\'t applying correctly — the compliance dashboard shows it immediately rather than at the next audit.',
+    ],
     stack: ['PowerShell DSC', 'PSDesiredStateConfiguration', 'Pester', 'GitHub Actions', 'Azure Automation'],
     highlights: [
       'CIS Windows Server 2022 Benchmark Level 1 and Level 2 controls as DSC resources',
@@ -568,6 +705,11 @@ export const projects: Project[] = [
     createdYear: 0,
     summary: 'Browser-based cutting sheet optimiser that packs rectangular pieces onto plywood sheets with minimal waste. Zero-dependency, runs entirely in-browser.',
     description: 'Browser-based cutting sheet optimiser that packs rectangular pieces onto plywood sheets with minimal waste. Zero-dependency, runs entirely in-browser with PDF export and CSV import.',
+    narrative: [
+      'CutWise is a woodworking tool that I built because I needed it. When you\'re cutting a cabinet or a set of shelves from sheet plywood, you have a list of pieces that need to come from standard 2400×1200mm sheets. Figuring out how to arrange them to minimise waste is a 2D bin packing problem — straightforward to understand, surprisingly annoying to do by hand for more than a few pieces.',
+      'The algorithm is Guillotine Best-Area-Fit: at each step, choose the free rectangle whose area most closely matches the piece being placed, and split the remaining space into two rectangles with a guillotine cut. It\'s not optimal — 2D bin packing is NP-hard — but it\'s fast, produces good results in practice, and the guillotine constraint is actually useful for woodworking because it reflects how real cuts are made: you run a sheet through a table saw, which produces a guillotine split.',
+      'The grain direction feature came from practical experience. For furniture work, the wood grain usually needs to run in a specific direction relative to the piece. The tool supports locking grain direction per piece and evaluates both 0° and 90° orientations when placing, choosing the one that fits better while respecting the grain constraint. The canvas rendering gives you an immediate visual of the placement, colour-coded by piece name, so you can sanity-check the output before cutting. PDF export produces a print-ready sheet at scale.',
+    ],
     stack: ['HTML', 'CSS', 'Vanilla JavaScript', 'Canvas API', 'jsPDF', 'GitHub Pages'],
     highlights: [
       'Guillotine Best-Area-Fit packing algorithm — pieces sorted largest-to-smallest by area',

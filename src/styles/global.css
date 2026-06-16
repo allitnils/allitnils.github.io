@@ -167,10 +167,7 @@
   50%       { opacity: 0; }
 }
 .cursor {
-  display: inline-block;
-  width: 2px; height: 0.9em;
-  background: var(--accent);
-  margin-left: 1px; vertical-align: middle;
+  display: inline;
   animation: blink 1.1s step-end infinite;
 }
 
