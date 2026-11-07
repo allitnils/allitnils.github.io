@@ -34,6 +34,12 @@ const { project: p, prev, next } = Astro.props;
         <span style="font-family:'Fira Code Variable',monospace;font-size:0.625rem;color:var(--text-muted);">{p.category}</span>
       </div>
       <h1 style="font-weight:700;font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-0.04em;margin:0 0 1.25rem;line-height:1.1;">{p.title}</h1>
+      {p.status === 'Reference pattern' && (
+        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.65;margin:0 0 1.25rem;padding:0.75rem 1rem;border-left:2px solid var(--accent);background:var(--mid);border-radius:0 6px 6px 0;max-width:62ch;">
+          <strong style="font-weight:600;color:var(--text-primary);">Reference pattern.</strong>
+          The repository is a public, generalised version of this architecture: templates and examples to adapt, not a deployable product. Organisation-specific configuration is omitted.
+        </p>
+      )}
       <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
         {p.githubUrl && (
           <a href={p.githubUrl} target="_blank" rel="noopener noreferrer"

@@ -174,8 +174,8 @@ const websiteSchema = {
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
         {[
-          { title: 'Claude Code Agentic Workflows', desc: 'Autonomous multi-agent system using Claude\'s tool-use API — parallel sub-agents, hook-driven automation, persistent memory.', stack: ['Claude API', 'Python', 'Bash'], href: '/projects' },
-          { title: 'Enterprise Observability Stack', desc: 'Production-grade metrics, logs, and alerting across distributed infrastructure using Prometheus, Loki, and Grafana.', stack: ['Prometheus', 'Loki', 'Grafana'], href: '/projects' },
+          { title: 'Stack Decoder', desc: 'Paste a tech job description and get a plain-English read on stack modernity, tech debt signals, culture flags, and tailored interview questions.', stack: ['Python', 'Streamlit', 'Claude'], href: '/projects/stack-decoder' },
+          { title: 'Enterprise Observability Stack', desc: 'Reference pattern for unified metrics, logs, and alerting across distributed infrastructure using Prometheus, Loki, and Grafana.', stack: ['Prometheus', 'Loki', 'Grafana'], href: '/projects/enterprise-observability-stack' },
           { title: 'CutWise', desc: 'Browser-based cutting sheet optimiser. Zero-dependency, runs entirely in-browser with PDF export and CSV import.', stack: ['JavaScript', 'Canvas API'], href: 'https://ivanocampo.com/CutWise/' },
         ].map(p => (
           <a href={p.href} class="post-card" style="display:flex;flex-direction:column;padding:1.25rem;text-decoration:none;color:inherit;gap:0.5rem;" target={p.href.startsWith('http') ? '_blank' : undefined} rel={p.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
