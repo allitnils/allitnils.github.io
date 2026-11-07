@@ -1,5 +1,6 @@
 ---
 title: "TikZ and pgfplots: Publication-Quality Figures That Don't Break Your LaTeX Build"
+seoTitle: "TikZ and pgfplots: Publication-Quality Figures"
 description: "From first principles to production-ready diagrams: how to use TikZ and pgfplots correctly for journal and conference figures, including coordinate systems, styling architecture, common failure modes, and externalization for large documents."
 pubDate: 2026-05-28
 tags: [academic, automation]

@@ -25,3 +25,29 @@ export const AUTHOR = {
     'Cloudflare', 'Meraki', 'IIS', 'Jira Service Management',
   ],
 } as const;
+
+/** Stable entity id — every schema references this so search engines merge them into one person. */
+export const PERSON_ID = `${AUTHOR.url}/#person`;
+
+/** Reference to the Person entity, for author/publisher fields. */
+export const personRef = { '@id': PERSON_ID } as const;
+
+/** Full Person entity. Single source for all Person JSON-LD on the site. */
+export const personSchema = {
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: AUTHOR.name,
+  givenName: 'Ivan',
+  familyName: 'Ocampo',
+  url: AUTHOR.url,
+  image: `${AUTHOR.url}${AUTHOR.image}`,
+  jobTitle: AUTHOR.role,
+  worksFor: { '@type': 'Organization', name: AUTHOR.org },
+  alumniOf: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
+  description: AUTHOR.description,
+  sameAs: [...AUTHOR.sameAs],
+  knowsAbout: ['Enterprise Architecture', 'Cloud Infrastructure', 'Azure', 'Observability',
+               'Phenomenology', 'Remote Work', 'Liminality', 'Organisation Studies'],
+  address: { '@type': 'PostalAddress', addressLocality: AUTHOR.city, addressCountry: AUTHOR.country },
+  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
+};

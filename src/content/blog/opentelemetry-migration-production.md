@@ -1,5 +1,6 @@
 ---
 title: "OpenTelemetry Migration in Production: Trade-offs Every Platform Team Gets Wrong"
+seoTitle: "OpenTelemetry Migration in Production: Trade-offs"
 description: "Concrete collector topology decisions, SDK migration patterns, tail sampling configuration, cardinality budget management, and rollback architecture for teams migrating from proprietary agents to OpenTelemetry in Kubernetes production environments."
 pubDate: 2026-05-25
 tags: [observability, cloud, architecture]
@@ -44,7 +45,7 @@ Parallelising across teams is fine. Parallelising all three signals within the s
 
 The topology you choose for your OTel Collector deployment determines what's possible, what fails, and what it costs. There are three patterns in production use. They are not interchangeable.
 
-![OTel Collector Deployment Topologies](/assets/img/otel-collector-topologies.svg)
+<img src="/images/blog/otel-collector-topologies.svg" alt="OpenTelemetry Collector deployment topologies: sidecar, DaemonSet and gateway patterns" width="1100" height="580" loading="lazy" decoding="async" />
 *Figure 1: Three OTel Collector deployment topologies with distinct blast radius, memory, and capability trade-offs.*
 
 ### Sidecar
@@ -207,7 +208,7 @@ Add 2× headroom for the 30-second decision window during traffic surges. A gate
 
 The tail sampling flow for every trace:
 
-![OTel Tail Sampling Decision Flow](/assets/img/otel-tail-sampling-flow.svg)
+<img src="/images/blog/otel-tail-sampling-flow.svg" alt="OpenTelemetry tail sampling decision flow" width="820" height="560" loading="lazy" decoding="async" />
 *Figure 2: Trace-level sampling decision. ~85–90% of healthy traces are dropped. The full trace — all spans — is exported or dropped together, never individual spans.*
 
 

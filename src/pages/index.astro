@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import { AUTHOR } from '../data/author';
+import { AUTHOR, personRef, personSchema as personEntity } from '../data/author';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -15,29 +15,17 @@ const topics = Object.entries(tagCounts)
   .map(([tag]) => tag)
   .slice(0, 16);
 
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: AUTHOR.name,
-  url: AUTHOR.url,
-  image: `${AUTHOR.url}${AUTHOR.image}`,
-  jobTitle: AUTHOR.role,
-  worksFor: { '@type': 'Organization', name: AUTHOR.org },
-  alumniOf: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
-  description: AUTHOR.description,
-  sameAs: [...AUTHOR.sameAs],
-  knowsAbout: ['Enterprise Architecture','Cloud Infrastructure','Azure','Observability',
-               'Phenomenology','Remote Work','Liminality','Organisation Studies'],
-  address: { '@type': 'PostalAddress', addressLocality: AUTHOR.city, addressCountry: AUTHOR.country },
-  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
-};
+const personSchema = { '@context': 'https://schema.org', ...personEntity };
 
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: `${AUTHOR.name} — Blog`,
   url: AUTHOR.url,
-  author: { '@type': 'Person', name: AUTHOR.name },
+  '@id': `${AUTHOR.url}/#website`,
+  author: personRef,
+  publisher: personRef,
+  inLanguage: 'en-AU',
   description: AUTHOR.description,
   potentialAction: {
     '@type': 'SearchAction',

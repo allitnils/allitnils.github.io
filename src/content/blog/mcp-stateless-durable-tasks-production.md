@@ -1,5 +1,6 @@
 ---
 title: "MCP Goes Stateless: Durable Tasks, the Death of Sessions, and What the 2026 Draft Means for Production Agents"
+seoTitle: "MCP Goes Stateless: Durable Tasks in Production"
 description: "The MCP spec is quietly throwing out the foundations most production servers were built on — sessions, the initialize handshake, server-initiated sampling. Here is what the 2025-11-25 revision and the current draft actually change, why durable async tasks are the real story, and how to build for it without rewriting twice."
 pubDate: 2026-06-13
 tags: [agentic-ai, architecture, cloud]

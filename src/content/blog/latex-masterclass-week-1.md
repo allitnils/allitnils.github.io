@@ -1,5 +1,6 @@
 ---
 title: "LaTeX Masterclass Week 1: What Is LaTeX and Why It Matters"
+seoTitle: "LaTeX Masterclass Week 1: What Is LaTeX?"
 description: "A clear, honest introduction to LaTeX for researchers, PhD students, and technical writers: what it is, how it differs from Word and Google Docs, why typesetting quality matters, and when LaTeX is the right tool — and when it isn't."
 pubDate: 2026-06-02
 tags: [academic, automation]

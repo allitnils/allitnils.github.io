@@ -14,7 +14,7 @@ interface Props {
 const {
   title,
   description,
-  image = AUTHOR.image,
+  image = '/images/ivan-ocampo-og.jpg',
   type = 'website',
   pubDate,
   tags = [],
@@ -25,7 +25,10 @@ const pageUrl   = canonical ?? new URL(Astro.url.pathname, AUTHOR.url).href;
 const ogImage   = new URL(image, AUTHOR.url).href;
 const fullTitle = title === AUTHOR.name
   ? `${AUTHOR.name} — Chief Architect & PhD Researcher`
-  : `${title} | ${AUTHOR.name}`;
+  : title.includes(AUTHOR.name)
+    ? title
+    : `${title} | ${AUTHOR.name}`;
+const isDefaultImage = image === '/images/ivan-ocampo-og.jpg';
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,6 +43,8 @@ const fullTitle = title === AUTHOR.name
 <meta property="og:title"       content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image"       content={ogImage} />
+{isDefaultImage && <meta property="og:image:width"  content="1200" />}
+{isDefaultImage && <meta property="og:image:height" content="630" />}
 <meta property="og:image:alt"   content="Ivan Ocampo — Chief Architect & PhD Researcher" />
 <meta property="og:site_name"   content="Ivan Ocampo" />
 <meta property="og:locale"      content="en_AU" />

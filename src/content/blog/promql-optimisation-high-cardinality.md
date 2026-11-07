@@ -1,5 +1,6 @@
 ---
 title: "PromQL Optimisation Patterns for High-Cardinality Environments"
+seoTitle: "PromQL Optimisation for High Cardinality"
 description: "Concrete PromQL optimisation techniques for platform engineers operating at high cardinality: label matchers, recording rules, histogram strategies, aggregation ordering, and failure modes that silently degrade query performance in production."
 pubDate: 2026-06-07
 tags: [observability, architecture]

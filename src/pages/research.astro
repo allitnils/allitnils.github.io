@@ -1,18 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { AUTHOR } from '../data/author';
+import { AUTHOR, personRef, personSchema as personEntity } from '../data/author';
 
 const dissertationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Thesis',
   name: 'Space Between Spaces: Rituals, Liminality, and the Dynamics of Remote Work Intensity',
-  author: {
-    '@type': 'Person',
-    name: 'Ivan Ocampo',
-    url: 'https://ivanocampo.com',
-    sameAs: [...AUTHOR.sameAs],
-    identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: 'https://orcid.org/0000-0002-8532-0673' }],
-  },
+  author: personRef,
   datePublished: '2025',
   inSupportOf: 'Doctor of Philosophy',
   sourceOrganization: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
@@ -20,14 +14,7 @@ const dissertationSchema = {
   url: 'https://ivanocampo.com/research',
 };
 
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: AUTHOR.name,
-  url: AUTHOR.url,
-  sameAs: [...AUTHOR.sameAs],
-  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
-};
+const personSchema = { '@context': 'https://schema.org', ...personEntity };
 
 const researchInterests = [
   'Remote Work', 'Liminality', 'Technostress', 'Work-Life Balance',

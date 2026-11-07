@@ -1,5 +1,6 @@
 ---
 title: "Practical MCP Server Development for Internal Tooling"
+seoTitle: "MCP Server Development for Internal Tooling"
 description: "A deep, hands-on guide to building production MCP servers for internal engineering tooling — transport selection, the 2025-06-18 OAuth resource-server model, token-audience binding, tool design, and the confused-deputy failure mode that takes teams down."
 pubDate: 2026-06-13
 tags: [agentic-ai, security, architecture]

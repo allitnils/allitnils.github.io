@@ -1,5 +1,6 @@
 ---
 title: "Claude Code as an Orchestration Layer Across Multi-System Enterprise Environments"
+seoTitle: "Claude Code as an Enterprise Orchestration Layer"
 description: "How Claude Code's sub-agent model, hook system, MCP integration, and worktree isolation compose into a production-grade orchestration layer for multi-system enterprise workflows — with architecture patterns, failure modes, and a practical implementation checklist."
 pubDate: 2026-06-07
 tags: [agentic-ai, automation, cloud]

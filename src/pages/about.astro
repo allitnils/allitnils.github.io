@@ -1,21 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TerminalBadge from '../components/TerminalBadge.astro';
-import { AUTHOR } from '../data/author';
+import { AUTHOR, personSchema as personEntity } from '../data/author';
 
 const personSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: AUTHOR.name,
-  url: AUTHOR.url,
-  image: `${AUTHOR.url}${AUTHOR.image}`,
-  jobTitle: AUTHOR.role,
-  worksFor: { '@type': 'Organization', name: AUTHOR.org },
-  alumniOf: { '@type': 'EducationalOrganization', name: 'Australian Institute of Business' },
-  description: AUTHOR.description,
-  sameAs: [...AUTHOR.sameAs],
-  address: { '@type': 'PostalAddress', addressLocality: AUTHOR.city, addressCountry: AUTHOR.country },
-  identifier: [{ '@type': 'PropertyValue', propertyID: 'ORCID', value: `https://orcid.org/${AUTHOR.orcid}` }],
+  '@type': 'ProfilePage',
+  url: `${AUTHOR.url}/about/`,
+  name: 'About Ivan Ocampo',
+  inLanguage: 'en-AU',
+  mainEntity: personEntity,
 };
 
 const competencies = [
