@@ -3,8 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { AUTHOR } from '../../data/author';
 import { getCollection } from 'astro:content';
+import { isPublished } from '../../utils/posts';
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const allPosts = await getCollection('blog', isPublished);
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const tagCounts: Record<string, number> = {};

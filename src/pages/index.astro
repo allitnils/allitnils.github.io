@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import { AUTHOR, personRef, personSchema as personEntity } from '../data/author';
 import { getCollection } from 'astro:content';
+import { isPublished } from '../utils/posts';
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const allPosts = await getCollection('blog', isPublished);
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const latestPosts = allPosts.slice(0, 3);
 
